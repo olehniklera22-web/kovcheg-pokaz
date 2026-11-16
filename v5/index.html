@@ -8,13 +8,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=2">
+<link rel="stylesheet" href="style.css?v=3">
+<link rel="stylesheet" href="../assets/collage.css">
 </head>
 <body>
 <a class="sr" href="#main">Перейти к содержанию</a>
 <header class="top" id="top">
   <div class="wrap">
-    <a class="logo" href="#">Театральный ковчег<span>в Дубраве</span></a>
+    <a class="logo" href="#"><img src="../assets/logo.png" alt="Театральный ковчег в Дубраве" width="900" height="385"></a>
     <nav class="nav" aria-label="Основное меню"><a class="on" href="#af">Афиша</a><a href="#">Репертуар</a><a href="#fest">Фестивали</a><a href="#">Театр</a><a href="#">Труппа</a><a href="#">Зрителям</a></nav>
     <div class="tools">
       <button class="a11y" type="button" id="a11y" aria-pressed="false" aria-label="Версия для слабовидящих">◐ <span class="al">Для слабовидящих</span></button>
@@ -42,24 +43,31 @@
     <div class="wrap">
       <div class="af-h"><h2>Афиша</h2><span class="cnt" id="cnt" aria-live="polite"></span></div>
       <div class="pnl" id="pnl">
-        <div class="row1">
-          <div class="grp" role="group" aria-label="Когда" id="per"></div>
-          <span class="vs" aria-hidden="true"></span>
-          <div class="grp" role="group" aria-label="Что">
-            <button class="q" data-t="all" aria-pressed="true">Всё</button>
-            <button class="q" data-t="drama" aria-pressed="false">Спектакли</button>
-            <button class="q" data-t="kids" aria-pressed="false">Детям</button>
-            <button class="q" data-t="concert" aria-pressed="false">Концерты</button>
-            <button class="q pk" data-pk aria-pressed="false">Пушкинская карта</button>
-          </div>
-        </div>
-        <div class="days" id="days" role="group" aria-label="День"></div>
+        <div class="row1"><div class="grp" role="group" aria-label="Когда" id="per"></div></div>
+        <div class="row2"><div class="grp" role="group" aria-label="Что">
+          <button class="q" data-t="all" aria-pressed="true">Всё</button>
+          <button class="q" data-t="drama" aria-pressed="false">Спектакли</button>
+          <button class="q" data-t="kids" aria-pressed="false">Детям</button>
+          <button class="q" data-t="concert" aria-pressed="false">Концерты</button>
+        </div></div>
       </div>
       <div class="scope" id="scope"></div>
       <div id="cards"></div>
       <p class="note">Цены — ориентир с нынешнего сайта, точная стоимость — при выборе мест. Билет приходит на почту, вернуть его можно там же — <a href="#">правила возврата</a>.</p>
     </div>
   </section>
+
+  <div class="rip" data-seed="13"></div>
+
+  <!-- Лица театра -->
+  <section class="sx" id="faces-sec">
+    <div class="wrap">
+      <div class="sh"><div><span class="kk">Труппа</span><h2>Лица театра</h2></div><p>Актёры, режиссёры и те, кто делает «Ковчег» каждый день. Наведите на человека — он оживёт в цвете.</p></div>
+      <div id="faces"></div>
+    </div>
+  </section>
+
+  <div class="rip r" data-seed="29"></div>
 
   <!-- Новый год -->
   <section class="sx" id="ny">
@@ -77,6 +85,8 @@
       </div>
     </div>
   </section>
+
+  <div class="rip" data-seed="47"></div>
 
   <!-- Фестиваль -->
   <section class="sx last" id="fest">
@@ -167,7 +177,7 @@
   var months = []; UP.forEach(function (e) { var m = e.date.slice(0, 7); if (months.indexOf(m) < 0) months.push(m); });
   var PER = [['all', 'Все даты'], ['week', 'Неделя'], ['we', 'Выходные']].concat(months.map(function (m) { return [m, MN[m.split('-')[1] - 1]]; }));
   var PERN = { all: 'Все даты', week: 'Ближайшая неделя', we: 'Выходные' };
-  var st = { per: 'all', day: '', t: 'all', pk: false };
+  var st = { per: 'all', day: '', t: 'all', pk: false, open: {}, allCards: false };
   document.getElementById('per').innerHTML = PER.map(function (p) { return '<button class="q" data-per="' + p[0] + '" aria-pressed="' + (p[0] === 'all') + '">' + p[1] + '</button>'; }).join('');
   function okType(e) {
     var s = S[e.show];
@@ -203,23 +213,20 @@
   function render() {
     document.querySelectorAll('[data-per]').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.per === st.per); });
     document.querySelectorAll('[data-t]').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.t === st.t); });
-    document.querySelector('[data-pk]').setAttribute('aria-pressed', st.pk);
     var period = UP.filter(function (e) { return okType(e) && okPer(e); });
-    if (st.day && !period.some(function (e) { return e.date === st.day; })) st.day = '';
-    var dEl = document.getElementById('days'); dEl.innerHTML = days(period);
-    var on = dEl.querySelector('[aria-pressed="true"]'); if (on) dEl.scrollLeft = on.offsetLeft - dEl.clientWidth / 2;
     var list = st.day ? period.filter(function (e) { return e.date === st.day; }) : period;
     var g = [], map = {}; list.forEach(function (e) { if (!map[e.show]) { map[e.show] = []; g.push(e.show); } map[e.show].push(e); });
     var sc = st.day ? (function () { var d = pd(st.day); return d.getDate() + ' ' + MG[d.getMonth()] + ', ' + WD[d.getDay()]; })() : (PERN[st.per] || MN[+st.per.split('-')[1] - 1] + ' ' + st.per.split('-')[0]);
     document.getElementById('scope').innerHTML = '<b>' + sc + '</b><span>' + list.length + ' ' + plural(list.length, 'показ', 'показа', 'показов') + ' · ' + g.length + ' ' + plural(g.length, 'спектакль', 'спектакля', 'спектаклей') + '</span>' + (st.day ? '<button type="button" data-day="">Все дни периода ×</button>' : '');
     document.getElementById('cnt').textContent = UP.filter(okType).length + ' показов до ' + (function () { var l = pd(UP[UP.length - 1].date); return l.getDate() + ' ' + MG[l.getMonth()]; })();
+    var total = g.length; if (!st.allCards) g = g.slice(0, 6);
     document.getElementById('cards').innerHTML = g.length ? g.map(function (k) {
       var s = S[k], ev = map[k], pr = PRICE[s.type], prem = ev.some(function (e) { return e.prem; });
       return '<article class="card"><div class="im">' + (s.photo ? '<img src="../photos/' + s.photo + '" alt="" loading="lazy">' : '<span class="ni">' + esc(s.short || s.title) + '</span>') + '</div>' +
         '<div class="bd"><div class="tt"><h3><a href="#">' + esc(s.title) + '</a></h3>' + (s.age ? '<span class="ag">' + s.age + '</span>' : '') + (prem ? '<span class="pr">Премьера</span>' : '') + (s.pk ? '<span class="pkb">Пушкинская карта</span>' : '') + '</div>' +
         '<p class="mt">' + esc(s.genre) + ' · ' + esc(s.author) + (s.dir ? ', реж. ' + esc(s.dir) : '') + ' · ' + SC[ev[0].scene] + (pr ? ' · <b>от ' + pr + ' ₽</b>' : '') + '</p>' +
-        '<p class="ds">' + esc(s.desc) + '</p><div class="chs">' + ev.map(function (e) { return chip(e, !st.day); }).join('') + '</div></div></article>';
-    }).join('') : '<div class="empty"><h3>В этот период таких показов нет</h3><button class="btn btn-gold" type="button" data-reset>Показать всё</button></div>';
+        '<p class="ds">' + esc(s.desc) + '</p><div class="chs">' + (st.open[k] ? ev : ev.slice(0, 8)).map(function (e) { return chip(e, !st.day); }).join('') + (!st.open[k] && ev.length > 8 ? '<button type="button" class="ch more" data-open="' + k + '">ещё ' + (ev.length - 8) + ' ' + plural(ev.length - 8, 'дата', 'даты', 'дат') + '</button>' : '') + '</div></div></article>';
+    }).join('') + (total > g.length ? '<div class="morecards"><button class="btn btn-glass" type="button" data-allcards>Показать все спектакли — ' + total + '</button></div>' : '') : '<div class="empty"><h3>В этот период таких показов нет</h3><button class="btn btn-gold" type="button" data-reset>Показать всё</button></div>';
   }
 
   var dlg = document.getElementById('buy');
@@ -227,10 +234,11 @@
     var t = ev.target;
     var g = t.closest('[data-go]'); if (g) { show(+g.dataset.go); return; }
     var af = t.closest('[data-af]'); if (af) { var p = af.dataset.af.split('|'); st.per = p[0] || 'all'; st.t = p[1] || 'all'; st.pk = p[2] === 'pk'; st.day = ''; render(); }
-    var pe = t.closest('[data-per]'); if (pe) { st.per = pe.dataset.per; st.day = ''; render(); return; }
+    if (t.closest('[data-allcards]')) { st.allCards = true; render(); return; }
+    var pe = t.closest('[data-per]'); if (pe) { st.per = pe.dataset.per; st.day = ''; st.allCards = false; render(); return; }
     var dy = t.closest('[data-day]'); if (dy) { st.day = st.day === dy.dataset.day ? '' : dy.dataset.day; render(); return; }
-    var ty = t.closest('[data-t]'); if (ty) { st.t = ty.dataset.t; st.day = ''; render(); return; }
-    if (t.closest('[data-pk]')) { st.pk = !st.pk; st.day = ''; render(); return; }
+    var ty = t.closest('[data-t]'); if (ty) { st.t = ty.dataset.t; st.day = ''; st.allCards = false; render(); return; }
+    var op = t.closest('[data-open]'); if (op) { st.open[op.dataset.open] = true; render(); return; }
     if (t.closest('[data-reset]')) { st.t = 'all'; st.pk = false; st.day = ''; st.per = 'all'; render(); return; }
     var wh = t.closest('[data-when]'); if (wh) { st.per = wh.dataset.when; st.day = ''; st.t = 'all'; render(); }
     var fd = t.closest('[data-find]'); if (fd) { st.t = 'all'; st.pk = false; st.day = ''; var f = UP.find(function (e) { return S[e.show].title === fd.dataset.find; }); if (f) st.per = f.date.slice(0, 7); render(); }
@@ -255,6 +263,7 @@
   try { if (localStorage.getItem('kv4-a11y')) setA(true); } catch (e) {}
 })();
 </script>
+<script src="../assets/collage.js" data-root="../"></script>
 <script src="../assets/switcher.js" data-root="../" data-cur="b"></script>
 </body>
 </html>

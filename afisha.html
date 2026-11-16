@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500;1,600&family=Fira+Sans+Extra+Condensed:wght@500;600;700;800&family=Fira+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/style.css?v=3">
 </head>
 <body data-page="afisha">
 <div id="site-header"></div>
@@ -27,10 +27,6 @@
     <div class="wrap">
       <div class="ctl-row">
         <div class="tabs" role="tablist" aria-label="Месяц" id="tabs"></div>
-        <div class="view" role="group" aria-label="Вид">
-          <button type="button" data-view="list" aria-pressed="true"><svg width="14" height="12" viewBox="0 0 14 12" fill="currentColor" aria-hidden="true"><rect width="14" height="2"/><rect y="5" width="14" height="2"/><rect y="10" width="14" height="2"/></svg>Список</button>
-          <button type="button" data-view="cal" aria-pressed="false"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x=".75" y="1.75" width="12.5" height="11.5"/><path d="M.75 5.5h12.5M4 0v3.5M10 0v3.5"/></svg>Календарь</button>
-        </div>
       </div>
       <div class="ctl-row">
         <div class="chips" role="group" aria-label="Тип события" id="types">
@@ -40,15 +36,8 @@
           <button class="chip" aria-pressed="false" data-t="concert">Концерты</button>
           <button class="chip" aria-pressed="false" data-t="fest">Фестивали</button>
         </div>
-        <button class="chip filters-toggle" type="button" aria-expanded="false" aria-controls="more">Ещё фильтры</button>
+        <span class="count" id="count" aria-live="polite"></span><span id="daychip" hidden></span><button class="reset" type="button" id="reset" hidden>Сбросить</button>
       </div>
-      <div class="ctl-row more" id="more">
-        <label class="sel"><span class="sr">Сцена</span><select id="scene"><option value="">Все сцены</option><option value="main">Основная сцена</option><option value="small">Малый зал</option><option value="square">Советская площадь</option></select></label>
-        <label class="sel"><span class="sr">Возраст</span><select id="age"><option value="">Любой возраст</option><option value="6">Детям до 7 лет (0+ — 6+)</option><option value="12">С 12 лет (до 12+)</option><option value="14">С 14 лет (до 14+)</option><option value="16">С 16 лет (до 16+)</option></select></label>
-        <label class="chk"><input type="checkbox" id="pk"> Пушкинская карта</label>
-        <label class="search"><span class="sr">Поиск по названию</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="7" cy="7" r="5.5"/><path d="M11 11l4 4"/></svg><input type="search" id="q" placeholder="Название, автор, режиссёр"></label>
-      </div>
-      <div class="ctl-row"><span class="count" id="count" aria-live="polite"></span><span id="daychip"></span><button class="reset" type="button" id="reset" hidden>Сбросить фильтры</button></div>
     </div>
   </div>
 
@@ -72,7 +61,7 @@
   var qs = new URLSearchParams(location.search);
   var months = [];
   H.upcoming.forEach(function (e) { var m = e.date.slice(0, 7); if (months.indexOf(m) < 0) months.push(m); });
-  var st = { m: qs.get('m') && months.indexOf(qs.get('m')) >= 0 ? qs.get('m') : 'all', view: 'list', t: qs.get('t') || 'all', scene: '', age: '', pk: qs.get('pk') === '1', q: qs.get('q') || '', day: '' };
+  var st = { m: qs.get('m') && months.indexOf(qs.get('m')) >= 0 ? qs.get('m') : 'all', view: 'list', t: qs.get('t') || 'all', scene: '', age: '', pk: false, q: '', day: '' };
 
   var tabs = document.getElementById('tabs');
   tabs.innerHTML = '<button class="tab" role="tab" data-m="all">Все даты</button>' + months.map(function (m) {
@@ -80,7 +69,6 @@
   }).join('');
 
   var $ = function (id) { return document.getElementById(id); };
-  $('pk').checked = st.pk; $('q').value = st.q;
 
   function filtered(ignoreDay) {
     var q = st.q.trim().toLowerCase();
@@ -150,11 +138,7 @@
   tabs.addEventListener('click', function (e) { var b = e.target.closest('.tab'); if (!b) return; st.m = b.dataset.m; st.day = ''; render(); });
   document.querySelectorAll('[data-view]').forEach(function (b) { b.addEventListener('click', function () { st.view = b.dataset.view; if (st.view === 'cal') st.day = ''; render(); }); });
   document.getElementById('types').addEventListener('click', function (e) { var b = e.target.closest('.chip'); if (!b) return; st.t = b.dataset.t; render(); });
-  $('scene').addEventListener('change', function () { st.scene = this.value; render(); });
-  $('age').addEventListener('change', function () { st.age = this.value; render(); });
-  $('pk').addEventListener('change', function () { st.pk = this.checked; render(); });
-  $('q').addEventListener('input', function () { st.q = this.value; render(); });
-  function reset() { st = { m: 'all', view: st.view, t: 'all', scene: '', age: '', pk: false, q: '', day: '' }; $('scene').value = ''; $('age').value = ''; $('pk').checked = false; $('q').value = ''; render(); }
+  function reset() { st = { m: 'all', view: 'list', t: 'all', scene: '', age: '', pk: false, q: '', day: '' }; render(); }
   $('reset').addEventListener('click', reset);
   document.addEventListener('click', function (e) {
     if (e.target.closest('[data-reset]')) reset();
@@ -162,8 +146,6 @@
     var c = e.target.closest('[data-day]');
     if (c) { st.day = c.dataset.day; st.m = st.day.slice(0, 7); st.view = 'list'; render(); document.getElementById('ctl').scrollIntoView({ behavior: 'smooth' }); }
   });
-  var ft = document.querySelector('.filters-toggle');
-  ft.addEventListener('click', function () { var o = $('more').classList.toggle('open'); ft.setAttribute('aria-expanded', o); });
   render();
 })();
 </script>

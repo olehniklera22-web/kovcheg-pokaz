@@ -75,7 +75,7 @@
       '<button data-off="1">Обычная версия</button>' +
     '</div></div>' +
     '<header class="hdr"><div class="wrap">' +
-      '<a class="logo" href="index.html" aria-label="Театральный ковчег в Дубраве — на главную"><span class="l1">ТЕАТРАЛЬНЫЙ</span><span class="l2">КОВЧЕГ</span><span class="l3">в Дубраве</span></a>' +
+      '<a class="logo" href="index.html"><img src="assets/logo.png" alt="Театральный ковчег в Дубраве — на главную" width="900" height="385"></a>' +
       '<nav class="nav" id="nav" aria-label="Основное меню">' +
         '<a href="afisha.html"' + (page === 'afisha' ? ' aria-current="page"' : '') + '>Афиша</a><a href="#">Репертуар</a><a href="index.html#fest">Фестивали</a><a href="index.html#about">Театр</a><a href="#">Труппа</a><a href="index.html#who">Зрителям</a>' +
       '</nav>' +

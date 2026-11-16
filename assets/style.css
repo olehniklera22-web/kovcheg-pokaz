@@ -7,7 +7,7 @@
   --fh:'Fira Sans Extra Condensed','Arial Narrow',sans-serif;
   --fs:'Cormorant Garamond',Georgia,serif;
   --ft:'Fira Sans',system-ui,sans-serif;
-  --r:4px;--wrap:1280px;--gut:clamp(16px,4vw,40px);
+  --r:4px;--wrap:100%;--gut:clamp(16px,4vw,40px);
   --photo-filter:grayscale(1) contrast(1.06) brightness(.86);
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -421,3 +421,18 @@ html:not(.js) .rv{opacity:1;transform:none}
 .info-strip h3{font-family:var(--fh);font-weight:700;text-transform:uppercase;font-size:22px;margin-bottom:8px}
 .info-strip p{font-size:15px;color:var(--ink-soft)}
 @media (max-width:860px){.info-strip{grid-template-columns:1fr}.info-strip div+div{padding-left:0;border-left:0;border-top:1px solid var(--line);margin-top:20px}}
+
+/* упрощённая витрина */
+.hero .when{font-family:var(--fh);font-weight:600;font-size:clamp(20px,1.7vw,26px);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:4px 0 28px}
+.sl-arrows{display:flex;gap:8px;justify-content:flex-end;margin-top:18px}
+.sl-arrows button{width:46px;height:46px;border:1px solid var(--line-2);border-radius:50%;color:var(--ink);font-size:18px;transition:.2s}
+.sl-arrows button:hover{border-color:var(--bronze);color:var(--bronze-2)}
+@media (max-width:900px){.sl-arrows{justify-content:flex-start}}
+
+/* настоящий логотип */
+.logo img{height:62px;width:auto;display:block}
+@media (max-width:520px){.logo img{height:40px}}
+/* бренд-коллаж */
+:root{--lc-bg:#33493a;--lc-ui:var(--ft);--lc-name:700 21px/1.05 var(--fh);--lc-r:40px;--lc-ink:var(--ink);--lc-on-ink:var(--bg);--lc-soft:var(--ink-soft);--lc-line:var(--line-2);--lc-accent:var(--bronze-2);--lc-paper:#e9e3d6;--lc-fiber:#faf7f0}
+.lc-card b{text-transform:uppercase}
+#faces-sec .lc-col{margin:0 calc(-1 * var(--gut))}

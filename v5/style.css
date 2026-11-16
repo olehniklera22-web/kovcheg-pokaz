@@ -3,7 +3,7 @@
   --ink:#f1e9da;--soft:rgba(241,233,218,.7);--mute:rgba(241,233,218,.45);--line:rgba(241,233,218,.1);--line-2:rgba(241,233,218,.22);
   --gold:#c9a25e;--gold-2:#ddb977;--bordo:#8c2737;--green:#86a585;
   --f:'Manrope',system-ui,sans-serif;
-  --wrap:1360px;--gut:clamp(16px,3.6vw,48px);
+  --wrap:100%;--gut:clamp(16px,3.6vw,48px);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{background:var(--bg);scroll-behavior:smooth}
@@ -231,3 +231,20 @@ html.a11y a:not(.btn):not(.logo){text-decoration:underline}
 
 @media (max-width:1000px){.fx2{grid-template-columns:1fr}}
 @media (max-width:700px){.ny2{grid-template-columns:1fr}}
+
+/* настоящий логотип */
+.logo img{height:58px;width:auto;display:block}
+@media (max-width:680px){.logo img{height:42px}}
+/* фильтры: месяц сверху, тип — вторым рядом */
+.row2{margin-top:10px}
+.row2 .grp,.row1 .grp{display:flex;flex-wrap:wrap;gap:6px}
+@media (max-width:900px){.row1 .grp,.row2 .grp{flex-wrap:nowrap;overflow-x:auto;max-width:100%;scrollbar-width:none}.row1 .grp::-webkit-scrollbar,.row2 .grp::-webkit-scrollbar{display:none}}
+.ch.more{cursor:pointer}
+.ch.more:hover{background:var(--card-2);color:var(--ink)}
+/* бренд-коллаж */
+:root{--lc-bg:#2a3d31;--lc-ui:var(--f);--lc-name:800 19px/1.15 var(--f);--lc-r:999px;--lc-card-r:16px;--lc-ink:var(--ink);--lc-on-ink:var(--bg);--lc-soft:var(--soft);--lc-line:var(--line-2);--lc-accent:var(--gold-2);--lc-paper:#e9e2d2;--lc-fiber:#faf6ee}
+#faces-sec .lc-col{border-radius:28px;margin:0}
+.rip{margin-top:clamp(36px,4vw,64px);margin-bottom:-10px}
+.sx#faces-sec{padding-top:clamp(40px,5vw,72px)}
+
+.morecards{display:flex;justify-content:center;margin-top:28px}

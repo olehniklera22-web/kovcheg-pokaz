@@ -9,7 +9,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500;1,600&family=Fira+Sans+Extra+Condensed:wght@500;600;700;800&family=Fira+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/style.css?v=3">
+<link rel="stylesheet" href="assets/collage.css">
 </head>
 <body data-page="home">
 <div id="site-header"></div>
@@ -22,47 +23,33 @@
       <div class="hero-stage">
         <div class="slide on" data-slide="0" aria-roledescription="slide" aria-label="1 из 3">
           <div class="txt">
-            <span class="eyebrow">Премьера ноября · Основная сцена</span>
+            <span class="eyebrow">Премьера · Основная сцена</span>
             <h1 class="h-xl">Отец<br>Арсений</h1>
-            <p class="by">по пьесе Владимира Малягина · режиссёр М. Недугова</p>
-            <p class="lead">Когда у человека отнимают свободу, что остаётся у него?</p>
-            <div class="dates" aria-label="Даты показов">
-              <span class="d"><small>чт · 19:00</small>19 ноября</span><span class="d"><small>пт · 19:00</small>20 ноября</span><span class="d"><small>сб · 17:00</small>21 ноября</span><span class="d"><small>вс · 17:00</small>22 ноября</span>
-            </div>
-            <div class="acts"><button class="btn btn-buy" data-buy="e0">Купить билет</button><a class="link-arrow" href="#">О спектакле</a></div>
+            <p class="when">19–22 ноября · 14+</p>
+            <button class="btn btn-buy" data-buy="e0">Купить билет</button>
           </div>
-          <div class="vis"><div class="frame"><div class="ph"><img src="photos/otets-arseniy.jpg" alt="Афиша спектакля «Отец Арсений»"></div></div><span class="stamp">14+ · Пушкинская карта</span></div>
+          <div class="vis"><div class="frame"><div class="ph"><img src="photos/otets-arseniy.jpg" alt="Афиша спектакля «Отец Арсений»"></div></div></div>
         </div>
         <div class="slide" data-slide="1" aria-roledescription="slide" aria-label="2 из 3">
           <div class="txt">
-            <span class="eyebrow">Премьера декабря · Малый зал</span>
+            <span class="eyebrow">Премьера · Малый зал</span>
             <h2 class="h-xl">Тёплая<br>память</h2>
-            <p class="by">фантастический трагифарс · М. Готье, С. Валиков</p>
-            <p class="lead">Камерная премьера в одном действии — на расстоянии вытянутой руки от сцены.</p>
-            <div class="dates"><span class="d"><small>пт · 19:00</small>11 декабря</span><span class="d"><small>сб · 17:00</small>12 декабря</span><span class="d"><small>вс · 17:00</small>13 декабря</span></div>
-            <div class="acts"><button class="btn btn-buy" data-buy="e12">Купить билет</button><a class="link-arrow" href="#">О спектакле</a></div>
+            <p class="when">11–13 декабря · 18+</p>
+            <button class="btn btn-buy" data-buy="e12">Купить билет</button>
           </div>
-          <div class="vis"><div class="frame"><div class="ph"><img src="photos/teplaya-pamyat.jpg" alt="Афиша спектакля «Тёплая память»"></div></div><span class="stamp bordo">18+ · 70 мест</span></div>
+          <div class="vis"><div class="frame"><div class="ph"><img src="photos/teplaya-pamyat.jpg" alt="Афиша спектакля «Тёплая память»"></div></div></div>
         </div>
         <div class="slide" data-slide="2" aria-roledescription="slide" aria-label="3 из 3">
           <div class="txt">
-            <span class="eyebrow">Новый год в Дубраве · для всей семьи</span>
+            <span class="eyebrow">Новый год · для всей семьи</span>
             <h2 class="h-xl">Волшебник<br>Изумрудного<br>города</h2>
-            <p class="by">по сказке Александра Волкова · режиссёр Е. Зимин</p>
-            <p class="lead">Дорога из жёлтого кирпича ведёт навстречу настоящим приключениям!</p>
-            <div class="dates"><span class="d"><small>утренние и дневные</small>18 декабря — 5 января</span></div>
-            <div class="acts"><a class="btn btn-buy" href="afisha.html?m=2026-12">Выбрать дату</a><a class="link-arrow" href="#ny">Новогодняя программа</a></div>
+            <p class="when">18 декабря — 5 января · 6+</p>
+            <a class="btn btn-buy" href="afisha.html?m=2026-12&amp;t=kids">Купить билет</a>
           </div>
-          <div class="vis"><div class="frame"><div class="ph"><img src="photos/volshebnik.jpg" alt="Афиша спектакля «Волшебник Изумрудного города»"></div></div><span class="stamp">6+</span></div>
+          <div class="vis"><div class="frame"><div class="ph"><img src="photos/volshebnik.jpg" alt="Афиша спектакля «Волшебник Изумрудного города»"></div></div></div>
         </div>
       </div>
-      <div class="slider-ctl">
-        <div class="dots" role="tablist" aria-label="Слайды">
-          <button class="dot on" role="tab" aria-selected="true" data-to="0">01<i></i></button>
-          <button class="dot" role="tab" aria-selected="false" data-to="1">02<i></i></button>
-          <button class="dot" role="tab" aria-selected="false" data-to="2">03<i></i></button>
-        </div>
-      </div>
+      <div class="sl-arrows"><button type="button" data-sl="-1" aria-label="Предыдущая премьера">←</button><button type="button" data-sl="1" aria-label="Следующая премьера">→</button></div>
 
       <div class="next" aria-label="Ближайшие события">
         <div class="lbl"><span class="eyebrow">Ближайшие</span><a class="link-arrow" href="afisha.html">Вся афиша</a></div>
@@ -81,7 +68,6 @@
           <button class="chip" aria-pressed="false" data-f="drama">Спектакли</button>
           <button class="chip" aria-pressed="false" data-f="kids">Детям</button>
           <button class="chip" aria-pressed="false" data-f="concert">Концерты</button>
-          <button class="chip" aria-pressed="false" data-f="pk">Пушкинская карта</button>
         </div>
       </div>
       <div class="ev-list rv" id="home-list"></div>
@@ -92,9 +78,21 @@
     </div>
   </section>
 
+  <div class="rip" data-seed="11"></div>
+
+  <!-- Лица театра -->
+  <section class="sec bg2" id="faces-sec">
+    <div class="wrap">
+      <div class="sec-head rv"><div><span class="eyebrow">Труппа</span><h2 class="h-l">Лица театра</h2></div>
+        <p class="lead">Актёры, режиссёры и те, кто делает «Ковчег» каждый день. Наведите на человека — он оживёт в цвете.</p></div>
+      <div id="faces"></div>
+    </div>
+  </section>
+
+  <div class="rip r" data-seed="23"></div>
+
   <!-- Новый год -->
-  <section class="sec bg2" id="ny">
-    <svg class="tear" viewBox="0 0 1200 28" preserveAspectRatio="none" aria-hidden="true" style="color:var(--bg);margin-top:calc(-1 * clamp(64px,8vw,120px));margin-bottom:clamp(48px,6vw,88px);transform:scaleY(-1)"><path d="M0 0H1200V12L1180 18 1152 9 1121 20 1090 11 1058 22 1024 10 990 17 958 8 921 21 889 12 856 19 820 7 788 18 751 13 717 23 684 9 650 16 612 6 580 19 545 12 509 22 476 10 441 17 405 8 370 20 338 11 301 18 266 7 232 21 198 13 161 19 128 9 94 22 60 12 29 18 0 10Z"/></svg>
+  <section class="sec" id="ny">
     <div class="wrap">
       <div class="sec-head rv"><div><span class="eyebrow">18 декабря — 10 января</span><h2 class="h-l">Новый год<br><span class="serif" style="text-transform:none;color:var(--bronze-2)">в Дубраве</span></h2></div>
         <p class="lead">Днём — сказка для детей, вечером — спектакль для взрослых. Можно прийти всей семьёй, а потом ещё раз — без детей.</p></div>
@@ -105,7 +103,7 @@
             <h3 class="h-m">Волшебник Изумрудного города</h3><p class="soft">Новогодняя сказка по Александру Волкову. Утренние и дневные показы на каникулах.</p>
             <div class="foot"><span class="soft">18 декабря — 5 января</span><span class="link-arrow">Выбрать дату</span></div></div>
         </a>
-        <a class="card rv" href="afisha.html?m=2026-12&amp;q=Рождественская">
+        <a class="card rv" href="afisha.html?m=2026-12&amp;t=drama">
           <div class="ph ph-none" aria-hidden="true"><span>Рождественская<br>история</span></div>
           <div class="body"><div class="row"><span class="tag tag-age">16+</span><span class="tag">17:00 и 19:00</span><span class="tag tag-pk">Пушкинская карта</span></div>
             <h3 class="h-m">Рождественская история</h3><p class="soft">Вечерний новогодний спектакль по пьесе В. Ольшанской.</p>
@@ -114,6 +112,8 @@
       </div>
     </div>
   </section>
+
+  <div class="rip" data-seed="37"></div>
 
   <!-- Фестиваль -->
   <section class="sec fest" id="fest">
@@ -137,18 +137,22 @@
     </div>
   </section>
 
+  <div class="rip r" data-seed="41"></div>
+
   <!-- Кому что -->
   <section class="sec" id="who">
     <div class="wrap">
       <div class="sec-head rv"><div><span class="eyebrow">Зрителям</span><h2 class="h-l">Кому что</h2></div></div>
       <div class="aud rv">
-        <a href="afisha.html?pk=1" id="pk"><span class="n">Пушкинская карта</span><h3>Если вам 14–22</h3><p>Спектакли с зелёной меткой можно оплатить картой — на сайте или в кассе.</p><span class="link-arrow">Спектакли по карте</span></a>
+        <a href="afisha.html?t=drama" id="pk"><span class="n">Пушкинская карта</span><h3>Если вам 14–22</h3><p>Спектакли с зелёной меткой можно оплатить картой — на сайте или в кассе.</p><span class="link-arrow">Спектакли по карте</span></a>
         <a href="afisha.html?t=kids"><span class="n">Семьям</span><h3>С детьми</h3><p>Сказки от 3+ и новогодние каникулы в театре. Утренние и дневные показы.</p><span class="link-arrow">Детская афиша</span></a>
         <a href="#"><span class="n">Туристам</span><h3>От Лавры до Дубравы</h3><p>Театр — в парке «Дубрава», мкр. Семхоз. Как доехать от центра и от платформы Семхоз.</p><span class="link-arrow">Как добраться</span></a>
         <a href="#"><span class="n">Школам и группам</span><h3>За кулисы</h3><p>Арт-экскурсия «Театральные профессии» и показы по коллективным заявкам.</p><span class="link-arrow">Оставить заявку</span></a>
       </div>
     </div>
   </section>
+
+  <div class="rip" data-seed="53"></div>
 
   <!-- О театре -->
   <section class="sec bg2" id="about">
@@ -172,6 +176,8 @@
       </a>
     </div>
   </section>
+
+  <div class="rip r" data-seed="67"></div>
 
   <!-- Новости -->
   <section class="sec" id="news">
@@ -252,26 +258,19 @@
   });
   render();
 
-  /* слайдер витрины */
-  var slides = document.querySelectorAll('.slide'), dots = document.querySelectorAll('.dot'), ctl = document.querySelector('.slider-ctl');
-  var cur = 0, timer, DUR = 7000, reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  ctl.style.setProperty('--dur', DUR + 'ms');
-  function go(i) {
-    cur = (i + slides.length) % slides.length;
-    slides.forEach(function (s, k) { s.classList.toggle('on', k === cur); });
-    dots.forEach(function (d, k) { d.classList.toggle('on', k === cur); d.setAttribute('aria-selected', k === cur); var b = d.querySelector('i'); b.replaceWith(b.cloneNode()); });
-    plan();
-  }
-  function plan() { clearTimeout(timer); if (!reduce && !ctl.classList.contains('paused') && !document.documentElement.classList.contains('a11y')) timer = setTimeout(function () { go(cur + 1); }, DUR); }
-  dots.forEach(function (d) { d.addEventListener('click', function () { go(+d.dataset.to); }); });
+  /* слайдер витрины: стрелки + тихая автопрокрутка */
+  var slides = document.querySelectorAll('.slide'), cur = 0, timer, DUR = 8000, paused = false, reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function go(i) { cur = (i + slides.length) % slides.length; slides.forEach(function (s, k) { s.classList.toggle('on', k === cur); }); plan(); }
+  function plan() { clearTimeout(timer); if (!reduce && !paused && !document.documentElement.classList.contains('a11y')) timer = setTimeout(function () { go(cur + 1); }, DUR); }
+  document.querySelectorAll('[data-sl]').forEach(function (b) { b.addEventListener('click', function () { go(cur + +b.dataset.sl); }); });
   var hero = document.querySelector('.hero');
-  hero.addEventListener('mouseenter', function () { ctl.classList.add('paused'); clearTimeout(timer); });
-  hero.addEventListener('mouseleave', function () { ctl.classList.remove('paused'); go(cur); });
-  hero.addEventListener('focusin', function () { ctl.classList.add('paused'); clearTimeout(timer); });
-  if (reduce) ctl.classList.add('paused');
+  hero.addEventListener('mouseenter', function () { paused = true; clearTimeout(timer); });
+  hero.addEventListener('mouseleave', function () { paused = false; plan(); });
+  hero.addEventListener('focusin', function () { paused = true; clearTimeout(timer); });
   plan();
 })();
 </script>
+<script src="assets/collage.js" data-root=""></script>
 <script src="assets/switcher.js" data-root="" data-cur="a"></script>
 </body>
 </html>
