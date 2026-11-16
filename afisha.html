@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Афиша — Театральный ковчег в Дубраве</title>
+<meta name="description" content="Афиша и билеты драматического театра «Театральный ковчег в Дубраве»: спектакли, концерты, детские показы.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500;1,600&family=Fira+Sans+Extra+Condensed:wght@500;600;700;800&family=Fira+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="afisha">
+<div id="site-header"></div>
+
+<main id="main">
+  <section class="pg-head">
+    <div class="wrap">
+      <div><span class="eyebrow">Билеты онлайн — круглосуточно</span>
+      <h1 class="h-xl" style="margin-top:10px">Афиша</h1></div>
+      <p class="lead">Спектакли, концерты и сказки на трёх сценах театра. Купить билет можно прямо здесь: в каждой строке — кнопка покупки.</p>
+    </div>
+  </section>
+
+  <div class="ctl" id="ctl">
+    <div class="wrap">
+      <div class="ctl-row">
+        <div class="tabs" role="tablist" aria-label="Месяц" id="tabs"></div>
+        <div class="view" role="group" aria-label="Вид">
+          <button type="button" data-view="list" aria-pressed="true"><svg width="14" height="12" viewBox="0 0 14 12" fill="currentColor" aria-hidden="true"><rect width="14" height="2"/><rect y="5" width="14" height="2"/><rect y="10" width="14" height="2"/></svg>Список</button>
+          <button type="button" data-view="cal" aria-pressed="false"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x=".75" y="1.75" width="12.5" height="11.5"/><path d="M.75 5.5h12.5M4 0v3.5M10 0v3.5"/></svg>Календарь</button>
+        </div>
+      </div>
+      <div class="ctl-row">
+        <div class="chips" role="group" aria-label="Тип события" id="types">
+          <button class="chip" aria-pressed="true" data-t="all">Всё</button>
+          <button class="chip" aria-pressed="false" data-t="drama">Спектакли</button>
+          <button class="chip" aria-pressed="false" data-t="kids">Детям</button>
+          <button class="chip" aria-pressed="false" data-t="concert">Концерты</button>
+          <button class="chip" aria-pressed="false" data-t="fest">Фестивали</button>
+        </div>
+        <button class="chip filters-toggle" type="button" aria-expanded="false" aria-controls="more">Ещё фильтры</button>
+      </div>
+      <div class="ctl-row more" id="more">
+        <label class="sel"><span class="sr">Сцена</span><select id="scene"><option value="">Все сцены</option><option value="main">Основная сцена</option><option value="small">Малый зал</option><option value="square">Советская площадь</option></select></label>
+        <label class="sel"><span class="sr">Возраст</span><select id="age"><option value="">Любой возраст</option><option value="6">Детям до 7 лет (0+ — 6+)</option><option value="12">С 12 лет (до 12+)</option><option value="14">С 14 лет (до 14+)</option><option value="16">С 16 лет (до 16+)</option></select></label>
+        <label class="chk"><input type="checkbox" id="pk"> Пушкинская карта</label>
+        <label class="search"><span class="sr">Поиск по названию</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="7" cy="7" r="5.5"/><path d="M11 11l4 4"/></svg><input type="search" id="q" placeholder="Название, автор, режиссёр"></label>
+      </div>
+      <div class="ctl-row"><span class="count" id="count" aria-live="polite"></span><span id="daychip"></span><button class="reset" type="button" id="reset" hidden>Сбросить фильтры</button></div>
+    </div>
+  </div>
+
+  <section class="wrap" style="padding-bottom:clamp(64px,8vw,110px)">
+    <div id="out"></div>
+    <div class="info-strip">
+      <div><h3>Покупка и возврат</h3><p>Билет приходит на почту. Вернуть его можно там же, где купили: онлайн — в письме с билетом, в кассе — с паспортом. <a class="link-arrow" href="#" style="font-size:14px">Правила</a></p></div>
+      <div><h3>Пушкинская карта</h3><p>Спектакли с зелёной меткой можно оплатить картой. Для зрителей 14–22 лет.</p></div>
+      <div><h3>Касса театра</h3><p>+7 496 545-75-75. Ср–пт 12:00–19:00, сб–вс 13:00–18:30. Мкр. Семхоз, Парковая ул., 16.</p></div>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+
+<script src="assets/data.js"></script>
+<script src="assets/app.js"></script>
+<script>
+(function () {
+  var H = window.KVH, S = KV.shows;
+  var qs = new URLSearchParams(location.search);
+  var months = [];
+  H.upcoming.forEach(function (e) { var m = e.date.slice(0, 7); if (months.indexOf(m) < 0) months.push(m); });
+  var st = { m: qs.get('m') && months.indexOf(qs.get('m')) >= 0 ? qs.get('m') : 'all', view: 'list', t: qs.get('t') || 'all', scene: '', age: '', pk: qs.get('pk') === '1', q: qs.get('q') || '', day: '' };
+
+  var tabs = document.getElementById('tabs');
+  tabs.innerHTML = '<button class="tab" role="tab" data-m="all">Все даты</button>' + months.map(function (m) {
+    var a = m.split('-'); return '<button class="tab" role="tab" data-m="' + m + '">' + H.MN[a[1] - 1] + (a[0] !== String(H.TODAY.getFullYear()) ? ' ' + a[0] : '') + '</button>';
+  }).join('');
+
+  var $ = function (id) { return document.getElementById(id); };
+  $('pk').checked = st.pk; $('q').value = st.q;
+
+  function filtered(ignoreDay) {
+    var q = st.q.trim().toLowerCase();
+    return H.upcoming.filter(function (e) {
+      var s = S[e.show];
+      if (st.m !== 'all' && e.date.slice(0, 7) !== st.m) return false;
+      if (!ignoreDay && st.day && e.date !== st.day) return false;
+      if (st.t !== 'all' && s.type !== st.t) return false;
+      if (st.scene && e.scene !== st.scene) return false;
+      if (st.age && (!s.age || H.ageNum(s.age) > +st.age)) return false;
+      if (st.pk && !(s.pk && e.status !== 'group' && e.status !== 'info')) return false;
+      if (q && (s.title + ' ' + s.author + ' ' + (s.dir || '') + ' ' + s.genre).toLowerCase().indexOf(q) < 0) return false;
+      return true;
+    });
+  }
+  function plural(n) { var a = n % 10, b = n % 100; return a === 1 && b !== 11 ? 'событие' : a >= 2 && a <= 4 && (b < 10 || b >= 20) ? 'события' : 'событий'; }
+
+  function list(ev) {
+    if (!ev.length) return '<div class="empty"><h2 class="h-m">Ничего не нашлось</h2><p class="soft">Попробуйте другую дату или уберите часть фильтров.</p><button class="btn btn-line" type="button" data-reset>Сбросить фильтры</button></div>';
+    var html = '', day = '';
+    ev.forEach(function (e) {
+      if (e.date !== day) {
+        if (day) html += '</div></div>';
+        day = e.date; var d = H.pd(day);
+        html += '<div class="day"><div class="day-h"><b>' + d.getDate() + ' ' + H.MG[d.getMonth()] + '</b><span>' + H.WD[d.getDay()] + '</span></div><div class="ev-list afisha-list">';
+      }
+      html += H.evRow(e, 'day');
+    });
+    return html + '</div></div>';
+  }
+
+  function cal(ev) {
+    var m = st.m !== 'all' ? st.m : (ev[0] ? ev[0].date.slice(0, 7) : months[0]);
+    var a = m.split('-'), y = +a[0], mo = a[1] - 1;
+    var first = new Date(y, mo, 1), start = new Date(first); start.setDate(1 - ((first.getDay() + 6) % 7));
+    var by = {}; ev.forEach(function (e) { if (e.date.slice(0, 7) === m) (by[e.date] = by[e.date] || []).push(e); });
+    var h = '<div class="cal"><div class="day-h"><b>' + H.MN[mo] + ' ' + y + '</b>' + (st.m === 'all' ? '<span>выберите месяц вверху, чтобы листать</span>' : '') + '</div><div class="cal-grid">';
+    ['пн','вт','ср','чт','пт','сб','вс'].forEach(function (w) { h += '<div class="wd">' + w + '</div>'; });
+    for (var i = 0; i < 42; i++) {
+      var d = new Date(start); d.setDate(start.getDate() + i);
+      if (i >= 35 && d.getMonth() !== mo) break;
+      var k = H.iso(d), list = by[k] || [], out = d.getMonth() !== mo, today = k === H.iso(H.TODAY);
+      var inner = '<span class="n">' + d.getDate() + '</span>' + list.slice(0, 2).map(function (e) {
+        var s = S[e.show]; return '<span class="e ' + s.type + '">' + e.time + ' ' + H.esc(H.title(s)) + '</span>';
+      }).join('') + (list.length > 2 ? '<span class="more-n">ещё ' + (list.length - 2) + '</span>' : '');
+      var lbl = d.getDate() + ' ' + H.MG[d.getMonth()] + (list.length ? ': ' + list.length + ' ' + plural(list.length) : '');
+      h += list.length && !out
+        ? '<button type="button" class="cal-cell has' + (today ? ' today' : '') + '" data-day="' + k + '" aria-label="' + lbl + '">' + inner + '</button>'
+        : '<div class="cal-cell' + (out ? ' out' : '') + (today ? ' today' : '') + '">' + (out ? '' : inner) + '</div>';
+    }
+    return h + '</div><div class="cal-legend"><span><i></i>Спектакли</span><span class="k"><i></i>Детям</span><span class="c"><i></i>Концерты</span></div></div>';
+  }
+
+  function render() {
+    tabs.querySelectorAll('.tab').forEach(function (b) { b.setAttribute('aria-selected', b.dataset.m === st.m); });
+    document.querySelectorAll('#types .chip').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.t === st.t); });
+    document.querySelectorAll('[data-view]').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.view === st.view); });
+    var ev = filtered(st.view === 'cal');
+    $('out').innerHTML = st.view === 'cal' ? cal(ev) : list(ev);
+    $('count').textContent = st.view === 'cal' ? 'Нажмите на день, чтобы увидеть события' : 'Найдено ' + ev.length + ' ' + plural(ev.length);
+    var dirty = st.t !== 'all' || st.scene || st.age || st.pk || st.q || st.day || st.m !== 'all';
+    $('reset').hidden = !dirty;
+    if (st.day) { var d = H.pd(st.day); $('daychip').innerHTML = '<span class="day-chip">' + d.getDate() + ' ' + H.MG[d.getMonth()] + '<button type="button" aria-label="Показать все дни" data-clear-day>×</button></span>'; }
+    else $('daychip').innerHTML = '';
+  }
+
+  tabs.addEventListener('click', function (e) { var b = e.target.closest('.tab'); if (!b) return; st.m = b.dataset.m; st.day = ''; render(); });
+  document.querySelectorAll('[data-view]').forEach(function (b) { b.addEventListener('click', function () { st.view = b.dataset.view; if (st.view === 'cal') st.day = ''; render(); }); });
+  document.getElementById('types').addEventListener('click', function (e) { var b = e.target.closest('.chip'); if (!b) return; st.t = b.dataset.t; render(); });
+  $('scene').addEventListener('change', function () { st.scene = this.value; render(); });
+  $('age').addEventListener('change', function () { st.age = this.value; render(); });
+  $('pk').addEventListener('change', function () { st.pk = this.checked; render(); });
+  $('q').addEventListener('input', function () { st.q = this.value; render(); });
+  function reset() { st = { m: 'all', view: st.view, t: 'all', scene: '', age: '', pk: false, q: '', day: '' }; $('scene').value = ''; $('age').value = ''; $('pk').checked = false; $('q').value = ''; render(); }
+  $('reset').addEventListener('click', reset);
+  document.addEventListener('click', function (e) {
+    if (e.target.closest('[data-reset]')) reset();
+    if (e.target.closest('[data-clear-day]')) { st.day = ''; render(); }
+    var c = e.target.closest('[data-day]');
+    if (c) { st.day = c.dataset.day; st.m = st.day.slice(0, 7); st.view = 'list'; render(); document.getElementById('ctl').scrollIntoView({ behavior: 'smooth' }); }
+  });
+  var ft = document.querySelector('.filters-toggle');
+  ft.addEventListener('click', function () { var o = $('more').classList.toggle('open'); ft.setAttribute('aria-expanded', o); });
+  render();
+})();
+</script>
+<script src="assets/switcher.js" data-root="" data-cur="a"></script>
+</body>
+</html>

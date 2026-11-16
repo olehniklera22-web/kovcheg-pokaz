@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Театральный ковчег в Дубраве — вариант 5 «Сцена + карточки»</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="sr" href="#main">Перейти к содержанию</a>
+<header class="top" id="top">
+  <div class="wrap">
+    <a class="logo" href="#">Театральный ковчег<span>в Дубраве</span></a>
+    <nav class="nav" aria-label="Основное меню"><a class="on" href="#af">Афиша</a><a href="#">Репертуар</a><a href="#fest">Фестивали</a><a href="#">Театр</a><a href="#">Труппа</a><a href="#">Зрителям</a></nav>
+    <div class="tools">
+      <button class="a11y" type="button" id="a11y" aria-pressed="false" aria-label="Версия для слабовидящих">◐ <span class="al">Для слабовидящих</span></button>
+      <a class="tel" href="tel:+74965457575">+7 496 545-75-75</a>
+      <a class="btn btn-gold" href="#af">Купить билет</a>
+      <button class="burger" type="button" aria-label="Меню" aria-expanded="false" aria-controls="mnav">≡</button>
+    </div>
+  </div>
+  <nav class="mnav" id="mnav" aria-label="Меню"><a href="#af">Афиша</a><a href="#">Репертуар</a><a href="#fest">Фестивали</a><a href="#">Театр</a><a href="#">Труппа</a><a href="#">Зрителям</a><a href="tel:+74965457575">+7 496 545-75-75</a><button type="button" id="a11y-m">Версия для слабовидящих</button></nav>
+</header>
+
+<main id="main">
+  <section class="hero" aria-roledescription="carousel" aria-label="Премьеры">
+    <div class="bg" id="bg" aria-hidden="true"></div>
+    <div class="wrap in">
+      <div id="slide" aria-live="polite"></div>
+      <div class="sw" id="sw" role="tablist" aria-label="Выбор премьеры"></div>
+    </div>
+    <div class="strip" aria-label="Ближайшие показы">
+      <div class="wrap" id="strip"></div>
+    </div>
+  </section>
+
+  <section class="af" id="af">
+    <div class="wrap">
+      <div class="af-h"><h2>Афиша</h2><span class="cnt" id="cnt" aria-live="polite"></span></div>
+      <div class="pnl" id="pnl">
+        <div class="row1">
+          <div class="grp" role="group" aria-label="Когда" id="per"></div>
+          <span class="vs" aria-hidden="true"></span>
+          <div class="grp" role="group" aria-label="Что">
+            <button class="q" data-t="all" aria-pressed="true">Всё</button>
+            <button class="q" data-t="drama" aria-pressed="false">Спектакли</button>
+            <button class="q" data-t="kids" aria-pressed="false">Детям</button>
+            <button class="q" data-t="concert" aria-pressed="false">Концерты</button>
+            <button class="q pk" data-pk aria-pressed="false">Пушкинская карта</button>
+          </div>
+        </div>
+        <div class="days" id="days" role="group" aria-label="День"></div>
+      </div>
+      <div class="scope" id="scope"></div>
+      <div id="cards"></div>
+      <p class="note">Цены — ориентир с нынешнего сайта, точная стоимость — при выборе мест. Билет приходит на почту, вернуть его можно там же — <a href="#">правила возврата</a>.</p>
+    </div>
+  </section>
+
+  <!-- Новый год -->
+  <section class="sx" id="ny">
+    <div class="wrap">
+      <div class="sh"><div><span class="kk">18 декабря — 10 января</span><h2>Новый год в Дубраве</h2></div><p>Днём — сказка для детей, вечером — спектакль для взрослых. Можно прийти всей семьёй, а потом ещё раз — без детей.</p></div>
+      <div class="ny2">
+        <a class="nc" href="#af" data-af="2026-12|kids">
+          <div class="ph"><img src="../photos/volshebnik.jpg" alt="" loading="lazy"></div>
+          <div class="nb"><div class="tg"><span>6+</span><span>11:00 и 14:00</span></div><h3>Волшебник Изумрудного города</h3><p>Новогодняя сказка по Александру Волкову. Утренние и дневные показы на каникулах.</p><span class="go">Выбрать дату →</span></div>
+        </a>
+        <a class="nc" href="#af" data-af="2026-12|drama">
+          <div class="ph ni"><span>Рождественская история</span></div>
+          <div class="nb"><div class="tg"><span>16+</span><span>17:00 и 19:00</span><span class="g">Пушкинская карта</span></div><h3>Рождественская история</h3><p>Вечерний новогодний спектакль по пьесе В. Ольшанской.</p><span class="go">Выбрать дату →</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Фестиваль -->
+  <section class="sx last" id="fest">
+    <div class="wrap">
+      <div class="fx2">
+        <div class="fl2">
+          <span class="kk">Международный театральный фестиваль</span>
+          <h2>«У Троицы»</h2>
+          <p class="fd"><b>11–20 июня 2027</b> · XIII фестиваль · Сергиев Посад</p>
+          <p class="sf">Фестиваль собирает спектакли об истории России, классической литературе и человеческих судьбах. Театр учредил его в 2014 году, к 700-летию преподобного Сергия Радонежского.</p>
+          <div class="acts2"><a class="btn btn-gold" href="https://t.me/teatralnykovcheg">Узнать о старте продаж</a><a class="btn btn-glass" href="#">История фестиваля</a></div>
+        </div>
+        <div class="fr2">
+          <span class="kk">XII фестиваль в 2026 году</span>
+          <div class="st2"><div><b>21</b><span>спектакль</span></div><div><b>19</b><span>театров</span></div><div><b>18</b><span>городов</span></div></div>
+          <p class="sf">Впервые — коллективы из Ташкента, Сахалина и Камчатки. Лаборатория театральной критики вместе с СТД России.</p>
+          <div class="sub2"><b>Вне формата. У Троицы</b><span>Уличный фестиваль в августе на «Дороге к храму» и в парке «Дубрава». В 2026 году — больше 10 тысяч зрителей за два дня.</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="ftr"><div class="wrap">
+  <div><div class="tel">+7 496 545-75-75</div><div>Касса: ср–пт 12–19, сб–вс 13–18:30 · Мкр. Семхоз, Парковая ул., 16</div></div>
+  <div class="gov"><a href="#">Как добраться</a><a href="#">Сведения об организации</a><a href="#">Независимая оценка качества</a><a href="#">Решаем вместе</a><a href="#">PRO.Культура.РФ</a></div>
+</div></footer>
+
+<dialog id="buy" aria-labelledby="buy-t"><div class="dlg">
+  <button class="x" type="button" aria-label="Закрыть">×</button>
+  <span class="k" id="buy-k">Покупка билета</span><h3 id="buy-t"></h3><p id="buy-m" style="color:var(--soft)"></p>
+  <div class="bx">Здесь откроется виджет QuickTickets: схема зала, выбор мест и оплата — не уходя с сайта театра.</div>
+  <small>Спектакли с меткой «Пушкинская карта» можно оплатить картой.</small>
+</div></dialog>
+
+<script src="../assets/data.js"></script>
+<script>
+(function () {
+  var S = KV.shows, E = KV.events, SC = KV.scenes;
+  var MG = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+  var MN = ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
+  var WD = ['воскресенье','понедельник','вторник','среда','четверг','пятница','суббота'];
+  var WS = ['вс','пн','вт','ср','чт','пт','сб'];
+  var PRICE = { drama: 600, kids: 500, concert: 300 };
+  function pd(s) { var a = s.split('-'); return new Date(+a[0], a[1] - 1, +a[2]); }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  var qs = new URLSearchParams(location.search);
+  var TODAY = qs.get('today') ? pd(qs.get('today')) : new Date(); TODAY.setHours(0, 0, 0, 0);
+  var UP = E.filter(function (e) { return pd(e.date) >= TODAY; }); if (!UP.length) UP = E.slice();
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- шапка ---------- */
+  var top = document.getElementById('top');
+  function solid() { top.classList.toggle('solid', scrollY > 40 || document.getElementById('mnav').classList.contains('open')); }
+  addEventListener('scroll', solid, { passive: true }); solid();
+
+  /* ---------- первый экран ---------- */
+  var slides = [
+    { ph: 'otets-arseniy.jpg', k: 'Премьера · Основная сцена', t: 'Отец Арсений', m: '<b>19–22 ноября</b> · 14+ · Пушкинская карта', buy: 'e0', s: 'Отец Арсений' },
+    { ph: 'teplaya-pamyat.jpg', k: 'Премьера · Малый зал', t: 'Тёплая память', m: '<b>11–13 декабря</b> · 18+ · 70 мест', buy: 'e12', s: 'Тёплая память' },
+    { ph: 'volshebnik.jpg', k: 'Новый год · для всей семьи', t: 'Волшебник Изумрудного города', m: '<b>18 декабря — 5 января</b> · 6+', when: '2026-12', s: 'Новый год' }
+  ];
+  var bg = document.getElementById('bg'), sw = document.getElementById('sw'), cur = 0, timer, DUR = 8000;
+  bg.innerHTML = slides.map(function (s, i) { return '<img src="../photos/' + s.ph + '" alt=""' + (i ? '' : ' class="on"') + '>'; }).join('');
+  sw.style.setProperty('--dur', DUR + 'ms');
+  function show(i) {
+    cur = (i + slides.length) % slides.length; var s = slides[cur];
+    bg.querySelectorAll('img').forEach(function (im, k) { im.classList.toggle('on', k === cur); });
+    document.getElementById('slide').innerHTML = '<div class="fade"><span class="kick"><i></i>' + s.k + '</span><h1' + (s.t.length > 16 ? ' class="long"' : '') + '>' + s.t + '</h1><p class="meta">' + s.m + '</p><div class="acts">' +
+      (s.buy ? '<button class="btn btn-gold" data-buy="' + s.buy + '">Купить билет</button><a class="btn btn-glass" href="#af" data-find="' + s.t + '">Все даты</a>' : '<a class="btn btn-gold" href="#af" data-when="' + s.when + '">Выбрать дату</a>') + '</div></div>';
+    sw.innerHTML = slides.map(function (x, k) { return '<button type="button" role="tab" aria-selected="' + (k === cur) + '" data-go="' + k + '"' + (k === cur ? ' class="on"' : '') + '><span>0' + (k + 1) + '</span><em style="font-style:normal">' + x.s + '</em></button>'; }).join('');
+    clearTimeout(timer); if (!reduce && !sw.classList.contains('paused') && !document.documentElement.classList.contains('a11y')) timer = setTimeout(function () { show(cur + 1); }, DUR);
+  }
+  var hero = document.querySelector('.hero .in');
+  hero.addEventListener('mouseenter', function () { sw.classList.add('paused'); clearTimeout(timer); });
+  hero.addEventListener('mouseleave', function () { sw.classList.remove('paused'); show(cur); });
+  hero.addEventListener('focusin', function () { sw.classList.add('paused'); clearTimeout(timer); });
+  show(0);
+
+  var seen = {}, near = UP.filter(function (e) { if (seen[e.show] || !(e.status === 'sale' || e.status === 'few')) return false; seen[e.show] = 1; return true; }).slice(0, 3);
+  document.getElementById('strip').innerHTML = '<span class="lb">Ближайшие</span>' + near.map(function (e) {
+    var s = S[e.show], d = pd(e.date);
+    return '<button type="button" class="it" data-buy="' + e.id + '" aria-label="Купить: ' + esc(s.title) + ', ' + d.getDate() + ' ' + MG[d.getMonth()] + ', ' + e.time + '"><span class="d">' + d.getDate() + '<small>' + MG[d.getMonth()].slice(0, 3) + '</small></span><span class="t"><b>' + esc(s.short || s.title) + '</b><span>' + WS[d.getDay()] + ', ' + e.time + ' · ' + SC[e.scene] + '</span></span></button>';
+  }).join('') + '<a class="all" href="#af">Вся афиша ↓</a>';
+
+  /* ---------- афиша: периоды + дни с показами + карточки спектаклей ---------- */
+  var months = []; UP.forEach(function (e) { var m = e.date.slice(0, 7); if (months.indexOf(m) < 0) months.push(m); });
+  var PER = [['all', 'Все даты'], ['week', 'Неделя'], ['we', 'Выходные']].concat(months.map(function (m) { return [m, MN[m.split('-')[1] - 1]]; }));
+  var PERN = { all: 'Все даты', week: 'Ближайшая неделя', we: 'Выходные' };
+  var st = { per: 'all', day: '', t: 'all', pk: false };
+  document.getElementById('per').innerHTML = PER.map(function (p) { return '<button class="q" data-per="' + p[0] + '" aria-pressed="' + (p[0] === 'all') + '">' + p[1] + '</button>'; }).join('');
+  function okType(e) {
+    var s = S[e.show];
+    if (st.t !== 'all' && s.type !== st.t) return false;
+    if (st.pk && !(s.pk && e.status !== 'group' && e.status !== 'info')) return false;
+    return true;
+  }
+  function okPer(e) {
+    var d = pd(e.date);
+    if (st.per === 'week') return (d - TODAY) / 864e5 <= 6;
+    if (st.per === 'we') return d.getDay() === 0 || d.getDay() === 6;
+    if (/^\d{4}-\d{2}$/.test(st.per)) return e.date.slice(0, 7) === st.per;
+    return true;
+  }
+  function plural(n, a, b, c) { var x = n % 10, y = n % 100; return x === 1 && y !== 11 ? a : x >= 2 && x <= 4 && (y < 10 || y >= 20) ? b : c; }
+  function days(list) {
+    var ds = [], cm = '', h = '';
+    list.forEach(function (e) { if (ds.indexOf(e.date) < 0) ds.push(e.date); });
+    ds.forEach(function (k) {
+      var d = pd(k), m = k.slice(0, 7), we = d.getDay() === 0 || d.getDay() === 6;
+      if (m !== cm && st.per === 'all' || m !== cm && st.per === 'we' || m !== cm && st.per === 'week') { if (cm) h += '<span class="mm" aria-hidden="true">' + MN[d.getMonth()].slice(0, 3) + '</span>'; }
+      cm = m;
+      h += '<button type="button" class="dc' + (we ? ' we' : '') + '" data-day="' + k + '" aria-pressed="' + (st.day === k) + '" aria-label="' + d.getDate() + ' ' + MG[d.getMonth()] + ', ' + WD[d.getDay()] + '"><b>' + d.getDate() + '</b><span>' + WS[d.getDay()] + '</span></button>';
+    });
+    return h;
+  }
+  function chip(e, withDate) {
+    var d = pd(e.date), l = (withDate ? '<b>' + d.getDate() + ' ' + MG[d.getMonth()].slice(0, 3) + '</b> <span>' + WS[d.getDay()] + '</span> ' : '') + e.time;
+    if (e.status === 'sold') return '<span class="ch sold" title="Аншлаг">' + l + '<small>аншлаг</small></span>';
+    if (e.status === 'info') return '<a class="ch" href="#">' + l + '<small>программа</small></a>';
+    return '<button type="button" class="ch' + (e.status === 'few' ? ' few' : '') + '" data-buy="' + e.id + '" aria-label="Купить: ' + esc(S[e.show].title) + ', ' + d.getDate() + ' ' + MG[d.getMonth()] + ', ' + e.time + '">' + l + (e.status === 'few' ? '<small>мало мест</small>' : e.status === 'group' ? '<small>по заявке</small>' : '') + '</button>';
+  }
+  function render() {
+    document.querySelectorAll('[data-per]').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.per === st.per); });
+    document.querySelectorAll('[data-t]').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.t === st.t); });
+    document.querySelector('[data-pk]').setAttribute('aria-pressed', st.pk);
+    var period = UP.filter(function (e) { return okType(e) && okPer(e); });
+    if (st.day && !period.some(function (e) { return e.date === st.day; })) st.day = '';
+    var dEl = document.getElementById('days'); dEl.innerHTML = days(period);
+    var on = dEl.querySelector('[aria-pressed="true"]'); if (on) dEl.scrollLeft = on.offsetLeft - dEl.clientWidth / 2;
+    var list = st.day ? period.filter(function (e) { return e.date === st.day; }) : period;
+    var g = [], map = {}; list.forEach(function (e) { if (!map[e.show]) { map[e.show] = []; g.push(e.show); } map[e.show].push(e); });
+    var sc = st.day ? (function () { var d = pd(st.day); return d.getDate() + ' ' + MG[d.getMonth()] + ', ' + WD[d.getDay()]; })() : (PERN[st.per] || MN[+st.per.split('-')[1] - 1] + ' ' + st.per.split('-')[0]);
+    document.getElementById('scope').innerHTML = '<b>' + sc + '</b><span>' + list.length + ' ' + plural(list.length, 'показ', 'показа', 'показов') + ' · ' + g.length + ' ' + plural(g.length, 'спектакль', 'спектакля', 'спектаклей') + '</span>' + (st.day ? '<button type="button" data-day="">Все дни периода ×</button>' : '');
+    document.getElementById('cnt').textContent = UP.filter(okType).length + ' показов до ' + (function () { var l = pd(UP[UP.length - 1].date); return l.getDate() + ' ' + MG[l.getMonth()]; })();
+    document.getElementById('cards').innerHTML = g.length ? g.map(function (k) {
+      var s = S[k], ev = map[k], pr = PRICE[s.type], prem = ev.some(function (e) { return e.prem; });
+      return '<article class="card"><div class="im">' + (s.photo ? '<img src="../photos/' + s.photo + '" alt="" loading="lazy">' : '<span class="ni">' + esc(s.short || s.title) + '</span>') + '</div>' +
+        '<div class="bd"><div class="tt"><h3><a href="#">' + esc(s.title) + '</a></h3>' + (s.age ? '<span class="ag">' + s.age + '</span>' : '') + (prem ? '<span class="pr">Премьера</span>' : '') + (s.pk ? '<span class="pkb">Пушкинская карта</span>' : '') + '</div>' +
+        '<p class="mt">' + esc(s.genre) + ' · ' + esc(s.author) + (s.dir ? ', реж. ' + esc(s.dir) : '') + ' · ' + SC[ev[0].scene] + (pr ? ' · <b>от ' + pr + ' ₽</b>' : '') + '</p>' +
+        '<p class="ds">' + esc(s.desc) + '</p><div class="chs">' + ev.map(function (e) { return chip(e, !st.day); }).join('') + '</div></div></article>';
+    }).join('') : '<div class="empty"><h3>В этот период таких показов нет</h3><button class="btn btn-gold" type="button" data-reset>Показать всё</button></div>';
+  }
+
+  var dlg = document.getElementById('buy');
+  document.addEventListener('click', function (ev) {
+    var t = ev.target;
+    var g = t.closest('[data-go]'); if (g) { show(+g.dataset.go); return; }
+    var af = t.closest('[data-af]'); if (af) { var p = af.dataset.af.split('|'); st.per = p[0] || 'all'; st.t = p[1] || 'all'; st.pk = p[2] === 'pk'; st.day = ''; render(); }
+    var pe = t.closest('[data-per]'); if (pe) { st.per = pe.dataset.per; st.day = ''; render(); return; }
+    var dy = t.closest('[data-day]'); if (dy) { st.day = st.day === dy.dataset.day ? '' : dy.dataset.day; render(); return; }
+    var ty = t.closest('[data-t]'); if (ty) { st.t = ty.dataset.t; st.day = ''; render(); return; }
+    if (t.closest('[data-pk]')) { st.pk = !st.pk; st.day = ''; render(); return; }
+    if (t.closest('[data-reset]')) { st.t = 'all'; st.pk = false; st.day = ''; st.per = 'all'; render(); return; }
+    var wh = t.closest('[data-when]'); if (wh) { st.per = wh.dataset.when; st.day = ''; st.t = 'all'; render(); }
+    var fd = t.closest('[data-find]'); if (fd) { st.t = 'all'; st.pk = false; st.day = ''; var f = UP.find(function (e) { return S[e.show].title === fd.dataset.find; }); if (f) st.per = f.date.slice(0, 7); render(); }
+    var b = t.closest('[data-buy]');
+    if (b) {
+      var e = E.find(function (x) { return x.id === b.dataset.buy; }), s = S[e.show], d = pd(e.date);
+      document.getElementById('buy-k').textContent = e.status === 'group' ? 'Заявка на групповой показ' : 'Покупка билета';
+      document.getElementById('buy-t').textContent = s.title;
+      document.getElementById('buy-m').textContent = d.getDate() + ' ' + MG[d.getMonth()] + ', ' + WD[d.getDay()] + ', ' + e.time + ' · ' + SC[e.scene] + (s.age ? ' · ' + s.age : '');
+      dlg.showModal(); return;
+    }
+    if (t.closest('.dlg .x') || t === dlg) dlg.close();
+  });
+  render();
+
+  var bu = document.querySelector('.burger'), mn = document.getElementById('mnav');
+  bu.onclick = function () { var o = mn.classList.toggle('open'); bu.setAttribute('aria-expanded', o); solid(); };
+  mn.addEventListener('click', function (e) { if (e.target.closest('a')) { mn.classList.remove('open'); bu.setAttribute('aria-expanded', false); solid(); } });
+  var a = document.getElementById('a11y');
+  function setA(on) { document.documentElement.classList.toggle('a11y', on); a.setAttribute('aria-pressed', on); try { localStorage.setItem('kv4-a11y', on ? '1' : ''); } catch (e) {} }
+  a.onclick = document.getElementById('a11y-m').onclick = function () { setA(!document.documentElement.classList.contains('a11y')); };
+  try { if (localStorage.getItem('kv4-a11y')) setA(true); } catch (e) {}
+})();
+</script>
+<script src="../assets/switcher.js" data-root="../" data-cur="b"></script>
+</body>
+</html>
