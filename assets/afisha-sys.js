@@ -56,6 +56,17 @@ window.KVPop = function (box, rowSel, minR) {
     return arr.map(function (o) { return '<button type="button" class="afs-chip" data-' + key + '="' + o[0] + '" aria-pressed="' + (o[0] === cur) + '">' + o[1] + '</button>'; }).join('');
   }
 
+  /* обрывок бумаги: рваные верх и низ, у каждого показа свой (зерно — id показа) */
+  function rnd(seed) { var x = 0, i = 0; for (; i < seed.length; i++) x = (x * 31 + seed.charCodeAt(i)) % 2147483647; return function () { x = (x * 16807) % 2147483647; return x / 2147483647; }; }
+  function torn(id) {
+    var r = rnd('t' + id), top = [], bot = [], x;
+    for (x = 0; x < 100; x += 7 + r() * 6) top.push(x.toFixed(1) + '% ' + (r() * 7).toFixed(1) + '%');
+    top.push('100% ' + (r() * 6).toFixed(1) + '%');
+    for (x = 100; x > 0; x -= 7 + r() * 6) bot.push(x.toFixed(1) + '% ' + (93 + r() * 7).toFixed(1) + '%');
+    bot.push('0% ' + (94 + r() * 6).toFixed(1) + '%');
+    return 'polygon(' + top.concat(bot).join(',') + ')';
+  }
+  function tilt(id) { return ((rnd('r' + id)() - .5) * 5).toFixed(1); }
   function byDate(list) {
     var h = '', cd = '', cm = '';
     list.slice(0, st.n).forEach(function (e) {
@@ -63,7 +74,7 @@ window.KVPop = function (box, rowSel, minR) {
       if (m !== cm && st.m === 'all') { h += '<div class="afs-mh">' + H.MN[d.getMonth()] + '</div>'; }
       cm = m; cd = e.date;
       h += '<div class="afs-ev' + (first ? ' first' : '') + (first && h ? ' newday' : '') + '" data-show="' + e.show + '">' +
-        '<span class="afs-d' + (we ? ' we' : '') + '"><b>' + d.getDate() + '</b> ' + H.MG[d.getMonth()].slice(0, 3) + '<small>' + H.WD[d.getDay()] + '</small></span>' +
+        '<span class="afs-d' + (we ? ' we' : '') + '" style="--r:' + tilt(e.id) + 'deg"><span class="pp" style="clip-path:' + torn(e.id) + '"><b>' + d.getDate() + '</b> ' + H.MG[d.getMonth()].slice(0, 3) + '<small>' + H.WD[d.getDay()] + '</small></span></span>' +
         '<span class="afs-tm">' + e.time + '</span>' +
         '<span class="afs-th">' + (s.photo ? '<img src="photos/' + s.photo + '" alt="" loading="lazy">' : '') + '</span>' +
         '<span class="afs-ti"><a href="#">' + H.esc(s.title) + '</a>' + (e.prem ? '<em>премьера</em>' : '') +

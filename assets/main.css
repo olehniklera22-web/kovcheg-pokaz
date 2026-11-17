@@ -26,8 +26,12 @@
 .afs-ev{position:relative;display:grid;grid-template-columns:84px 60px 120px minmax(0,1fr) 110px 150px;gap:20px;align-items:center;padding:12px 20px 12px 18px;margin-top:8px;background:var(--panel);border:1px solid var(--line);border-left:3px solid transparent;transition:background .15s,border-color .15s}
 .afs-ev:hover{background:var(--panel-2);border-color:var(--line-2);border-left-color:var(--bronze)}
 .afs-ev.newday{margin-top:16px}
-/* дата — светлый «листок календаря» */
-.afs-d{display:flex;flex-direction:column;align-items:center;justify-content:center;width:84px;height:84px;background:#ece4d3;color:#17130e;font-family:var(--fh);font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:.12em;line-height:1;box-shadow:0 6px 14px rgba(0,0,0,.35)}
+/* дата — обрывок бумаги: рваные края, фактура, лёгкий наклон */
+.afs-d{display:block;width:84px;height:88px;transform:rotate(var(--r,0deg));filter:drop-shadow(0 5px 8px rgba(0,0,0,.45));transition:transform .2s}
+.afs-ev:hover .afs-d{transform:rotate(0deg) scale(1.04)}
+.afs-d .pp{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;padding-top:2px;color:#17130e;font-family:var(--fh);font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:.12em;line-height:1;
+  background-color:#ebe3d1;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .3 0 0 0 0 .22 0 0 0 .22 0'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E"),linear-gradient(160deg,#f3ecdd 0%,#e6dcc6 100%)}
 .afs-d b{font-weight:800;font-size:40px;letter-spacing:-.01em;line-height:.9}
 .afs-d small{display:block;margin-top:5px;font-family:var(--ft);font-weight:500;font-size:12px;text-transform:none;letter-spacing:0;color:#5b5346}
 .afs-d.we small{color:var(--bordo);font-weight:600}
@@ -45,7 +49,7 @@
 @media (max-width:1000px){.afs-ev{grid-template-columns:84px 56px minmax(0,1fr) 130px;padding:12px 16px}.afs-th,.afs-pr{display:none}}
 @media (max-width:620px){
   .afs-ev{grid-template-columns:64px minmax(0,1fr);gap:6px 14px;padding:12px}
-  .afs-d{grid-row:1/4;width:64px;height:72px;align-self:start}.afs-d b{font-size:30px}.afs-d small{font-size:11px}
+  .afs-d{grid-row:1/4;width:64px;height:76px;align-self:start}.afs-d b{font-size:30px}.afs-d small{font-size:11px}
   .afs-tm{font-size:18px}
   .afs-ti{grid-column:2}.afs-ac{grid-column:2;text-align:left;margin-top:4px}
 }
