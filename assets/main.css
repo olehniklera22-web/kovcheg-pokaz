@@ -145,21 +145,17 @@
 .afs-pop .tag{position:absolute;right:-10px;bottom:2px;background:var(--bronze,#b98a4e);color:#17130e;font-family:var(--fh);font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:13px;padding:6px 10px;transform:rotate(3deg);box-shadow:0 6px 12px rgba(0,0,0,.35)}
 @media (prefers-reduced-motion:reduce){.afs-pop{transition:none}}
 
-/* вариант 2 — гамма с открытки театра, насыщеннее: шалфей, зелень, олива, медное золото, холодная белая бумага.
-   Один градиент на всю страницу (на body, а не на каждом блоке) — течёт сверху вниз и уходит в бордо в подвале.
-   Блоки прозрачные, карточки полупрозрачные — градиент виден сквозь них. Кнопки — бордо */
-html:has(body.pal-sage){background:#2c3c25}
-body.pal-sage{--bg:#33452b;--bg-2:transparent;--panel:rgba(24,36,18,.55);--panel-2:rgba(28,42,22,.72);--line:rgba(238,235,224,.16);--line-2:rgba(238,235,224,.3);--ink:#f0ede2;--ink-soft:rgba(240,237,226,.76);--ink-mute:rgba(240,237,226,.54);--bronze:#cf9a52;--bronze-2:#dea65f;--bordo:#94303f;--bordo-2:#ab3a4b;
+/* вариант 2 — зелёный первого варианта, чуть светлее и спокойнее (#0c130f → #181f1b, тот же оттенок, меньше насыщенность).
+   Один градиент на всю страницу: сверху светлее, по ходу — мягкие бордовые пятна, в подвале бордо. Акценты — бронза, кнопки — бордо */
+html:has(body.pal-sage){background:#181f1b}
+body.pal-sage{--bg:#181f1b;--bg-2:transparent;--panel:rgba(40,52,44,.62);--panel-2:rgba(48,63,53,.78);--line:rgba(236,226,206,.13);--line-2:rgba(236,226,206,.25);
   min-height:100vh;background:
-    radial-gradient(55% 22% at 88% 40%,rgba(130,36,54,.34),transparent 72%),
-    radial-gradient(60% 20% at 8% 66%,rgba(130,36,54,.24),transparent 72%),
-    linear-gradient(180deg,#7d966a 0%,#5d7a48 4%,#41592f 10%,#34482b 22%,#36462b 38%,#3b3f2c 50%,#35482c 64%,#3a3d2c 80%,#56303a 93%,#6b2a3a 100%)}
-.pal-sage .hdr{background:rgba(44,60,37,.86)}
-.pal-sage .nav{background:#2c3c25}
+    radial-gradient(55% 22% at 88% 40%,rgba(125,36,51,.30),transparent 72%),
+    radial-gradient(60% 20% at 8% 66%,rgba(125,36,51,.22),transparent 72%),
+    linear-gradient(180deg,#34433a 0%,#2a3630 6%,#212b25 14%,#1b231e 26%,#1d231f 40%,#231f20 52%,#1b231e 64%,#1f2220 80%,#36202a 93%,#45212d 100%)}
+.pal-sage .hdr{background:rgba(24,31,27,.88)}
+.pal-sage .nav{background:#181f1b}
 .pal-sage .hf,.pal-sage .bg2,.pal-sage .afs-sec,.pal-sage .sec{background:transparent}
-.pal-sage .hf .eyebrow{color:#f0ede2}
-.pal-sage .hf h1 .serif{color:#e7ad66}
-.pal-sage .hf .film{background:rgba(18,26,14,.82)}
-.pal-sage .hf .tear .pap{fill:#d8ddd9}.pal-sage .hf .tear .fib{fill:#f4f5f2}
-.pal-sage .sec.fest{background:rgba(16,34,20,.5)}
-.pal-sage .ftr{background:rgba(20,10,14,.28);border-top-color:rgba(238,235,224,.12)}
+.pal-sage .hf .film{background:rgba(10,14,12,.8)}
+.pal-sage .sec.fest{background:rgba(10,20,14,.45)}
+.pal-sage .ftr{background:rgba(16,8,12,.3);border-top-color:rgba(236,226,206,.1)}

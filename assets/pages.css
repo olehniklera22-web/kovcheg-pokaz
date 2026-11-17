@@ -21,7 +21,6 @@
 .sp-hero .edge{position:absolute;left:-2%;width:104%;bottom:-16px;height:34px;filter:drop-shadow(0 4px 6px rgba(0,0,0,.35))}
 .sp-hero .edge svg{display:block;width:100%;height:100%}
 .sp-hero .edge .pap,.ar-hero .pap{fill:#e9e1cf}.sp-hero .edge .fib{fill:#f8f4ea}
-.pal-sage .sp-hero .edge .pap{fill:#d8ddd9}.pal-sage .sp-hero .edge .fib{fill:#f4f5f2}
 
 .sp-dates{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;padding:0}
 .sp-dates .afs-dt span{display:block}
