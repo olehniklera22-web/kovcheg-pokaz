@@ -62,8 +62,8 @@ window.KVPop = function (box, rowSel, minR) {
       var s = S[e.show], d = H.pd(e.date), m = e.date.slice(0, 7), first = e.date !== cd, we = d.getDay() === 0 || d.getDay() === 6;
       if (m !== cm && st.m === 'all') { h += '<div class="afs-mh">' + H.MN[d.getMonth()] + '</div>'; }
       cm = m; cd = e.date;
-      h += '<div class="afs-ev' + (first ? ' first' : '') + '" data-show="' + e.show + '">' +
-        '<span class="afs-d' + (we ? ' we' : '') + '">' + (first ? '<b>' + d.getDate() + '</b> ' + H.MG[d.getMonth()].slice(0, 3) + '<small>' + H.WD[d.getDay()] + '</small>' : '') + '</span>' +
+      h += '<div class="afs-ev' + (first ? ' first' : '') + (first && h ? ' newday' : '') + '" data-show="' + e.show + '">' +
+        '<span class="afs-d' + (we ? ' we' : '') + '"><b>' + d.getDate() + '</b> ' + H.MG[d.getMonth()].slice(0, 3) + '<small>' + H.WD[d.getDay()] + '</small></span>' +
         '<span class="afs-tm">' + e.time + '</span>' +
         '<span class="afs-th">' + (s.photo ? '<img src="photos/' + s.photo + '" alt="" loading="lazy">' : '') + '</span>' +
         '<span class="afs-ti"><a href="#">' + H.esc(s.title) + '</a>' + (e.prem ? '<em>премьера</em>' : '') +
