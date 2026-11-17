@@ -145,9 +145,14 @@
 .afs-pop .tag{position:absolute;right:-10px;bottom:2px;background:var(--bronze,#b98a4e);color:#17130e;font-family:var(--fh);font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:13px;padding:6px 10px;transform:rotate(3deg);box-shadow:0 6px 12px rgba(0,0,0,.35)}
 @media (prefers-reduced-motion:reduce){.afs-pop{transition:none}}
 
-/* вариант 2 — своя гамма: приглушённый пастельный зелёный, переходящий в лёгкое бордо. Кнопки — бордо */
-body.pal-sage{--bg:#26322c;--bg-2:#2c3a33;--panel:#34443b;--panel-2:#3c4d44;--line:rgba(236,226,206,.14);--line-2:rgba(236,226,206,.26);--bordo:#8c3644;--bordo-2:#a3424f;background:linear-gradient(180deg,#26322c 0%,#26322c 70%,#3a2a2f 100%)}
-.pal-sage .hdr{background:rgba(38,50,44,.9)}
-.pal-sage .hf{background:linear-gradient(165deg,#3b4e44 0%,#2f3f37 45%,#4d2c35 100%)}
-.pal-sage .afs-sec.bg2{background:linear-gradient(180deg,#2c3a33 0%,#2c3a33 55%,#3a2e33 100%)}
-.pal-sage .ftr{background:linear-gradient(180deg,#2d2a2b 0%,#3a2329 100%)}
+/* вариант 2 — гамма с открытки театра: тёмная олива #363d2d, шалфей #798473, хаки #c1bca8, медное золото #cd9558, холодная белая бумага.
+   Градиент прежний: из зелёного в лёгкое бордо. Кнопки — бордо */
+body.pal-sage{--bg:#363d2d;--bg-2:#3b4332;--panel:#424a38;--panel-2:#4a5340;--line:rgba(236,234,224,.14);--line-2:rgba(236,234,224,.28);--ink:#eeebe0;--ink-soft:rgba(238,235,224,.72);--ink-mute:rgba(238,235,224,.5);--bronze:#c79f64;--bronze-2:#cd9558;--bordo:#8c3644;--bordo-2:#a3424f;background:linear-gradient(180deg,#363d2d 0%,#363d2d 70%,#41302f 100%)}
+.pal-sage .hdr{background:rgba(54,61,45,.9)}
+.pal-sage .hf{background:linear-gradient(165deg,#798473 0%,#55604b 28%,#363d2d 60%,#5a3038 100%)}
+.pal-sage .hf .eyebrow{color:#eeebe0}
+.pal-sage .hf h1 .serif{color:#d9a466}
+.pal-sage .hf .film{background:#262b20}
+.pal-sage .hf .tear .pap{fill:#d8ddd9}.pal-sage .hf .tear .fib{fill:#f4f5f2}
+.pal-sage .afs-sec.bg2{background:linear-gradient(180deg,#3b4332 0%,#3b4332 55%,#43332f 100%)}
+.pal-sage .ftr{background:linear-gradient(180deg,#2f3427 0%,#3f2a2d 100%)}
