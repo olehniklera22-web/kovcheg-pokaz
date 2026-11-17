@@ -119,6 +119,15 @@
 .hf .track img{height:clamp(150px,16vw,230px);width:auto;aspect-ratio:3/2;object-fit:cover;filter:var(--photo-filter);transition:filter .5s}
 .hf .track img:hover{filter:none}
 @keyframes hf-run{to{transform:translateX(-50%)}}
+/* вырезанные герои стоят на ленте: ноги прячутся за верхней полосой бумаги, при наведении — цвет и ярлык */
+.hero-cut{position:absolute;bottom:calc(100% - 22px);z-index:1;display:block}
+.hero-cut.l{left:clamp(16px,5vw,90px);height:clamp(300px,30vw,440px)}
+.hero-cut.r{right:clamp(16px,5vw,90px);height:clamp(250px,24vw,350px)}
+.hero-cut img{height:100%;width:auto;display:block;filter:grayscale(1) contrast(1.06) drop-shadow(2px 0 0 #f4efe4) drop-shadow(-2px 0 0 #f4efe4) drop-shadow(0 -2px 0 #f4efe4) drop-shadow(0 14px 22px rgba(0,0,0,.45));transition:filter .5s,transform .4s;transform-origin:bottom center}
+.hero-cut:hover img,.hero-cut:focus-visible img{filter:grayscale(0) drop-shadow(2px 0 0 #f4efe4) drop-shadow(-2px 0 0 #f4efe4) drop-shadow(0 -2px 0 #f4efe4) drop-shadow(0 14px 22px rgba(0,0,0,.45));transform:translateY(-6px)}
+.hero-cut span{position:absolute;left:50%;top:18%;transform:translate(-50%,6px) rotate(-2deg);white-space:nowrap;background:#e9e1cf;color:#1c1712;font-family:var(--fh);font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase;padding:6px 10px;box-shadow:0 6px 14px rgba(0,0,0,.35);opacity:0;transition:.25s;pointer-events:none}
+.hero-cut:hover span,.hero-cut:focus-visible span{opacity:1;transform:translate(-50%,0) rotate(-2deg)}
+@media (max-width:1100px){.hero-cut{display:none}}
 @media (prefers-reduced-motion:reduce){.hf .track{animation:none}}
 
 /* переключатель вариантов */
