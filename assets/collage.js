@@ -55,6 +55,11 @@
   document.querySelectorAll('.rip').forEach(function (el, i) {
     el.innerHTML = strip(+(el.dataset.seed || i + 3) * 977, +(el.dataset.h || 46));
   });
+  /* произвольный клочок бумаги: <div data-strip="5" data-h="80"></div> */
+  window.KVStrip = strip;
+  document.querySelectorAll('[data-strip]').forEach(function (el) {
+    el.innerHTML = strip(+el.dataset.strip * 613 + 11, +(el.dataset.h || 60));
+  });
 
   /* ---------- блок «Лица театра» ---------- */
   var host = document.getElementById('faces');
