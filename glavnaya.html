@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Театральный ковчег в Дубраве — главная (коллаж)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500;1,600&family=Fira+Sans+Extra+Condensed:wght@500;600;700;800&family=Fira+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css?v=3">
+<link rel="stylesheet" href="assets/collage.css">
+<link rel="stylesheet" href="assets/heroes.css?v=3">
+</head>
+<body data-page="home">
+<div id="site-header"></div>
+<main id="main">
+  <section class="pb" aria-label="Афиша на ближайшие недели">
+    <div class="pp a" data-strip="21" data-h="66"></div><div class="pp b" data-strip="22" data-h="58"></div>
+    <div id="cuts"></div>
+    <div class="wrap">
+      <div class="sheet">
+        <div class="bgp" data-strip="23" data-h="900"></div>
+        <span class="tape l"></span><span class="tape r"></span>
+        <div class="top-l"><span>Театральный ковчег в Дубраве</span><span>Сезон 2026/27</span></div>
+        <h1>Афиша</h1>
+        <p class="mon" id="mon"></p>
+        <div class="rule"></div>
+        <ol id="pl"></ol>
+        <div class="foot"><a href="afisha.html">Вся афиша →</a><span>Касса: +7 496 545-75-75</span></div>
+      </div>
+    </div>
+  </section>
+</main>
+<div id="site-footer"></div>
+<script src="assets/data.js"></script>
+<script src="assets/app.js"></script>
+<script src="assets/collage.js" data-root=""></script>
+<script>
+(function () {
+  var H = window.KVH, S = KV.shows;
+  /* вырезанные герои — только у спектаклей, для которых на сайте театра нашлись фото со сцены */
+  var FIG = { zoykina: { src: 'zoykina-man.png', cls: 'r' }, magiya: { src: 'magiya-trio.png', cls: 'l' } };
+  var groups = [], map = {};
+  H.upcoming.forEach(function (e) {
+    if (S[e.show].type === 'fest') return;
+    if (!map[e.show]) { if (groups.length >= 5) return; map[e.show] = []; groups.push(e.show); }
+    map[e.show].push(e);
+  });
+  var first = H.pd(map[groups[0]][0].date), last = H.pd(map[groups[groups.length - 1]][0].date);
+  document.getElementById('mon').textContent = first.getMonth() === last.getMonth() ? H.MN[first.getMonth()].toLowerCase() : H.MN[first.getMonth()].toLowerCase() + ' — ' + H.MN[last.getMonth()].toLowerCase();
+  document.getElementById('pl').innerHTML = groups.map(function (k) {
+    var ev = map[k], s = S[k], a = H.pd(ev[0].date), m = a.getMonth();
+    var same = ev.filter(function (e) { return H.pd(e.date).getMonth() === m; }), b = H.pd(same[same.length - 1].date);
+    var extra = ev.length - same.length;
+    var d = (same.length > 1 ? a.getDate() + '–' + b.getDate() : a.getDate()) + '<small>' + H.MG[m] + '</small>';
+    var prem = ev.some(function (e) { return e.prem; });
+    var buy = ev.find(function (e) { return e.status === 'sale' || e.status === 'few'; }) || ev[0];
+    var meta = s.genre + (s.age ? ' · ' + s.age : '') + (extra ? ' · и ещё ' + extra + ' ' + (extra === 1 ? 'дата' : 'даты') : '');
+    return '<li data-show="' + k + '"><span class="d">' + d + '</span><span><span class="t"><a href="#">' + H.esc(s.short || s.title) + '</a>' + (prem ? '<em>премьера</em>' : '') + '</span><span class="m">' + H.esc(meta) + '</span></span><button class="b" type="button" data-buy="' + buy.id + '">Билеты</button></li>';
+  }).join('');
+  document.getElementById('cuts').innerHTML = groups.filter(function (k) { return FIG[k]; }).map(function (k) {
+    return '<figure class="cut ' + FIG[k].cls + '" data-fig="' + k + '"><img src="photos/stage/' + FIG[k].src + '" alt=""></figure>';
+  }).join('');
+  /* наведение на строку — герой этого спектакля оживает в цвете */
+  document.getElementById('pl').addEventListener('mouseover', function (e) {
+    var li = e.target.closest('li'); var k = li && li.dataset.show;
+    document.querySelectorAll('[data-fig]').forEach(function (f) { f.classList.toggle('lit', f.dataset.fig === k); });
+  });
+  document.getElementById('pl').addEventListener('mouseleave', function () { document.querySelectorAll('[data-fig]').forEach(function (f) { f.classList.remove('lit'); }); });
+})();
+</script>
+</body>
+</html>
