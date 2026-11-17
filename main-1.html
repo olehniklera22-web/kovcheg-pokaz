@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Главная — вариант 1 «По датам» — Театральный ковчег в Дубраве</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500;1,600&family=Fira+Sans+Extra+Condensed:wght@500;600;700;800&family=Fira+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css?v=3">
+<link rel="stylesheet" href="assets/main.css">
+</head>
+<body data-page="home">
+<div id="site-header"></div>
+<main id="main">
+  <section class="m1" aria-roledescription="carousel" aria-label="Премьеры">
+    <div class="wrap">
+      <div id="m1-txt" aria-live="polite"></div>
+      <div class="pic"><div class="ph" id="m1-ph"></div><div class="edge" data-strip="31" data-h="38"></div></div>
+    </div>
+  </section>
+
+  <section class="afs-sec" id="afisha">
+    <div class="wrap">
+      <div class="afs-head"><div><span class="eyebrow">Билеты онлайн — круглосуточно</span><h2 class="h-l">Афиша</h2></div><p class="soft" style="max-width:40ch">Все показы по порядку: выберите месяц и что хотите посмотреть — купить можно прямо в строке.</p></div>
+      <div id="afs" data-mode="date"></div>
+    </div>
+  </section>
+</main>
+<div id="site-footer"></div>
+<script src="assets/data.js"></script>
+<script src="assets/app.js"></script>
+<script src="assets/collage.js" data-root=""></script>
+<script src="assets/afisha-sys.js"></script>
+<script>
+(function () {
+  var SL = [
+    { k: 'Премьера · Основная сцена', t: 'Отец<br>Арсений', w: '19–22 ноября · 14+', ph: 'otets-arseniy.jpg', buy: 'e0' },
+    { k: 'Премьера · Малый зал', t: 'Тёплая<br>память', w: '11–13 декабря · 18+', ph: 'teplaya-pamyat.jpg', buy: 'e12' },
+    { k: 'Новый год · для всей семьи', t: 'Волшебник<br>Изумрудного<br>города', w: '18 декабря — 5 января · 6+', ph: 'volshebnik.jpg', go: '2026-12' }
+  ], cur = 0, timer;
+  function show(i) {
+    cur = (i + SL.length) % SL.length; var s = SL[cur];
+    document.getElementById('m1-txt').innerHTML = '<div class="hv-in"><span class="eyebrow">' + s.k + '</span><h1 class="h-xl">' + s.t + '</h1><p class="when">' + s.w + '</p>' +
+      (s.buy ? '<button class="btn btn-buy" data-buy="' + s.buy + '">Купить билет</button>' : '<a class="btn btn-buy" href="#afisha">Выбрать дату</a>') +
+      '<div class="nav"><button type="button" data-s="-1" aria-label="Предыдущая премьера">←</button><button type="button" data-s="1" aria-label="Следующая премьера">→</button></div></div>';
+    document.getElementById('m1-ph').innerHTML = '<img src="photos/' + s.ph + '" alt="">';
+    clearTimeout(timer); timer = setTimeout(function () { show(cur + 1); }, 9000);
+  }
+  document.querySelector('.m1').addEventListener('click', function (e) { var b = e.target.closest('[data-s]'); if (b) show(cur + +b.dataset.s); });
+  document.querySelector('.m1').addEventListener('mouseenter', function () { clearTimeout(timer); });
+  show(0);
+})();
+(function () {
+  var bar = document.createElement('nav'); bar.className = 'mbar'; bar.setAttribute('aria-label', 'Варианты главной');
+  bar.innerHTML = '<span>Главная</span><a href="main-1.html"' + (1 === 1 ? ' class="on"' : '') + '>1 · По датам</a><a href="main-2.html"' + (1 === 2 ? ' class="on"' : '') + '>2 · По спектаклям</a>';
+  document.body.appendChild(bar);
+})();
+</script>
+</body>
+</html>
