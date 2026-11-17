@@ -100,32 +100,28 @@
 @media (max-width:900px){.m1 .wrap{grid-template-columns:1fr}.m1 .pic{order:-1}}
 
 /* ---------- вариант 2: неделя на первом экране ---------- */
-.m2{position:relative;overflow:hidden;padding:clamp(32px,4vw,56px) 0 clamp(40px,4vw,64px);background:radial-gradient(70% 90% at 85% 70%,#33493a,transparent 70%)}
-.m2 .wrap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(28px,4vw,64px);align-items:end}
-.m2 .wk h1{margin:10px 0 18px}
-.m2 .wk ol{list-style:none;border-top:2px solid var(--ink)}
-.m2 .wk li{display:grid;grid-template-columns:110px 60px minmax(0,1fr) auto;gap:16px;align-items:center;padding:11px 0;border-bottom:1px solid var(--line)}
-.m2 .wk .d{font-family:var(--fh);font-weight:600;text-transform:uppercase;font-size:15px;line-height:1.1}
-.m2 .wk .d b{font-weight:800;font-size:28px}
-.m2 .wk .d small{display:block;font-family:var(--ft);font-weight:400;text-transform:none;font-size:12px;color:var(--ink-mute)}
-.m2 .wk .tm{font-family:var(--fh);font-weight:700;font-size:20px}
-.m2 .wk .ti{font-family:var(--fh);font-weight:700;text-transform:uppercase;font-size:clamp(19px,1.6vw,23px);line-height:1.05}
-.m2 .wk .ti small{display:block;font-family:var(--ft);font-weight:400;text-transform:none;font-size:13px;color:var(--ink-mute);margin-top:2px}
-.m2 .wk .all{display:inline-block;margin-top:18px}
-.m2 .wk li{transition:background .2s}
-.m2 .wk li.on{background:linear-gradient(90deg,rgba(184,147,90,.12),transparent 70%)}
-.m2 .wk li.on .ti{color:var(--bronze-2)}
-/* справа — крупная афиша выбранного спектакля */
-.m2 .stage{align-self:center}
-.m2 .stage .ph{position:relative;aspect-ratio:3/2;overflow:hidden;background:var(--panel);box-shadow:0 30px 60px rgba(0,0,0,.45)}
-.m2 .stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .45s ease}
-.m2 .stage img.on{opacity:1}
-.m2 .stage .cap{padding-top:18px}
-.m2 .stage h2{font-family:var(--fh);font-weight:800;text-transform:uppercase;font-size:clamp(26px,2.4vw,36px);line-height:1;margin:8px 0 6px}
-.m2 .stage p{color:var(--ink-soft);font-size:15px}
-@media (max-width:1000px){.m2 .wrap{grid-template-columns:1fr}.m2 .stage{max-width:560px}}
-@media (max-width:620px){.m2 .stage{display:none}.m2 .wk li.on{background:none}.m2 .wk li.on .ti{color:inherit}}
-@media (max-width:620px){.m2 .wk li{grid-template-columns:52px minmax(0,1fr) auto;gap:4px 12px}.m2 .wk .d{grid-column:1/-1}.m2 .wk .d small{display:inline;margin-left:6px}.m2 .wk .ti{grid-column:2}}
+/* вариант 2 — первый экран: театр, а не афиша. Заголовок, одна строка «ближайший спектакль», три кадра со сцены */
+.m2{position:relative;overflow:hidden;padding:clamp(40px,5vw,80px) 0 clamp(48px,5vw,88px);background:radial-gradient(70% 90% at 85% 60%,#2c4133,transparent 70%)}
+.m2 .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,80px);align-items:center}
+.m2 h1{margin:14px 0 22px}
+.m2 .lead{max-width:34ch}
+.m2 .next{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:6px 22px;margin:clamp(28px,3vw,40px) 0 18px;padding:18px 20px;border:1px solid var(--line-2);background:rgba(22,34,26,.6);max-width:640px}
+.m2 .next .k{grid-column:1/-1;font-family:var(--fh);font-weight:600;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--bronze-2)}
+.m2 .next .w{font-family:var(--ft);font-size:14px;color:var(--ink-soft);line-height:1.2}
+.m2 .next .w b{display:block;font-family:var(--fh);font-weight:800;font-size:26px;text-transform:uppercase;color:var(--ink);margin-bottom:2px}
+.m2 .next .t{font-family:var(--fh);font-weight:700;text-transform:uppercase;font-size:22px;line-height:1.05}
+.m2 .next .t em{font-style:normal;display:inline-block;vertical-align:3px;margin-left:6px;font-size:11px;letter-spacing:.1em;padding:2px 6px;background:var(--bronze);color:#15100a}
+.m2 .next .t small{display:block;font-family:var(--ft);font-weight:400;text-transform:none;font-size:13px;color:var(--ink-mute);margin-top:3px}
+.m2 .tri{position:relative;aspect-ratio:1/1;max-height:600px}
+.m2 .tri figure{position:absolute;margin:0;overflow:hidden;box-shadow:0 24px 50px rgba(0,0,0,.5)}
+.m2 .tri img{width:100%;height:100%;object-fit:cover;filter:var(--photo-filter);transition:filter .6s}
+.m2 .tri figure:hover img{filter:none}
+.m2 .tri figcaption{position:absolute;left:0;bottom:0;padding:6px 10px;background:rgba(12,19,15,.82);font-family:var(--fh);font-weight:600;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft)}
+.m2 .tri .t1{left:0;top:4%;width:62%;height:54%;z-index:2}
+.m2 .tri .t2{right:0;top:22%;width:50%;height:40%;z-index:1}
+.m2 .tri .t3{left:18%;bottom:0;width:56%;height:38%;z-index:3}
+@media (max-width:1000px){.m2 .wrap{grid-template-columns:1fr}.m2 .tri{max-width:560px;width:100%}}
+@media (max-width:620px){.m2 .next{grid-template-columns:1fr;gap:8px}.m2 .next .btn{justify-self:start}.m2 .tri{display:none}}
 
 /* переключатель вариантов */
 .mbar{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:9999;display:flex;gap:4px;padding:5px;border-radius:999px;background:rgba(18,18,16,.92);border:1px solid rgba(255,255,255,.16);font:500 13px/1.2 system-ui,sans-serif;box-shadow:0 10px 40px rgba(0,0,0,.45)}

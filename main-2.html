@@ -10,22 +10,24 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500;1,600&family=Fira+Sans+Extra+Condensed:wght@500;600;700;800&family=Fira+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css?v=6">
 <link rel="stylesheet" href="assets/collage.css?v=2">
-<link rel="stylesheet" href="assets/main.css?v=12">
+<link rel="stylesheet" href="assets/main.css?v=14">
 </head>
 <body data-page="home">
 <div id="site-header"></div>
 <main id="main">
-  <section class="m2" aria-label="Ближайшие показы">
+  <section class="m2" aria-label="О театре и ближайший спектакль">
     <div class="wrap">
-      <div class="wk">
-        <span class="eyebrow">Ближайшие показы</span>
-        <h1 class="h-l">Скоро на сцене</h1>
-        <ol id="wk"></ol>
-        <a class="link-arrow all" href="#afisha">Вся афиша</a>
+      <div class="intro">
+        <span class="eyebrow">Сезон 2026/27 · Сергиев Посад</span>
+        <h1 class="h-xl">Театр<br>в&nbsp;парке</h1>
+        <p class="lead">Классика и современная драматургия, сказки для детей и концерты — на трёх сценах в парке «Дубрава».</p>
+        <div class="next" id="next"></div>
+        <a class="link-arrow" href="#afisha">Вся афиша</a>
       </div>
-      <div class="stage" id="stg" aria-live="polite">
-        <div class="ph"><img id="stg-a" alt=""><img id="stg-b" alt=""></div>
-        <div class="cap"><span class="eyebrow" id="stg-k"></span><h2 id="stg-t"></h2><p id="stg-m"></p></div>
+      <div class="tri" aria-hidden="true">
+        <figure class="t1"><img src="photos/iudushka-2.jpg" alt=""><figcaption>Иудушка. Страсти</figcaption></figure>
+        <figure class="t2"><img src="photos/zoykina.jpg" alt=""><figcaption>Зойкина квартира</figcaption></figure>
+        <figure class="t3"><img src="photos/vishnevyy-sad.jpg" alt=""><figcaption>Вишнёвый сад</figcaption></figure>
       </div>
     </div>
   </section>
@@ -101,7 +103,7 @@
     <div class="wrap about">
       <div class="rv">
         <span class="eyebrow">О театре</span>
-        <h2 class="big" style="margin-top:12px">Театр в&nbsp;парке<span class="serif">с 2004 года</span></h2>
+        <h2 class="big" style="margin-top:12px">Наша история<span class="serif">с 2004 года</span></h2>
         <p>«Театральный ковчег» основал заслуженный артист РСФСР Станислав Коренев. С 2023 года театр работает в центре «Дубрава» в Семхозе: основная сцена на 200 мест, Малый зал на 70, летняя сцена и парк вокруг.</p>
         <p>В репертуаре — русская и мировая классика, современная драматургия, сказки для детей и концерты филармонии.</p>
         <div class="nums">
@@ -148,30 +150,16 @@
 <script src="assets/afisha-sys.js?v=9"></script>
 <script>
 (function () {
+  /* одна строка «ближайший спектакль» вместо списка — подробно всё в афише ниже */
   var H = window.KVH, S = KV.shows, SC = KV.scenes;
-  var ev = H.upcoming.filter(function (e) { return (e.status === 'sale' || e.status === 'few') && S[e.show].type !== 'fest'; }).slice(0, 6), cd = '';
-  document.getElementById('wk').innerHTML = ev.map(function (e) {
-    var s = S[e.show], d = H.pd(e.date), first = e.date !== cd; cd = e.date;
-    return '<li data-show="' + e.show + '"><span class="d">' + (first ? '<b>' + d.getDate() + '</b> ' + H.MG[d.getMonth()].slice(0, 3) + '<small>' + H.WD[d.getDay()] + '</small>' : '') + '</span><span class="tm">' + e.time + '</span>' +
-      '<span class="ti">' + H.esc(s.short || s.title) + '<small>' + H.esc(s.genre) + (s.age ? ' · ' + s.age : '') + ' · ' + SC[e.scene] + '</small></span>' +
-      '<button class="afs-btn" type="button" data-buy="' + e.id + '">Купить</button></li>';
-  }).join('');
-  /* справа — афиша спектакля из списка: по умолчанию ближайший, при наведении — тот, что под курсором */
-  var A = document.getElementById('stg-a'), B = document.getElementById('stg-b'), cur = '', front = A;
-  function stage(i) {
-    var e = ev[i], s = S[e.show], d = H.pd(e.date);
-    if (!s.photo || e.show === cur) return; cur = e.show;
-    var back = front === A ? B : A;
-    back.onload = function () { back.classList.add('on'); front.classList.remove('on'); front = back; };
-    back.src = 'photos/' + s.photo; back.alt = 'Афиша спектакля «' + s.title + '»';
-    document.getElementById('stg-k').textContent = (e.prem ? 'Премьера · ' : '') + s.genre + (s.age ? ' · ' + s.age : '');
-    document.getElementById('stg-t').textContent = s.title;
-    var same = ev.filter(function (x) { return x.show === e.show; }).map(function (x) { return H.pd(x.date).getDate(); });
-    document.getElementById('stg-m').textContent = (same.length > 1 ? same.join(', ') : d.getDate()) + ' ' + H.MG[d.getMonth()] + ' · ' + SC[e.scene];
-    document.querySelectorAll('#wk li').forEach(function (li, j) { li.classList.toggle('on', ev[j].show === e.show); });
-  }
-  stage(0);
-  document.getElementById('wk').addEventListener('mouseover', function (x) { var li = x.target.closest('li'); if (li) stage([].indexOf.call(li.parentNode.children, li)); });
+  var e = H.upcoming.filter(function (x) { return (x.status === 'sale' || x.status === 'few') && S[x.show].type !== 'fest'; })[0];
+  if (!e) return;
+  var s = S[e.show], d = H.pd(e.date);
+  document.getElementById('next').innerHTML =
+    '<span class="k">Ближайший спектакль</span>' +
+    '<span class="w"><b>' + d.getDate() + ' ' + H.MG[d.getMonth()] + '</b>' + H.WD[d.getDay()] + ', ' + e.time + '</span>' +
+    '<span class="t">' + H.esc(s.title) + (e.prem ? ' <em>премьера</em>' : '') + '<small>' + H.esc(s.genre) + (s.age ? ' · ' + s.age : '') + ' · ' + SC[e.scene] + '</small></span>' +
+    '<button class="btn btn-buy" type="button" data-buy="' + e.id + '">Купить билет</button>';
 })();
 (function () {
   var bar = document.createElement('nav'); bar.className = 'mbar'; bar.setAttribute('aria-label', 'Варианты главной');
