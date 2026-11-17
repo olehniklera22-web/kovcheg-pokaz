@@ -66,7 +66,7 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:200;op
 /* header */
 .hdr{position:sticky;top:0;z-index:50;background:rgba(12,19,15,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .hdr .wrap{display:flex;align-items:center;gap:32px;min-height:76px}
-.logo{display:flex;flex-direction:column;line-height:.86;flex-shrink:0}
+.logo{display:flex;flex-direction:column;align-items:flex-start;justify-self:start;line-height:.86;flex-shrink:0}
 .logo .l1{font-family:var(--fh);font-weight:600;letter-spacing:.32em;font-size:11px;color:var(--ink-soft)}
 .logo .l2{font-family:var(--fh);font-weight:800;font-size:32px;letter-spacing:.04em}
 .logo .l3{font-family:var(--fs);font-style:italic;font-size:17px;color:var(--bronze-2);margin-top:-2px;align-self:flex-end}
