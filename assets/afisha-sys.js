@@ -31,7 +31,7 @@
       var s = S[e.show], d = H.pd(e.date), m = e.date.slice(0, 7), first = e.date !== cd, we = d.getDay() === 0 || d.getDay() === 6;
       if (m !== cm && st.m === 'all') { h += '<div class="afs-mh">' + H.MN[d.getMonth()] + '</div>'; }
       cm = m; cd = e.date;
-      h += '<div class="afs-ev' + (first ? ' first' : '') + '">' +
+      h += '<div class="afs-ev' + (first ? ' first' : '') + '" data-show="' + e.show + '">' +
         '<span class="afs-d' + (we ? ' we' : '') + '">' + (first ? '<b>' + d.getDate() + '</b> ' + H.MG[d.getMonth()].slice(0, 3) + '<small>' + H.WD[d.getDay()] + '</small>' : '') + '</span>' +
         '<span class="afs-tm">' + e.time + '</span>' +
         '<span class="afs-th">' + (s.photo ? '<img src="photos/' + s.photo + '" alt="" loading="lazy">' : '') + '</span>' +
@@ -80,5 +80,32 @@
     if (t.closest('[data-more]')) { st.n += MODE === 'date' ? 10 : 99; render(); return; }
     if ((b = t.closest('[data-open]'))) { st.open[b.dataset.open] = true; render(); }
   });
+
+  /* всплывающая афиша при наведении на строку (вариант «по датам», только мышь) */
+  if (MODE === 'date' && host.hasAttribute('data-hover') && matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    var pop = document.createElement('div'); pop.className = 'afs-pop'; pop.setAttribute('aria-hidden', 'true'); document.body.appendChild(pop);
+    var curShow = '', tx = 0, ty = 0, x = 0, y = 0, raf = 0;
+    function fill(k) {
+      var s = S[k], i = 0, seed = 0; for (; i < k.length; i++) seed += k.charCodeAt(i);
+      var edge = window.KVStrip ? window.KVStrip(seed * 37, 30) : '';
+      if (!s.photo) { pop.innerHTML = ''; return; }
+      pop.style.setProperty('--rot', ((seed % 7) - 3) * .8 + 'deg');
+      pop.innerHTML = '<div class="card"><span class="tape"></span><img src="photos/' + s.photo + '" alt=""><div class="edge">' + edge + '</div></div>' +
+        '<span class="tag">' + H.esc(s.genre) + (s.age ? ' · ' + s.age : '') + '</span>';
+    }
+    function loop() { x += (tx - x) * .22; y += (ty - y) * .22; pop.style.transform = 'translate(' + x + 'px,' + y + 'px)'; raf = (Math.abs(tx - x) + Math.abs(ty - y) > .5) ? requestAnimationFrame(loop) : 0; }
+    host.addEventListener('mousemove', function (e) {
+      var row = e.target.closest('.afs-ev');
+      if (!row || e.target.closest('.afs-btn')) { pop.classList.remove('on'); curShow = ''; return; }
+      var k = row.dataset.show;
+      if (k !== curShow) { curShow = k; fill(k); }
+      var w = pop.offsetWidth || 300, h = pop.offsetHeight || 260;
+      var r = row.getBoundingClientRect(); tx = Math.min(Math.max(e.clientX + 40, r.left + r.width * .5), innerWidth - w - 16); ty = Math.max(16, Math.min(e.clientY - h / 2, innerHeight - h - 16));
+      if (!pop.classList.contains('on')) { x = tx; y = ty; pop.classList.add('on'); }
+      if (!raf) raf = requestAnimationFrame(loop);
+    });
+    host.addEventListener('mouseleave', function () { pop.classList.remove('on'); curShow = ''; });
+    addEventListener('scroll', function () { pop.classList.remove('on'); curShow = ''; }, { passive: true });
+  }
   render();
 })();
