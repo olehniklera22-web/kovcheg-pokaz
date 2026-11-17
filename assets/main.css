@@ -100,33 +100,7 @@
 @media (max-width:900px){.m1 .wrap{grid-template-columns:1fr}.m1 .pic{order:-1}}
 
 /* ---------- вариант 2: неделя на первом экране ---------- */
-/* вариант 2 — два варианта первого экрана, переключаются ?hero=b */
-body[data-hero="a"] .hero-b,body[data-hero="b"] .hero-a{display:none}
-.mbar i{width:1px;margin:6px 4px;background:rgba(255,255,255,.18)}
-
-/* А «Сезон»: три события */
-.hs{padding:clamp(32px,4vw,56px) 0 clamp(48px,5vw,80px)}
-.hs-top{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:clamp(20px,2.4vw,32px)}
-.hs-top h1{margin-top:8px}
-.hs-row{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:clamp(12px,1.4vw,20px);height:clamp(420px,62vh,620px)}
-.hs-c{position:relative;display:flex;align-items:flex-end;overflow:hidden;background:var(--panel);color:var(--ink)}
-.hs-c img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:var(--photo-filter);transition:filter .6s,transform 1.2s ease}
-.hs-c:hover img{filter:none;transform:scale(1.03)}
-.hs-c::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 35%,rgba(8,12,10,.92) 100%)}
-.hs-c .tx{position:relative;z-index:1;padding:clamp(18px,2vw,28px)}
-.hs-c .k{font-family:var(--fh);font-weight:600;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--bronze-2)}
-.hs-c h2{font-family:var(--fh);font-weight:800;text-transform:uppercase;line-height:.95;font-size:clamp(28px,2.6vw,40px);margin:8px 0 8px}
-.hs-c.big h2{font-size:clamp(40px,4.4vw,72px)}
-.hs-c p{color:var(--ink-soft);font-size:15px;margin-bottom:16px;max-width:30ch}
-.hs-c .link-arrow{color:var(--ink)}
-.hs-c.fest{background:var(--bordo)}
-.hs-c.fest::after{display:none}
-.hs-c.fest .num{position:absolute;right:-4%;top:-6%;font-family:var(--fh);font-weight:800;font-size:clamp(160px,16vw,260px);line-height:1;color:transparent;-webkit-text-stroke:1.5px rgba(246,236,219,.35)}
-.hs-c.fest .k{color:#f1d9a6}.hs-c.fest p{color:rgba(246,236,219,.8)}
-@media (max-width:1000px){.hs-row{grid-template-columns:1fr 1fr;height:auto}.hs-c{min-height:300px}.hs-c.big{grid-column:1/-1;min-height:420px}}
-@media (max-width:620px){.hs-row{grid-template-columns:1fr}.hs-c,.hs-c.big{min-height:340px}.hs-top .link-arrow{display:none}}
-
-/* Б «Плёнка»: заголовок по центру и движущаяся лента кадров */
+/* вариант 2 — первый экран «Плёнка»: заголовок по центру и движущаяся лента кадров между полосами рваной бумаги */
 .hf{padding:clamp(48px,6vw,96px) 0 0;text-align:center;overflow:hidden}
 .hf .wrap{display:flex;flex-direction:column;align-items:center}
 .hf h1{margin:16px 0 20px;font-size:clamp(52px,8.4vw,128px)}
@@ -134,7 +108,12 @@ body[data-hero="a"] .hero-b,body[data-hero="b"] .hero-a{display:none}
 .hf .lead{max-width:44ch;margin:0 auto}
 .hf .acts{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:14px 24px;margin-top:28px}
 .hf .nx{color:var(--ink-soft);font-size:15px}.hf .nx b{color:var(--ink)}
-.hf .film{margin-top:clamp(40px,5vw,72px);padding:14px 0;background:#0a0f0c;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.hf .film{position:relative;margin-top:clamp(48px,6vw,88px);padding:26px 0;background:#141b17}
+.hf .tear{position:absolute;left:-2%;width:104%;height:34px;z-index:2;pointer-events:none;filter:drop-shadow(0 4px 6px rgba(0,0,0,.35))}
+.hf .tear svg{display:block;width:100%;height:100%}
+.hf .tear .pap{fill:#e9e1cf}.hf .tear .fib{fill:#f8f4ea}
+.hf .tear.t{top:-14px;transform:rotate(-.6deg)}
+.hf .tear.b{bottom:-14px;transform:rotate(.5deg) scaleY(-1)}
 .hf .track{display:flex;gap:12px;width:max-content;animation:hf-run 70s linear infinite}
 .hf .film:hover .track{animation-play-state:paused}
 .hf .track img{height:clamp(150px,16vw,230px);width:auto;aspect-ratio:3/2;object-fit:cover;filter:var(--photo-filter);transition:filter .5s}
@@ -166,12 +145,9 @@ body[data-hero="a"] .hero-b,body[data-hero="b"] .hero-a{display:none}
 .afs-pop .tag{position:absolute;right:-10px;bottom:2px;background:var(--bronze,#b98a4e);color:#17130e;font-family:var(--fh);font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:13px;padding:6px 10px;transform:rotate(3deg);box-shadow:0 6px 12px rgba(0,0,0,.35)}
 @media (prefers-reduced-motion:reduce){.afs-pop{transition:none}}
 
-/* вариант 2 — своя гамма: тёмное бордо вместо зелёного, кнопки — бронза. Цвета из фирменных цветов театра */
-body.pal-wine{--bg:#170a0e;--bg-2:#1f0e13;--panel:#2a141b;--panel-2:#341a22;--bordo:#c29a5e;--bordo-2:#d6b27a;--green:#2b4532;background:var(--bg)}
-.pal-wine .hdr{background:rgba(23,10,14,.88)}
-.pal-wine .btn-buy,.pal-wine .afs-btn:not(.ghost){color:#1c0f12}
-.pal-wine .afs-dt:hover b,.pal-wine .afs-dt:hover span{color:#1c0f12}
-.pal-wine .hs-c.fest{background:#24402e}
-.pal-wine .hf .film{background:#12070a}
-.pal-wine .afs-pop .tag{background:var(--bronze)}
-.pal-wine .fest .when em{background:#7d2433;color:#f4ecdc}
+/* вариант 2 — своя гамма: приглушённый пастельный зелёный, переходящий в лёгкое бордо. Кнопки — бордо */
+body.pal-sage{--bg:#26322c;--bg-2:#2c3a33;--panel:#34443b;--panel-2:#3c4d44;--line:rgba(236,226,206,.14);--line-2:rgba(236,226,206,.26);--bordo:#8c3644;--bordo-2:#a3424f;background:linear-gradient(180deg,#26322c 0%,#26322c 70%,#3a2a2f 100%)}
+.pal-sage .hdr{background:rgba(38,50,44,.9)}
+.pal-sage .hf{background:linear-gradient(165deg,#3b4e44 0%,#2f3f37 45%,#4d2c35 100%)}
+.pal-sage .afs-sec.bg2{background:linear-gradient(180deg,#2c3a33 0%,#2c3a33 55%,#3a2e33 100%)}
+.pal-sage .ftr{background:linear-gradient(180deg,#2d2a2b 0%,#3a2329 100%)}
