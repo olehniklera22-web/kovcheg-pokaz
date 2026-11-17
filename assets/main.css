@@ -145,14 +145,21 @@
 .afs-pop .tag{position:absolute;right:-10px;bottom:2px;background:var(--bronze,#b98a4e);color:#17130e;font-family:var(--fh);font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:13px;padding:6px 10px;transform:rotate(3deg);box-shadow:0 6px 12px rgba(0,0,0,.35)}
 @media (prefers-reduced-motion:reduce){.afs-pop{transition:none}}
 
-/* вариант 2 — гамма с открытки театра: тёмная олива #363d2d, шалфей #798473, хаки #c1bca8, медное золото #cd9558, холодная белая бумага.
-   Градиент прежний: из зелёного в лёгкое бордо. Кнопки — бордо */
-body.pal-sage{--bg:#363d2d;--bg-2:#3b4332;--panel:#424a38;--panel-2:#4a5340;--line:rgba(236,234,224,.14);--line-2:rgba(236,234,224,.28);--ink:#eeebe0;--ink-soft:rgba(238,235,224,.72);--ink-mute:rgba(238,235,224,.5);--bronze:#c79f64;--bronze-2:#cd9558;--bordo:#8c3644;--bordo-2:#a3424f;background:linear-gradient(180deg,#363d2d 0%,#363d2d 70%,#41302f 100%)}
-.pal-sage .hdr{background:rgba(54,61,45,.9)}
-.pal-sage .hf{background:linear-gradient(165deg,#798473 0%,#55604b 28%,#363d2d 60%,#5a3038 100%)}
-.pal-sage .hf .eyebrow{color:#eeebe0}
-.pal-sage .hf h1 .serif{color:#d9a466}
-.pal-sage .hf .film{background:#262b20}
+/* вариант 2 — гамма с открытки театра, насыщеннее: шалфей, зелень, олива, медное золото, холодная белая бумага.
+   Один градиент на всю страницу (на body, а не на каждом блоке) — течёт сверху вниз и уходит в бордо в подвале.
+   Блоки прозрачные, карточки полупрозрачные — градиент виден сквозь них. Кнопки — бордо */
+html:has(body.pal-sage){background:#2c3c25}
+body.pal-sage{--bg:#33452b;--bg-2:transparent;--panel:rgba(24,36,18,.55);--panel-2:rgba(28,42,22,.72);--line:rgba(238,235,224,.16);--line-2:rgba(238,235,224,.3);--ink:#f0ede2;--ink-soft:rgba(240,237,226,.76);--ink-mute:rgba(240,237,226,.54);--bronze:#cf9a52;--bronze-2:#dea65f;--bordo:#94303f;--bordo-2:#ab3a4b;
+  min-height:100vh;background:
+    radial-gradient(55% 22% at 88% 40%,rgba(130,36,54,.34),transparent 72%),
+    radial-gradient(60% 20% at 8% 66%,rgba(130,36,54,.24),transparent 72%),
+    linear-gradient(180deg,#7d966a 0%,#5d7a48 4%,#41592f 10%,#34482b 22%,#36462b 38%,#3b3f2c 50%,#35482c 64%,#3a3d2c 80%,#56303a 93%,#6b2a3a 100%)}
+.pal-sage .hdr{background:rgba(44,60,37,.86)}
+.pal-sage .nav{background:#2c3c25}
+.pal-sage .hf,.pal-sage .bg2,.pal-sage .afs-sec,.pal-sage .sec{background:transparent}
+.pal-sage .hf .eyebrow{color:#f0ede2}
+.pal-sage .hf h1 .serif{color:#e7ad66}
+.pal-sage .hf .film{background:rgba(18,26,14,.82)}
 .pal-sage .hf .tear .pap{fill:#d8ddd9}.pal-sage .hf .tear .fib{fill:#f4f5f2}
-.pal-sage .afs-sec.bg2{background:linear-gradient(180deg,#3b4332 0%,#3b4332 55%,#43332f 100%)}
-.pal-sage .ftr{background:linear-gradient(180deg,#2f3427 0%,#3f2a2d 100%)}
+.pal-sage .sec.fest{background:rgba(16,34,20,.5)}
+.pal-sage .ftr{background:rgba(20,10,14,.28);border-top-color:rgba(238,235,224,.12)}

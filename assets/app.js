@@ -53,7 +53,13 @@
       '<div class="tags">' + tags(e, s) + '</div></div>' +
       '<div class="act">' + action(e) + '</div></article>';
   }
-  window.KVH = { pd: pd, iso: iso, esc: esc, MG: MG, MN: MN, WD: WD, WS: WS, TODAY: TODAY, upcoming: upcoming, evRow: evRow, ageNum: ageNum, title: title, photo: photo };
+  /* вариант 2 (своя гамма) переносится между страницами параметром ?v=2 */
+  var V2 = qs.get('v') === '2' || document.body.classList.contains('pal-sage');
+  if (V2) document.body.classList.add('pal-sage');
+  function withV(u) { return V2 ? u + (u.indexOf('?') < 0 ? '?' : '&') + 'v=2' : u; }
+  function showUrl(k) { return withV('spektakl.html?id=' + k); }
+  function artistUrl(id) { return withV('artist.html?id=' + id); }
+  window.KVH = { pd: pd, iso: iso, esc: esc, MG: MG, MN: MN, WD: WD, WS: WS, TODAY: TODAY, upcoming: upcoming, evRow: evRow, ageNum: ageNum, title: title, photo: photo, V2: V2, withV: withV, showUrl: showUrl, artistUrl: artistUrl };
 
   /* ---------- header & footer ---------- */
   var page = document.body.dataset.page;
@@ -160,6 +166,16 @@
   });
   var tt;
   function toast(m) { var t = document.querySelector('.toast'); t.textContent = m; t.classList.add('on'); clearTimeout(tt); tt = setTimeout(function () { t.classList.remove('on'); }, 2200); }
+
+  /* логотип ведёт на главную своего варианта; внутренние страницы сохраняют вариант */
+  var lg = document.querySelector('.hdr .logo'); if (lg) lg.setAttribute('href', V2 ? 'main-2.html' : 'main-1.html');
+  /* на новых страницах (главные 1/2, спектакль, артист, труппа) «Афиша» и «Купить билет» ведут к афише своей главной, а не в старую концепцию */
+  if (/(main-\d|spektakl|artist|truppa)\.html/.test(location.pathname)) {
+    var home = (V2 ? 'main-2.html' : 'main-1.html'), here = location.pathname.indexOf(home) >= 0;
+    document.querySelectorAll('a[href="afisha.html"]').forEach(function (a) { a.setAttribute('href', here ? '#afisha' : home + '#afisha'); });
+  }
+  document.querySelectorAll('a[href^="truppa.html"],a[href^="spektakl.html"],a[href^="artist.html"]').forEach(function (a) { if (V2 && a.getAttribute('href').indexOf('v=2') < 0) a.setAttribute('href', withV(a.getAttribute('href'))); });
+  if (page !== 'home') document.querySelectorAll('a[href^="index.html#"]').forEach(function (a) { a.setAttribute('href', (V2 ? 'main-2.html#' : 'main-1.html#') + a.getAttribute('href').split('#')[1]); });
 
   /* ссылки шапки вида index.html#блок ведут в блок этой же страницы, если он здесь есть */
   document.querySelectorAll('a[href^="index.html#"]').forEach(function (a) { var id = a.getAttribute('href').split('#')[1]; if (document.getElementById(id) && page !== 'troupe') a.setAttribute('href', '#' + id); });

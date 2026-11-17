@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Спектакль — Театральный ковчег в Дубраве</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500;1,600&family=Fira+Sans+Extra+Condensed:wght@500;600;700;800&family=Fira+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css?v=6">
+<link rel="stylesheet" href="assets/collage.css?v=2">
+<link rel="stylesheet" href="assets/main.css?v=22">
+<link rel="stylesheet" href="assets/pages.css?v=2">
+</head>
+<body data-page="show">
+<div id="site-header"></div>
+<main id="main">
+  <section class="sp-hero">
+    <div class="wrap">
+      <div class="tx">
+        <a class="back" id="sp-back" href="main-1.html#afisha">← Афиша</a>
+        <span class="eyebrow" id="sp-k"></span>
+        <h1 class="h-xl" id="sp-t"></h1>
+        <p class="src" id="sp-src"></p>
+        <p class="tagline" id="sp-tag"></p>
+        <dl class="facts" id="sp-facts"></dl>
+        <div class="acts"><button class="btn btn-buy" type="button" id="sp-buy">Купить билет</button><a class="link-arrow" href="#dates">Все даты</a></div>
+      </div>
+      <div class="pic"><div class="ph"><img id="sp-img" alt=""></div><div class="edge" data-strip="73" data-h="34"></div></div>
+    </div>
+  </section>
+
+  <section class="sp-sec" id="dates">
+    <div class="wrap">
+      <div class="sp-h"><h2 class="h-m">Ближайшие показы</h2><p class="soft" id="sp-dsum"></p></div>
+      <div class="afs-dates sp-dates" id="sp-dates"></div>
+    </div>
+  </section>
+
+  <section class="sp-sec" id="about">
+    <div class="wrap sp-two">
+      <div><h2 class="h-m">О спектакле</h2><div class="sp-about" id="sp-about"></div></div>
+      <div id="sp-crew-w"><h2 class="h-m">Создатели</h2><dl class="sp-crew" id="sp-crew"></dl></div>
+    </div>
+  </section>
+
+  <section class="sp-sec" id="cast-w">
+    <div class="wrap">
+      <div class="sp-h"><h2 class="h-m">В ролях</h2><p class="soft">Нажмите на артиста — откроется его страница</p></div>
+      <ul class="sp-cast" id="sp-cast"></ul>
+    </div>
+  </section>
+
+  <section class="sp-sec" id="gal-w">
+    <div class="wrap">
+      <div class="sp-h"><h2 class="h-m">Фото со сцены</h2><p class="soft" id="sp-gsum"></p></div>
+      <div class="sp-gal" id="sp-gal"></div>
+    </div>
+  </section>
+
+  <section class="sp-sec">
+    <div class="wrap">
+      <div class="sp-h"><h2 class="h-m">Другие спектакли</h2><a class="link-arrow" id="sp-all" href="main-1.html#afisha">Вся афиша</a></div>
+      <div class="sp-more" id="sp-more"></div>
+    </div>
+  </section>
+</main>
+<dialog class="lb" id="lb" aria-label="Фото со сцены"><button class="x" type="button" aria-label="Закрыть">×</button><button class="nv p" type="button" aria-label="Предыдущее фото">←</button><img id="lb-img" alt=""><button class="nv n" type="button" aria-label="Следующее фото">→</button></dialog>
+<div id="site-footer"></div>
+<script src="assets/data.js"></script>
+<script src="assets/shows-info.js?v=1"></script>
+<script src="assets/app.js?v=5"></script>
+<script src="assets/collage.js?v=3" data-root=""></script>
+<script>
+(function () {
+  var H = window.KVH, S = KV.shows, SC = KV.scenes, I = window.KV_INFO || {}, P = window.KV_PEOPLE || [];
+  var id = new URLSearchParams(location.search).get('id');
+  if (!S[id]) id = 'zoykina';
+  var s = S[id], inf = I[id] || {}, home = H.V2 ? 'main-2.html' : 'main-1.html';
+  var $ = function (x) { return document.getElementById(x); };
+  document.title = s.title + ' — Театральный ковчег в Дубраве';
+  $('sp-back').href = $('sp-all').href = home + '#afisha';
+
+  /* первый экран */
+  $('sp-k').textContent = s.genre + (s.age ? ' · ' + s.age : '') + (s.pk ? ' · Пушкинская карта' : '');
+  $('sp-t').textContent = s.title;
+  $('sp-src').textContent = inf.src || s.author || '';
+  $('sp-tag').textContent = inf.tag || s.desc || '';
+  if (s.photo) { $('sp-img').src = 'photos/' + s.photo; $('sp-img').alt = 'Афиша спектакля «' + s.title + '»'; }
+  var ev = H.upcoming.filter(function (e) { return e.show === id; });
+  var scenes = []; ev.forEach(function (e) { if (scenes.indexOf(SC[e.scene]) < 0) scenes.push(SC[e.scene]); });
+  var dir = (inf.crew || []).filter(function (c) { return /режисс/i.test(c[0]); })[0];
+  var facts = [['Продолжительность', inf.dur], ['Сцена', scenes.join(', ')], ['Режиссёр', dir ? dir[1] : s.dir], ['Премьера', inf.prem]];
+  $('sp-facts').innerHTML = facts.filter(function (f) { return f[1]; }).map(function (f) { return '<div><dt>' + f[0] + '</dt><dd>' + H.esc(f[1]) + '</dd></div>'; }).join('');
+  var next = ev.filter(function (e) { return e.status === 'sale' || e.status === 'few'; })[0];
+  if (next) $('sp-buy').setAttribute('data-buy', next.id); else $('sp-buy').style.display = 'none';
+
+  /* даты */
+  $('sp-dsum').textContent = ev.length ? ev.length + ' ' + (ev.length % 10 === 1 && ev.length % 100 !== 11 ? 'показ' : ev.length % 10 >= 2 && ev.length % 10 <= 4 && (ev.length % 100 < 10 || ev.length % 100 >= 20) ? 'показа' : 'показов') + ' · нажмите на дату, чтобы купить билет' : '';
+  $('sp-dates').innerHTML = ev.length ? ev.map(function (e) {
+    var d = H.pd(e.date), l = '<b>' + d.getDate() + ' ' + H.MG[d.getMonth()].slice(0, 3) + '</b><span>' + H.WS[d.getDay()] + ', ' + e.time + ' · ' + SC[e.scene] + '</span>';
+    return e.status === 'sold' ? '<span class="afs-dt sold" title="Аншлаг">' + l + '</span>' : '<button type="button" class="afs-dt' + (e.status === 'few' ? ' few' : '') + '" data-buy="' + e.id + '">' + l + '</button>';
+  }).join('') : '<p class="soft">Новых показов пока нет — следите за афишей.</p>';
+
+  /* о спектакле и создатели */
+  var about = (inf.about && inf.about.length ? inf.about : [s.desc]).filter(Boolean);
+  $('sp-about').innerHTML = about.map(function (p) { return '<p>' + H.esc(p) + '</p>'; }).join('');
+  if (inf.crew && inf.crew.length) $('sp-crew').innerHTML = inf.crew.map(function (c) { return c[0] ? '<div><dt>' + H.esc(c[0]) + '</dt><dd>' + link(c[1]) + '</dd></div>' : '<div class="w"><dd>' + H.esc(c[1]) + '</dd></div>'; }).join('');
+  else if (s.dir) $('sp-crew').innerHTML = '<div><dt>Режиссёр</dt><dd>' + link(s.dir) + '</dd></div>';
+  else $('sp-crew-w').style.display = 'none';
+
+  /* имена артистов — ссылки на их страницы, если человек есть в труппе */
+  function person(name) { return P.filter(function (p) { return name.indexOf(p[1]) >= 0; })[0]; }
+  function link(names) {
+    return names.split(/,\s*/).map(function (n) { var p = person(n); return p ? '<a href="' + H.artistUrl(p[0]) + '">' + H.esc(n) + '</a>' : H.esc(n); }).join(', ');
+  }
+
+  /* состав */
+  if (inf.cast) inf.cast = inf.cast.filter(function (c) { return !/^N\.?N\.?$/.test(c[1].trim()); });
+  if (inf.cast && inf.cast.length) {
+    $('sp-cast').innerHTML = inf.cast.map(function (c) {
+      var p = person(c[1]);
+      return '<li>' + (p ? '<a class="pp" href="' + H.artistUrl(p[0]) + '"><span class="av"><img src="photos/artists/' + p[0] + '.png" alt="" loading="lazy"></span><span><b>' + H.esc(c[1]) + '</b><small>' + H.esc(c[0]) + '</small></span></a>'
+        : '<span class="pp"><span class="av none"></span><span><b>' + H.esc(c[1]) + '</b><small>' + H.esc(c[0]) + '</small></span></span>') + '</li>';
+    }).join('');
+  } else $('cast-w').style.display = 'none';
+
+  /* галерея + просмотр */
+  var n = inf.gal || 0, pics = [];
+  for (var i = 1; i <= n; i++) pics.push('photos/shows/' + id + '/' + (i < 10 ? '0' : '') + i + '.jpg');
+  if (pics.length < 2) $('gal-w').style.display = 'none';
+  else {
+    $('sp-gsum').textContent = pics.length + ' кадров';
+    $('sp-gal').innerHTML = pics.map(function (u, j) { return '<button type="button" data-i="' + j + '"><img src="' + u + '" alt="Сцена из спектакля «' + H.esc(s.title) + '», кадр ' + (j + 1) + '" loading="lazy"></button>'; }).join('');
+    var lb = $('lb'), cur = 0;
+    function show(j) { cur = (j + pics.length) % pics.length; $('lb-img').src = pics[cur]; }
+    $('sp-gal').addEventListener('click', function (e) { var b = e.target.closest('[data-i]'); if (b) { show(+b.dataset.i); lb.showModal(); } });
+    lb.addEventListener('click', function (e) { if (e.target.closest('.x') || e.target === lb) lb.close(); else if (e.target.closest('.p')) show(cur - 1); else if (e.target.closest('.n')) show(cur + 1); });
+    lb.addEventListener('keydown', function (e) { if (e.key === 'ArrowLeft') show(cur - 1); if (e.key === 'ArrowRight') show(cur + 1); });
+  }
+
+  /* другие спектакли — ближайшие по датам */
+  var seen = {}, more = [];
+  H.upcoming.forEach(function (e) { if (e.show !== id && !seen[e.show] && S[e.show].photo && S[e.show].type !== 'fest' && more.length < 4) { seen[e.show] = 1; more.push(e); } });
+  $('sp-more').innerHTML = more.map(function (e) {
+    var t = S[e.show], d = H.pd(e.date);
+    return '<a class="sp-card" href="' + H.showUrl(e.show) + '"><span class="ph"><img src="photos/' + t.photo + '" alt="" loading="lazy"></span><b>' + H.esc(t.title) + '</b><small>' + d.getDate() + ' ' + H.MG[d.getMonth()] + ' · ' + H.esc(t.genre) + (t.age ? ' · ' + t.age : '') + '</small></a>';
+  }).join('');
+})();
+</script>
+</body>
+</html>

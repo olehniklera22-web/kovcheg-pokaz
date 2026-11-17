@@ -32,6 +32,7 @@
     ['01', 'Александр Локтионов', 'режиссёр', 'team'],
     ['02', 'Александр Миронов', 'руководитель Филармонии', 'team']
   ];
+  window.KV_PEOPLE = PEOPLE;
   var byId = {}; PEOPLE.forEach(function (p) { byId[p[0]] = p; });
   function src(id) { return root + 'photos/artists/' + id + '.png'; }
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
@@ -72,7 +73,7 @@
     '<div class="lc-strip s1">' + strip(4111, 70) + '</div><div class="lc-strip s2">' + strip(9227, 60) + '</div>' +
     hero.map(function (id, i) {
       var p = byId[id], q = pos[i];
-      return '<figure class="lc-fig f' + i + '" style="left:' + q[0] + '%;height:' + q[1] + '%;z-index:' + q[2] + '"><img src="' + src(id) + '" alt="' + esc(p[1]) + '" loading="lazy"><figcaption>' + esc(p[1]) + '</figcaption></figure>';
+      return '<a class="lc-fig f' + i + '" href="' + (window.KVH ? KVH.artistUrl(id) : 'artist.html?id=' + id) + '" style="left:' + q[0] + '%;height:' + q[1] + '%;z-index:' + q[2] + '"><img src="' + src(id) + '" alt="' + esc(p[1]) + '" loading="lazy"><figcaption>' + esc(p[1]) + '</figcaption></a>';
     }).join('') + '</div>';
   /* data-compact: на главной — только коллаж и ссылка на всю труппу */
   if (host.hasAttribute('data-compact')) {
@@ -89,7 +90,7 @@
   function draw() {
     var list = PEOPLE.filter(function (p) { return p[3] === g; }), shown = all ? list : list.slice(0, LIM);
     document.getElementById('lc-grid').innerHTML = shown.map(function (p, i) {
-      return '<a class="lc-card" href="#"><span class="lc-ph">' + strip(300 + i * 31, 40).replace('<svg', '<svg class="lc-edge"') + '<img src="' + src(p[0]) + '" alt="" loading="lazy"></span><b>' + esc(p[1]) + '</b><small>' + esc(p[2]) + '</small></a>';
+      return '<a class="lc-card" href="' + (window.KVH ? KVH.artistUrl(p[0]) : 'artist.html?id=' + p[0]) + '"><span class="lc-ph">' + strip(300 + i * 31, 40).replace('<svg', '<svg class="lc-edge"') + '<img src="' + src(p[0]) + '" alt="" loading="lazy"></span><b>' + esc(p[1]) + '</b><small>' + esc(p[2]) + '</small></a>';
     }).join('');
     document.getElementById('lc-more').innerHTML = !all && list.length > LIM ? '<button type="button" data-lc-all>Показать всех — ' + list.length + '</button>' : '';
     host.querySelectorAll('[data-g]').forEach(function (b) { b.setAttribute('aria-selected', b.dataset.g === g); });

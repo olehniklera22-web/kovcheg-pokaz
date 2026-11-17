@@ -77,7 +77,7 @@ window.KVPop = function (box, rowSel, minR) {
         '<span class="afs-d' + (we ? ' we' : '') + '" style="--r:' + tilt(e.id) + 'deg"><span class="pp" style="clip-path:' + torn(e.id) + '"><b>' + d.getDate() + '</b> ' + H.MG[d.getMonth()].slice(0, 3) + '<small>' + H.WD[d.getDay()] + '</small></span></span>' +
         '<span class="afs-tm">' + e.time + '</span>' +
         '<span class="afs-th">' + (s.photo ? '<img src="photos/' + s.photo + '" alt="" loading="lazy">' : '') + '</span>' +
-        '<span class="afs-ti"><a href="#">' + H.esc(s.title) + '</a>' + (e.prem ? '<em>премьера</em>' : '') +
+        '<span class="afs-ti"><a href="' + H.showUrl(e.show) + '">' + H.esc(s.title) + '</a>' + (e.prem ? '<em>премьера</em>' : '') +
         '<small>' + H.esc(s.genre) + (s.age ? ' · ' + s.age : '') + ' · ' + SC[e.scene] + (s.pk ? ' · Пушкинская карта' : '') + '</small></span>' +
         '<span class="afs-pr">' + (PRICE[s.type] ? 'от ' + PRICE[s.type] + ' ₽' : '') + (e.status === 'few' ? '<small>мало мест</small>' : '') + '</span>' +
         '<span class="afs-ac">' + act(e) + '</span></div>';
@@ -89,8 +89,8 @@ window.KVPop = function (box, rowSel, minR) {
     var g = [], map = {}; list.forEach(function (e) { if (!map[e.show]) { map[e.show] = []; g.push(e.show); } map[e.show].push(e); });
     return { total: g.length, html: '<div class="afs-grid">' + g.slice(0, st.n).map(function (k) {
       var s = S[k], ev = map[k], lim = st.open[k] ? 99 : 4, prem = ev.some(function (e) { return e.prem; });
-      return '<article class="afs-card"><a class="afs-ph" href="#">' + (s.photo ? '<img src="photos/' + s.photo + '" alt="" loading="lazy">' : '<span>' + H.esc(s.short || s.title) + '</span>') + (prem ? '<em>премьера</em>' : '') + '</a>' +
-        '<div class="afs-cb"><h3><a href="#">' + H.esc(s.title) + '</a></h3><p>' + H.esc(s.genre) + (s.age ? ' · ' + s.age : '') + (PRICE[s.type] ? ' · от ' + PRICE[s.type] + ' ₽' : '') + '</p>' +
+      return '<article class="afs-card"><a class="afs-ph" href="' + H.showUrl(k) + '" tabindex="-1">' + (s.photo ? '<img src="photos/' + s.photo + '" alt="" loading="lazy">' : '<span>' + H.esc(s.short || s.title) + '</span>') + (prem ? '<em>премьера</em>' : '') + '</a>' +
+        '<div class="afs-cb"><h3><a href="' + H.showUrl(k) + '">' + H.esc(s.title) + '</a></h3><p>' + H.esc(s.genre) + (s.age ? ' · ' + s.age : '') + (PRICE[s.type] ? ' · от ' + PRICE[s.type] + ' ₽' : '') + '</p>' +
         '<div class="afs-dates">' + ev.slice(0, lim).map(function (e) {
           var d = H.pd(e.date), l = '<b>' + d.getDate() + ' ' + H.MG[d.getMonth()].slice(0, 3) + '</b><span>' + H.WS[d.getDay()] + ', ' + e.time + '</span>';
           return e.status === 'sold' ? '<span class="afs-dt sold" title="Аншлаг">' + l + '</span>' : '<button type="button" class="afs-dt' + (e.status === 'few' ? ' few' : '') + '" data-buy="' + e.id + '">' + l + '</button>';

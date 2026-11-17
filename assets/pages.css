@@ -1,0 +1,104 @@
+/* Страница спектакля и страница артиста. Цвета берутся из переменных — в варианте 2 (?v=2) подхватывается его гамма */
+.back{display:table;margin-bottom:22px;font-family:var(--fh);font-weight:600;font-size:14px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft)}
+.back:hover{color:var(--bronze-2)}
+.sp-sec{padding:clamp(40px,5vw,72px) 0;border-top:1px solid var(--line)}
+.sp-h{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:clamp(18px,2vw,28px)}
+.sp-h .soft{font-size:15px}
+.facts{display:flex;flex-wrap:wrap;gap:14px 36px;margin:26px 0 30px}
+.facts dt{font-family:var(--fh);font-weight:600;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--bronze-2)}
+.facts dd{margin:4px 0 0;font-size:16px}
+
+/* спектакль — первый экран */
+.sp-hero{padding:clamp(28px,4vw,56px) 0 clamp(48px,5vw,80px)}
+.sp-hero .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(28px,4vw,72px);align-items:center}
+.sp-hero h1{margin:12px 0 14px;font-size:clamp(48px,6.4vw,104px)}
+.sp-hero .src{color:var(--ink-soft);font-size:16px}
+.sp-hero .tagline{margin-top:18px;font-family:var(--fs);font-style:italic;font-size:clamp(22px,2vw,28px);line-height:1.25;color:var(--bronze-2);max-width:30ch}
+.sp-hero .acts{display:flex;flex-wrap:wrap;align-items:center;gap:14px 26px}
+.sp-hero .pic{position:relative}
+.sp-hero .pic .ph{aspect-ratio:3/2;overflow:hidden;background:var(--panel);box-shadow:0 30px 60px rgba(0,0,0,.45)}
+.sp-hero .pic img{width:100%;height:100%;object-fit:cover}
+.sp-hero .edge{position:absolute;left:-2%;width:104%;bottom:-16px;height:34px;filter:drop-shadow(0 4px 6px rgba(0,0,0,.35))}
+.sp-hero .edge svg{display:block;width:100%;height:100%}
+.sp-hero .edge .pap,.ar-hero .pap{fill:#e9e1cf}.sp-hero .edge .fib{fill:#f8f4ea}
+.pal-sage .sp-hero .edge .pap{fill:#d8ddd9}.pal-sage .sp-hero .edge .fib{fill:#f4f5f2}
+
+.sp-dates{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;padding:0}
+.sp-dates .afs-dt span{display:block}
+
+/* о спектакле, создатели */
+.sp-two{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(28px,5vw,80px)}
+.sp-two h2{margin-bottom:20px}
+.sp-about p{font-size:17px;line-height:1.65;color:var(--ink-soft);max-width:62ch}
+.sp-about p+p{margin-top:14px}
+.sp-crew div{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1fr);gap:16px;padding:10px 0;border-bottom:1px solid var(--line)}
+.sp-crew dt{font-size:14px;color:var(--ink-mute)}
+.sp-crew dd{margin:0;font-size:15px}
+.sp-crew .w{grid-template-columns:1fr}.sp-crew .w dd{color:var(--ink-soft);font-size:14px}
+.sp-crew a,.sp-cast a b{color:var(--ink);text-decoration:underline;text-decoration-color:var(--line-2);text-underline-offset:3px}
+.sp-crew a:hover,.sp-cast a:hover b{color:var(--bronze-2)}
+
+/* состав */
+.sp-cast{list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.sp-cast .pp{display:flex;align-items:center;gap:14px;padding:10px 12px;background:var(--panel);border:1px solid var(--line);height:100%;transition:border-color .2s,background .2s}
+.sp-cast a.pp:hover{border-color:var(--bronze);background:var(--panel-2)}
+.sp-cast .av{flex:none;width:56px;height:56px;border-radius:50%;overflow:hidden;background:var(--bg)}
+.sp-cast .av img{width:100%;height:100%;object-fit:cover;object-position:top;filter:grayscale(1)}
+.sp-cast a.pp:hover .av img{filter:none}
+.sp-cast .av.none{background:var(--panel-2)}
+.sp-cast b{display:block;font-family:var(--fh);font-weight:700;font-size:18px;text-transform:uppercase;line-height:1.05}
+.sp-cast small{display:block;margin-top:3px;font-size:13px;color:var(--ink-mute)}
+
+/* галерея и просмотр */
+.sp-gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}
+.sp-gal button{display:block;aspect-ratio:3/2;overflow:hidden;background:var(--panel)}
+.sp-gal button:first-child{grid-column:span 2;grid-row:span 2;aspect-ratio:auto}
+@media (max-width:560px){.sp-gal{grid-template-columns:1fr 1fr}}
+.sp-gal img{width:100%;height:100%;object-fit:cover;filter:var(--photo-filter);transition:filter .4s,transform .6s}
+.sp-gal button:hover img{filter:none;transform:scale(1.04)}
+.lb{max-width:min(92vw,1100px);padding:0;border:0;background:transparent;overflow:visible}
+.lb::backdrop{background:rgba(8,10,8,.9)}
+.lb img{display:block;max-width:100%;max-height:84vh;margin:auto;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+.lb button{position:absolute;width:48px;height:48px;border-radius:50%;background:rgba(240,237,226,.12);color:#f0ede2;font-size:22px}
+.lb button:hover{background:rgba(240,237,226,.24)}
+.lb .x{right:-8px;top:-56px}.lb .p{left:-64px;top:50%;margin-top:-24px}.lb .n{right:-64px;top:50%;margin-top:-24px}
+@media (max-width:900px){.lb .p{left:8px}.lb .n{right:8px}.lb .x{right:8px;top:-56px}}
+
+/* другие спектакли */
+.sp-more{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(12px,1.6vw,22px)}
+.sp-card .ph{display:block;aspect-ratio:3/2;overflow:hidden;background:var(--panel);margin-bottom:12px}
+.sp-card img{width:100%;height:100%;object-fit:cover;filter:var(--photo-filter);transition:filter .4s}
+.sp-card:hover img{filter:none}
+.sp-card b{display:block;font-family:var(--fh);font-weight:700;font-size:20px;text-transform:uppercase;line-height:1.05}
+.sp-card:hover b{color:var(--bronze-2)}
+.sp-card small{display:block;margin-top:4px;font-size:13px;color:var(--ink-mute)}
+
+/* артист */
+.ar-hero{padding:clamp(28px,4vw,56px) 0 0}
+.ar-hero .wrap{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(28px,4vw,72px);align-items:end}
+.ar-hero .pic{position:relative;display:flex;justify-content:center;align-items:flex-end;min-height:clamp(380px,52vw,620px);background:radial-gradient(60% 55% at 50% 70%,var(--panel-2),transparent 75%)}
+.ar-hero .pic img{max-height:clamp(380px,52vw,620px);width:auto;filter:grayscale(1) contrast(1.06) drop-shadow(0 20px 30px rgba(0,0,0,.45))}
+.ar-hero .tx{padding-bottom:clamp(28px,4vw,64px)}
+.ar-hero h1{margin:12px 0 10px;font-size:clamp(46px,6vw,96px)}
+.ar-hero .role{font-family:var(--fs);font-style:italic;font-size:clamp(22px,2vw,28px);color:var(--bronze-2)}
+.ar-roles{list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:10px}
+.ar-roles a{display:flex;align-items:center;gap:16px;padding:10px;background:var(--panel);border:1px solid var(--line);transition:border-color .2s}
+.ar-roles a:hover{border-color:var(--bronze)}
+.ar-roles .ph{flex:none;width:110px;aspect-ratio:3/2;overflow:hidden;background:var(--bg)}
+.ar-roles .ph img{width:100%;height:100%;object-fit:cover;filter:var(--photo-filter)}
+.ar-roles a:hover .ph img{filter:none}
+.ar-roles b{display:block;font-family:var(--fh);font-weight:700;font-size:20px;text-transform:uppercase;line-height:1.05}
+.ar-roles small{display:block;margin-top:4px;font-size:14px;color:var(--ink-soft)}
+.ar-nav{display:flex;justify-content:space-between;gap:16px}
+.ar-nav a{font-family:var(--fh);font-weight:700;font-size:22px;text-transform:uppercase}
+.ar-nav a:last-child{text-align:right}
+.ar-nav a:hover{color:var(--bronze-2)}
+.ar-nav small{display:block;font-family:var(--ft);font-weight:400;font-size:13px;text-transform:none;color:var(--ink-mute)}
+
+@media (max-width:1000px){
+  .sp-hero .wrap,.sp-two,.ar-hero .wrap{grid-template-columns:1fr}
+  .sp-hero .pic{order:-1}
+  .sp-more{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .ar-hero .pic{min-height:0}.ar-hero .pic img{max-height:420px}
+}
+@media (max-width:560px){.sp-more{grid-template-columns:1fr 1fr}.ar-roles{grid-template-columns:1fr}.sp-cast{grid-template-columns:1fr}}
