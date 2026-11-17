@@ -61,13 +61,6 @@
   var hdr = document.getElementById('site-header');
   if (hdr) hdr.outerHTML =
     '<a class="sr" href="#main">Перейти к содержанию</a>' +
-    '<div class="util"><div class="wrap">' +
-      '<a class="hide-m" href="#pk">Театр — участник программы «Пушкинская карта»</a>' +
-      '<span class="push"></span>' +
-      '<button class="a11y-btn" type="button" aria-expanded="false" aria-controls="a11y">' + eye + '<span>Версия для слабовидящих</span></button>' +
-      '<a class="phone" href="tel:+74965457575">+7 496 545-75-75</a>' +
-      '<a class="hide-m" href="https://t.me/teatralnykovcheg">Telegram</a><a class="hide-m" href="https://vk.ru/teatralnykovcheg">ВКонтакте</a>' +
-    '</div></div>' +
     '<div class="a11y-panel" id="a11y"><div class="wrap">' +
       '<div class="grp" role="group" aria-label="Размер текста"><span>Шрифт</span><button data-fz="0">A</button><button data-fz="1">A+</button><button data-fz="2">A++</button></div>' +
       '<div class="grp" role="group" aria-label="Цвета"><span>Цвета</span><button data-cl="hc">Чёрный фон</button><button data-cl="light">Белый фон</button></div>' +
@@ -78,9 +71,14 @@
       '<a class="logo" href="index.html"><img src="assets/logo.png" alt="Театральный ковчег в Дубраве — на главную" width="900" height="385"></a>' +
       '<nav class="nav" id="nav" aria-label="Основное меню">' +
         '<a href="afisha.html"' + (page === 'afisha' ? ' aria-current="page"' : '') + '>Афиша</a><a href="#">Репертуар</a><a href="index.html#fest">Фестивали</a><a href="index.html#about">Театр</a><a href="truppa.html"' + (page === 'troupe' ? ' aria-current="page"' : '') + '>Труппа</a><a href="index.html#who">Зрителям</a>' +
+        '<div class="nav-x"><a class="tel" href="tel:+74965457575">+7 496 545-75-75</a><span>Касса: ср–пт 12:00–19:00, сб–вс 13:00–18:30</span>' +
+          '<div class="soc"><a href="https://t.me/teatralnykovcheg">Telegram</a><a href="https://vk.ru/teatralnykovcheg">ВКонтакте</a></div></div>' +
       '</nav>' +
-      '<a class="btn btn-buy" href="afisha.html">Купить билет</a>' +
-      '<button class="burger" type="button" aria-label="Меню" aria-expanded="false" aria-controls="nav"><span></span></button>' +
+      '<div class="hdr-r">' +
+        '<button class="a11y-btn" type="button" aria-expanded="false" aria-controls="a11y" aria-label="Версия для слабовидящих" title="Версия для слабовидящих">' + eye + '</button>' +
+        '<a class="btn btn-buy" href="afisha.html">Купить билет</a>' +
+        '<button class="burger" type="button" aria-label="Меню" aria-expanded="false" aria-controls="nav"><span></span></button>' +
+      '</div>' +
     '</div></header>';
 
   var ftr = document.getElementById('site-footer');
@@ -130,7 +128,7 @@
       panel.querySelectorAll('[data-cl]').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.cl === A.cl); });
       panel.querySelectorAll('[data-img]').forEach(function (b) { b.setAttribute('aria-pressed', +b.dataset.img === +A.img); });
     }
-    if (abtn) { abtn.setAttribute('aria-expanded', A.on); abtn.querySelector('span').textContent = A.on ? 'Обычная версия' : 'Версия для слабовидящих'; }
+    if (abtn) { abtn.setAttribute('aria-expanded', A.on); var l = A.on ? 'Обычная версия' : 'Версия для слабовидящих'; abtn.setAttribute('aria-label', l); abtn.title = l; }
     store('kv-a11y', A);
   }
   if (abtn) abtn.addEventListener('click', function () { A.on = !A.on; if (A.on && !A.cl) A.cl = 'hc'; if (A.on && !A.fz) A.fz = 1; applyA(); });
