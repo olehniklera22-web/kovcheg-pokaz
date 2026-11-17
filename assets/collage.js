@@ -74,6 +74,11 @@
       var p = byId[id], q = pos[i];
       return '<figure class="lc-fig f' + i + '" style="left:' + q[0] + '%;height:' + q[1] + '%;z-index:' + q[2] + '"><img src="' + src(id) + '" alt="' + esc(p[1]) + '" loading="lazy"><figcaption>' + esc(p[1]) + '</figcaption></figure>';
     }).join('') + '</div>';
+  /* data-compact: на главной — только коллаж и ссылка на всю труппу */
+  if (host.hasAttribute('data-compact')) {
+    host.innerHTML = collage + '<div class="lc-bar lc-bar-c"><span>' + PEOPLE.length + ' человек: актёры, режиссёры и руководство</span><a class="link-arrow" href="' + (host.dataset.href || '#') + '">Вся труппа</a></div>';
+    return;
+  }
   var stage = PEOPLE.filter(function (p) { return p[3] === 'stage'; }), team = PEOPLE.filter(function (p) { return p[3] === 'team'; });
   host.innerHTML = collage +
     '<div class="lc-bar"><div class="lc-tabs" role="tablist" aria-label="Кого показать">' +

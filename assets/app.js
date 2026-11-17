@@ -77,7 +77,7 @@
     '<header class="hdr"><div class="wrap">' +
       '<a class="logo" href="index.html"><img src="assets/logo.png" alt="Театральный ковчег в Дубраве — на главную" width="900" height="385"></a>' +
       '<nav class="nav" id="nav" aria-label="Основное меню">' +
-        '<a href="afisha.html"' + (page === 'afisha' ? ' aria-current="page"' : '') + '>Афиша</a><a href="#">Репертуар</a><a href="index.html#fest">Фестивали</a><a href="index.html#about">Театр</a><a href="#">Труппа</a><a href="index.html#who">Зрителям</a>' +
+        '<a href="afisha.html"' + (page === 'afisha' ? ' aria-current="page"' : '') + '>Афиша</a><a href="#">Репертуар</a><a href="index.html#fest">Фестивали</a><a href="index.html#about">Театр</a><a href="truppa.html"' + (page === 'troupe' ? ' aria-current="page"' : '') + '>Труппа</a><a href="index.html#who">Зрителям</a>' +
       '</nav>' +
       '<a class="btn btn-buy" href="afisha.html">Купить билет</a>' +
       '<button class="burger" type="button" aria-label="Меню" aria-expanded="false" aria-controls="nav"><span></span></button>' +
@@ -94,7 +94,7 @@
           '<div class="btns"><a class="btn btn-sm btn-line" href="#">Как добраться</a><a class="btn btn-sm btn-line" href="#">Покупка и возврат билетов</a></div>' +
         '</div>' +
         '<div><h4>Зрителям</h4><ul><li><a href="afisha.html">Афиша</a></li><li><a href="#">Репертуар</a></li><li><a href="#">Льготы</a></li><li><a href="#pk">Пушкинская карта</a></li><li><a href="#">Подарочный сертификат</a></li><li><a href="#">Правила посещения</a></li></ul></div>' +
-        '<div><h4>Театр</h4><ul><li><a href="#">История</a></li><li><a href="#">Труппа</a></li><li><a href="#">Фестиваль «У Троицы»</a></li><li><a href="#">Новости</a></li><li><a href="#">Залы и техника сцены</a></li></ul></div>' +
+        '<div><h4>Театр</h4><ul><li><a href="#">История</a></li><li><a href="truppa.html">Труппа</a></li><li><a href="#">Фестиваль «У Троицы»</a></li><li><a href="#">Новости</a></li><li><a href="#">Залы и техника сцены</a></li></ul></div>' +
         '<div><h4>Связь</h4><ul><li><a href="https://t.me/teatralnykovcheg">Telegram</a></li><li><a href="https://vk.ru/teatralnykovcheg">ВКонтакте</a></li><li><a href="#">MAX</a></li><li><a href="mailto:teatr-kovcheg@yandex.ru">teatr-kovcheg@yandex.ru</a></li></ul></div>' +
       '</div>' +
       '<div class="ftr-gov">' +
@@ -162,6 +162,9 @@
   });
   var tt;
   function toast(m) { var t = document.querySelector('.toast'); t.textContent = m; t.classList.add('on'); clearTimeout(tt); tt = setTimeout(function () { t.classList.remove('on'); }, 2200); }
+
+  /* ссылки шапки вида index.html#блок ведут в блок этой же страницы, если он здесь есть */
+  document.querySelectorAll('a[href^="index.html#"]').forEach(function (a) { var id = a.getAttribute('href').split('#')[1]; if (document.getElementById(id) && page !== 'troupe') a.setAttribute('href', '#' + id); });
 
   /* ---------- reveal ---------- */
   if ('IntersectionObserver' in window) {

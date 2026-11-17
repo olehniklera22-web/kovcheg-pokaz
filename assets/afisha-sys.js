@@ -112,6 +112,13 @@ window.KVPop = function (box, rowSel, minR) {
     if ((b = t.closest('[data-open]'))) { st.open[b.dataset.open] = true; render(); }
   });
 
+  /* ссылки с других блоков страницы сразу ставят фильтр афиши: data-af="месяц|тип" */
+  document.addEventListener('click', function (ev) {
+    var a = ev.target.closest('[data-af]'); if (!a) return;
+    ev.preventDefault(); document.getElementById('afisha').scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    var p = a.dataset.af.split('|');
+    st.m = months.indexOf(p[0]) >= 0 ? p[0] : 'all'; st.t = p[1] || 'all'; st.n = MODE === 'date' ? 10 : 6; render();
+  });
   if (MODE === 'date' && host.hasAttribute('data-hover')) window.KVPop(host, '.afs-ev', .5);
   render();
 })();

@@ -44,3 +44,5 @@
 .lc-more button:hover{border-color:var(--lc-accent,#c9a25e);color:var(--lc-accent,#c9a25e)}
 @media (max-width:600px){.lc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.lc-bar{margin-top:20px}}
 @media (prefers-reduced-motion:reduce){.lc-fig,.lc-fig img,.lc-ph img{transition:none}}
+
+.lc-bar-c{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;color:var(--ink-soft);font-size:15px;margin-top:20px}

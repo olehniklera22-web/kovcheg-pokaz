@@ -9,7 +9,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500;1,600&family=Fira+Sans+Extra+Condensed:wght@500;600;700;800&family=Fira+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css?v=3">
-<link rel="stylesheet" href="assets/main.css?v=4">
+<link rel="stylesheet" href="assets/collage.css?v=2">
+<link rel="stylesheet" href="assets/main.css?v=5">
 </head>
 <body data-page="home">
 <div id="site-header"></div>
@@ -27,12 +28,116 @@
       <div id="afs" data-mode="date" data-hover></div>
     </div>
   </section>
+  <!-- ===== ниже афиши: общая часть главной для обоих вариантов ===== -->
+  <!-- Новый год -->
+  <section class="sec" id="ny">
+    <div class="wrap">
+      <div class="sec-head rv"><div><span class="eyebrow">18 декабря — 10 января</span><h2 class="h-l">Новый год<br><span class="serif" style="text-transform:none;color:var(--bronze-2)">в Дубраве</span></h2></div>
+        <p class="lead">Днём — сказка для детей, вечером — спектакль для взрослых. Можно прийти всей семьёй, а потом ещё раз — без детей.</p></div>
+      <div class="ny">
+        <a class="card rv" href="#afisha" data-af="2026-12|kids">
+          <div class="ph"><img src="photos/volshebnik.jpg" alt="" loading="lazy"></div>
+          <div class="body"><div class="row"><span class="tag tag-age">6+</span><span class="tag">11:00 и 14:00</span></div>
+            <h3 class="h-m">Волшебник Изумрудного города</h3><p class="soft">Новогодняя сказка по Александру Волкову. Утренние и дневные показы на каникулах.</p>
+            <div class="foot"><span class="soft">18 декабря — 5 января</span><span class="link-arrow">Выбрать дату</span></div></div>
+        </a>
+        <a class="card rv" href="#afisha" data-af="2026-12|drama">
+          <div class="ph ph-none" aria-hidden="true"><span>Рождественская<br>история</span></div>
+          <div class="body"><div class="row"><span class="tag tag-age">16+</span><span class="tag">17:00 и 19:00</span><span class="tag tag-pk">Пушкинская карта</span></div>
+            <h3 class="h-m">Рождественская история</h3><p class="soft">Вечерний новогодний спектакль по пьесе В. Ольшанской.</p>
+            <div class="foot"><span class="soft">18 декабря — 5 января</span><span class="link-arrow">Выбрать дату</span></div></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="rip" data-seed="37"></div>
+
+  <!-- Фестиваль -->
+  <section class="sec fest" id="fest">
+    <div class="wrap">
+      <div class="rv">
+        <span class="eyebrow">Международный театральный фестиваль</span>
+        <div class="num" aria-hidden="true">XIII</div>
+        <h2 class="h-l" style="margin-top:6px">«У Троицы»</h2>
+        <p class="when"><em>11–20 июня 2027</em><br>Сергиев Посад</p>
+        <div class="stats" aria-label="XII фестиваль в цифрах">
+          <div><b>21</b><span>спектакль в 2026 году</span></div>
+          <div><b>19</b><span>театров</span></div>
+          <div><b>18</b><span>городов — впервые Ташкент, Сахалин, Камчатка</span></div>
+        </div>
+      </div>
+      <div class="side rv">
+        <p>Фестиваль собирает спектакли об истории России, классической литературе и человеческих судьбах. Театр учредил его в 2014 году, к 700-летию преподобного Сергия Радонежского.</p>
+        <div class="acts" style="display:flex;flex-wrap:wrap;gap:12px"><a class="btn btn-buy" href="https://t.me/teatralnykovcheg">Узнать о старте продаж</a><a class="btn btn-line" href="#">История фестиваля</a></div>
+        <div class="sub"><b>Вне формата. У Троицы</b><span class="soft">Уличный фестиваль в августе: на «Дороге к храму» и в парке «Дубрава». В 2026 году — больше 10 тысяч зрителей за два дня.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Кому что -->
+  <section class="sec" id="who">
+    <div class="wrap">
+      <div class="sec-head rv"><div><span class="eyebrow">Зрителям</span><h2 class="h-l">Кому что</h2></div></div>
+      <div class="aud rv">
+        <a href="#afisha" data-af="all|drama" id="pk"><span class="n">Пушкинская карта</span><h3>Если вам 14–22</h3><p>Спектакли с зелёной меткой можно оплатить картой — на сайте или в кассе.</p><span class="link-arrow">Спектакли по карте</span></a>
+        <a href="#afisha" data-af="all|kids"><span class="n">Семьям</span><h3>С детьми</h3><p>Сказки от 3+ и новогодние каникулы в театре. Утренние и дневные показы.</p><span class="link-arrow">Детская афиша</span></a>
+        <a href="#"><span class="n">Туристам</span><h3>От Лавры до Дубравы</h3><p>Театр — в парке «Дубрава», мкр. Семхоз. Как доехать от центра и от платформы Семхоз.</p><span class="link-arrow">Как добраться</span></a>
+        <a href="#"><span class="n">Школам и группам</span><h3>За кулисы</h3><p>Арт-экскурсия «Театральные профессии» и показы по коллективным заявкам.</p><span class="link-arrow">Оставить заявку</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- О театре -->
+  <section class="sec bg2" id="about">
+    <div class="wrap about">
+      <div class="rv">
+        <span class="eyebrow">О театре</span>
+        <h2 class="big" style="margin-top:12px">Театр в&nbsp;парке<span class="serif">с 2004 года</span></h2>
+        <p>«Театральный ковчег» основал заслуженный артист РСФСР Станислав Коренев. С 2023 года театр работает в центре «Дубрава» в Семхозе: основная сцена на 200 мест, Малый зал на 70, летняя сцена и парк вокруг.</p>
+        <p>В репертуаре — русская и мировая классика, современная драматургия, сказки для детей и концерты филармонии.</p>
+        <div class="nums">
+          <div><b>199</b><span>спектаклей в 2025 году</span></div>
+          <div><b>≈400</b><span>мероприятий в округе и за его пределами</span></div>
+          <div><b>47 000</b><span>зрителей за год</span></div>
+          <div><b>3</b><span>сцены: основная, Малый зал, летняя</span></div>
+        </div>
+        <div style="margin-top:28px"><a class="link-arrow" href="#">История театра</a></div>
+      </div>
+      <a class="gold rv" href="#">
+        <div class="ph"><img src="photos/iudushka-2.jpg" alt="Сцена из спектакля «Иудушка. Страсти»" loading="lazy"></div>
+        <div class="cap"><span class="eyebrow">Золотой фонд СТД России</span><h3>«Иудушка. Страсти»</h3><p class="soft">Спектакль по «Господам Головлёвым» включён в «Золотой фонд театральных постановок России». В октябре 2026 года его показали в Москве, на сцене «Мастерской „12“».</p></div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Новости -->
+  <section class="sec" id="news">
+    <div class="wrap">
+      <div class="sec-head rv"><div><span class="eyebrow">Жизнь театра</span><h2 class="h-l">Новости</h2></div><a class="link-arrow" href="#">Все новости</a></div>
+      <div class="news">
+        <a class="rv" href="#"><div class="ph"><img src="photos/otets-arseniy.jpg" alt="" loading="lazy"></div><time>Ноябрь 2026</time><h3>«Отец Арсений» — премьера ноября</h3><p>Четыре первых показа — 19–22 ноября на Основной сцене.</p></a>
+        <a class="rv" href="#"><div class="ph"><img src="photos/iudushka.jpg" alt="" loading="lazy"></div><time>6 октября 2026</time><h3>«Иудушка» в Москве на «Атласе театральной России»</h3><p>Спектакль сыграли на сцене «Мастерской „12“» Никиты Михалкова.</p></a>
+        <a class="rv" href="#"><div class="ph ph-none" aria-hidden="true"><span>Вне<br>формата</span></div><time>Август 2026</time><h3>10 тысяч зрителей за два дня</h3><p>Девятый уличный фестиваль «Вне формата. У Троицы» прошёл в Сергиевом Посаде.</p></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Сертификат -->
+  <section class="sec" style="padding-top:0">
+    <div class="wrap">
+      <div class="cert rv">
+        <div><span class="eyebrow">Подарок</span><h2 class="h-m" style="margin-top:10px">Подарочный сертификат в театр</h2><p>Получатель сам выберет спектакль и дату. Электронный — сразу на почту, бумажный — в кассе театра.</p></div>
+        <a class="btn btn-buy" href="#">Купить сертификат</a>
+      </div>
+    </div>
+  </section>
 </main>
 <div id="site-footer"></div>
 <script src="assets/data.js"></script>
-<script src="assets/app.js"></script>
-<script src="assets/collage.js" data-root=""></script>
-<script src="assets/afisha-sys.js?v=5"></script>
+<script src="assets/app.js?v=2"></script>
+<script src="assets/collage.js?v=2" data-root=""></script>
+<script src="assets/afisha-sys.js?v=7"></script>
 <script>
 (function () {
   var SL = [
