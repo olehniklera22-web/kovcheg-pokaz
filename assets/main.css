@@ -101,7 +101,7 @@
 
 /* ---------- вариант 2: неделя на первом экране ---------- */
 .m2{position:relative;overflow:hidden;padding:clamp(32px,4vw,56px) 0 clamp(40px,4vw,64px);background:radial-gradient(70% 90% at 85% 70%,#33493a,transparent 70%)}
-.m2 .wrap{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:clamp(28px,4vw,64px);align-items:end}
+.m2 .wrap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(28px,4vw,64px);align-items:end}
 .m2 .wk h1{margin:10px 0 18px}
 .m2 .wk ol{list-style:none;border-top:2px solid var(--ink)}
 .m2 .wk li{display:grid;grid-template-columns:110px 60px minmax(0,1fr) auto;gap:16px;align-items:center;padding:11px 0;border-bottom:1px solid var(--line)}
@@ -112,15 +112,19 @@
 .m2 .wk .ti{font-family:var(--fh);font-weight:700;text-transform:uppercase;font-size:clamp(19px,1.6vw,23px);line-height:1.05}
 .m2 .wk .ti small{display:block;font-family:var(--ft);font-weight:400;text-transform:none;font-size:13px;color:var(--ink-mute);margin-top:2px}
 .m2 .wk .all{display:inline-block;margin-top:18px}
-.m2 .fig{position:relative;align-self:stretch;min-height:520px}
-.m2 .fig .strip{position:absolute;left:-10%;width:120%;bottom:22%;height:64px;transform:rotate(-4deg);filter:drop-shadow(0 8px 12px rgba(0,0,0,.4))}
-.m2 .fig .strip svg{width:100%;height:100%;display:block}.m2 .fig .strip .pap{fill:#e9e3d6}.m2 .fig .strip .fib{fill:#faf7f0}
-.m2 .fig figure{position:absolute;bottom:0;left:50%;transform:translateX(-50%);height:100%;margin:0}
-.m2 .fig img{height:100%;width:auto;filter:grayscale(1) contrast(1.06) drop-shadow(2px 0 0 #f4efe4) drop-shadow(-2px 0 0 #f4efe4) drop-shadow(0 -2px 0 #f4efe4) drop-shadow(0 14px 22px rgba(0,0,0,.5));transition:filter .5s}
-.m2 .fig:hover img{filter:grayscale(0) drop-shadow(2px 0 0 #f4efe4) drop-shadow(-2px 0 0 #f4efe4) drop-shadow(0 -2px 0 #f4efe4) drop-shadow(0 14px 22px rgba(0,0,0,.5))}
-.m2 .fig figcaption{position:absolute;right:0;top:12%;z-index:2;background:#e9e3d6;color:#1c1712;font-family:var(--fh);font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:14px;padding:8px 12px;transform:rotate(2deg);box-shadow:0 6px 14px rgba(0,0,0,.35);text-align:left}
-.m2 .fig figcaption small{display:block;font-weight:600;font-size:12px;color:#5a4d3e}
-@media (max-width:1000px){.m2 .wrap{grid-template-columns:1fr}.m2 .fig{min-height:320px}.m2 .fig figcaption{right:4%}}
+.m2 .wk li{transition:background .2s}
+.m2 .wk li.on{background:linear-gradient(90deg,rgba(184,147,90,.12),transparent 70%)}
+.m2 .wk li.on .ti{color:var(--bronze-2)}
+/* справа — крупная афиша выбранного спектакля */
+.m2 .stage{align-self:center}
+.m2 .stage .ph{position:relative;aspect-ratio:3/2;overflow:hidden;background:var(--panel);box-shadow:0 30px 60px rgba(0,0,0,.45)}
+.m2 .stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .45s ease}
+.m2 .stage img.on{opacity:1}
+.m2 .stage .cap{padding-top:18px}
+.m2 .stage h2{font-family:var(--fh);font-weight:800;text-transform:uppercase;font-size:clamp(26px,2.4vw,36px);line-height:1;margin:8px 0 6px}
+.m2 .stage p{color:var(--ink-soft);font-size:15px}
+@media (max-width:1000px){.m2 .wrap{grid-template-columns:1fr}.m2 .stage{max-width:560px}}
+@media (max-width:620px){.m2 .stage{display:none}.m2 .wk li.on{background:none}.m2 .wk li.on .ti{color:inherit}}
 @media (max-width:620px){.m2 .wk li{grid-template-columns:52px minmax(0,1fr) auto;gap:4px 12px}.m2 .wk .d{grid-column:1/-1}.m2 .wk .d small{display:inline;margin-left:6px}.m2 .wk .ti{grid-column:2}}
 
 /* переключатель вариантов */
