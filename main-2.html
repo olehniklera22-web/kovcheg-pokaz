@@ -41,17 +41,18 @@
 <script src="assets/data.js"></script>
 <script src="assets/app.js"></script>
 <script src="assets/collage.js" data-root=""></script>
-<script src="assets/afisha-sys.js?v=4"></script>
+<script src="assets/afisha-sys.js?v=5"></script>
 <script>
 (function () {
   var H = window.KVH, S = KV.shows, SC = KV.scenes;
   var ev = H.upcoming.filter(function (e) { return (e.status === 'sale' || e.status === 'few') && S[e.show].type !== 'fest'; }).slice(0, 6), cd = '';
   document.getElementById('wk').innerHTML = ev.map(function (e) {
     var s = S[e.show], d = H.pd(e.date), first = e.date !== cd; cd = e.date;
-    return '<li><span class="d">' + (first ? '<b>' + d.getDate() + '</b> ' + H.MG[d.getMonth()].slice(0, 3) + '<small>' + H.WD[d.getDay()] + '</small>' : '') + '</span><span class="tm">' + e.time + '</span>' +
+    return '<li data-show="' + e.show + '"><span class="d">' + (first ? '<b>' + d.getDate() + '</b> ' + H.MG[d.getMonth()].slice(0, 3) + '<small>' + H.WD[d.getDay()] + '</small>' : '') + '</span><span class="tm">' + e.time + '</span>' +
       '<span class="ti">' + H.esc(s.short || s.title) + '<small>' + H.esc(s.genre) + (s.age ? ' · ' + s.age : '') + ' · ' + SC[e.scene] + '</small></span>' +
       '<button class="afs-btn" type="button" data-buy="' + e.id + '">Купить</button></li>';
   }).join('');
+  window.KVPop(document.getElementById('wk'), 'li', 1.04);
 })();
 (function () {
   var bar = document.createElement('nav'); bar.className = 'mbar'; bar.setAttribute('aria-label', 'Варианты главной');

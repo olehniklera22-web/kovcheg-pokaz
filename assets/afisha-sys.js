@@ -1,5 +1,36 @@
 /* Система афиши для главной: фильтры «месяц» + «тип» и два способа показа —
    по датам (data-mode="date") и по спектаклям (data-mode="show"). */
+/* Всплывающая афиша при наведении на строку с data-show (только мышь).
+   KVPop(контейнер, селектор строки, доля ширины строки — левее неё афиша не заходит) */
+window.KVPop = function (box, rowSel, minR) {
+  if (!box || !matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+  var H = window.KVH, S = KV.shows;
+  var pop = document.createElement('div'); pop.className = 'afs-pop'; pop.setAttribute('aria-hidden', 'true'); document.body.appendChild(pop);
+  var cur = '', tx = 0, ty = 0, x = 0, y = 0, raf = 0;
+  function fill(k) {
+    var s = S[k], i = 0, seed = 0; for (; i < k.length; i++) seed += k.charCodeAt(i);
+    if (!s || !s.photo) { pop.innerHTML = ''; return; }
+    var edge = window.KVStrip ? window.KVStrip(seed * 37, 30) : '';
+    pop.style.setProperty('--rot', ((seed % 7) - 3) * .8 + 'deg');
+    pop.innerHTML = '<div class="card"><span class="tape"></span><img src="photos/' + s.photo + '" alt=""><div class="edge">' + edge + '</div></div>' +
+      '<span class="tag">' + H.esc(s.genre) + (s.age ? ' · ' + s.age : '') + '</span>';
+  }
+  function hide() { pop.classList.remove('on'); cur = ''; }
+  function loop() { x += (tx - x) * .22; y += (ty - y) * .22; pop.style.transform = 'translate(' + x + 'px,' + y + 'px)'; raf = (Math.abs(tx - x) + Math.abs(ty - y) > .5) ? requestAnimationFrame(loop) : 0; }
+  box.addEventListener('mousemove', function (e) {
+    var row = e.target.closest(rowSel);
+    if (!row || !row.dataset.show || e.target.closest('button')) { hide(); return; }
+    if (row.dataset.show !== cur) { cur = row.dataset.show; fill(cur); }
+    var w = pop.offsetWidth || 340, h = pop.offsetHeight || 260, r = row.getBoundingClientRect();
+    tx = Math.min(Math.max(e.clientX + 40, r.left + r.width * (minR || 0)), innerWidth - w - 16);
+    ty = Math.max(16, Math.min(e.clientY - h / 2, innerHeight - h - 16));
+    if (!pop.classList.contains('on')) { x = tx; y = ty; pop.classList.add('on'); }
+    if (!raf) raf = requestAnimationFrame(loop);
+  });
+  box.addEventListener('mouseleave', hide);
+  addEventListener('scroll', hide, { passive: true });
+};
+
 (function () {
   var host = document.getElementById('afs');
   if (!host) return;
@@ -81,31 +112,6 @@
     if ((b = t.closest('[data-open]'))) { st.open[b.dataset.open] = true; render(); }
   });
 
-  /* всплывающая афиша при наведении на строку (вариант «по датам», только мышь) */
-  if (MODE === 'date' && host.hasAttribute('data-hover') && matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    var pop = document.createElement('div'); pop.className = 'afs-pop'; pop.setAttribute('aria-hidden', 'true'); document.body.appendChild(pop);
-    var curShow = '', tx = 0, ty = 0, x = 0, y = 0, raf = 0;
-    function fill(k) {
-      var s = S[k], i = 0, seed = 0; for (; i < k.length; i++) seed += k.charCodeAt(i);
-      var edge = window.KVStrip ? window.KVStrip(seed * 37, 30) : '';
-      if (!s.photo) { pop.innerHTML = ''; return; }
-      pop.style.setProperty('--rot', ((seed % 7) - 3) * .8 + 'deg');
-      pop.innerHTML = '<div class="card"><span class="tape"></span><img src="photos/' + s.photo + '" alt=""><div class="edge">' + edge + '</div></div>' +
-        '<span class="tag">' + H.esc(s.genre) + (s.age ? ' · ' + s.age : '') + '</span>';
-    }
-    function loop() { x += (tx - x) * .22; y += (ty - y) * .22; pop.style.transform = 'translate(' + x + 'px,' + y + 'px)'; raf = (Math.abs(tx - x) + Math.abs(ty - y) > .5) ? requestAnimationFrame(loop) : 0; }
-    host.addEventListener('mousemove', function (e) {
-      var row = e.target.closest('.afs-ev');
-      if (!row || e.target.closest('.afs-btn')) { pop.classList.remove('on'); curShow = ''; return; }
-      var k = row.dataset.show;
-      if (k !== curShow) { curShow = k; fill(k); }
-      var w = pop.offsetWidth || 300, h = pop.offsetHeight || 260;
-      var r = row.getBoundingClientRect(); tx = Math.min(Math.max(e.clientX + 40, r.left + r.width * .5), innerWidth - w - 16); ty = Math.max(16, Math.min(e.clientY - h / 2, innerHeight - h - 16));
-      if (!pop.classList.contains('on')) { x = tx; y = ty; pop.classList.add('on'); }
-      if (!raf) raf = requestAnimationFrame(loop);
-    });
-    host.addEventListener('mouseleave', function () { pop.classList.remove('on'); curShow = ''; });
-    addEventListener('scroll', function () { pop.classList.remove('on'); curShow = ''; }, { passive: true });
-  }
+  if (MODE === 'date' && host.hasAttribute('data-hover')) window.KVPop(host, '.afs-ev', .5);
   render();
 })();
