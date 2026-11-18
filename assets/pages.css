@@ -17,7 +17,7 @@
 .sp-hero .acts{display:flex;flex-wrap:wrap;align-items:center;gap:14px 26px}
 .sp-hero .pic{position:relative}
 .sp-hero .pic .ph{aspect-ratio:3/2;overflow:hidden;background:var(--panel);box-shadow:0 30px 60px rgba(0,0,0,.45)}
-.sp-hero .pic img{width:100%;height:100%;object-fit:cover}
+.sp-hero .pic .ph img{width:100%;height:100%;object-fit:cover}
 .sp-hero .edge{position:absolute;left:-2%;width:104%;bottom:-16px;height:34px;filter:drop-shadow(0 4px 6px rgba(0,0,0,.35))}
 .sp-hero .edge svg{display:block;width:100%;height:100%}
 .sp-hero .edge .pap,.ar-hero .pap{fill:#e9e1cf}.sp-hero .edge .fib{fill:#f8f4ea}
@@ -101,3 +101,66 @@
   .ar-hero .pic{min-height:0}.ar-hero .pic img{max-height:420px}
 }
 @media (max-width:560px){.sp-more{grid-template-columns:1fr 1fr}.ar-roles{grid-template-columns:1fr}.sp-cast{grid-template-columns:1fr}}
+
+/* ===== страница спектакля, версия 2 ===== */
+/* вырезанный герой выходит из афиши: стоит слева, ноги прячутся за рваным краем */
+.sp-hero .pic .ph{position:relative;z-index:0}
+.sp-hero .sp-cut{position:absolute;z-index:1;left:-9%;bottom:4px;height:clamp(260px,30vw,440px);width:auto;pointer-events:none;filter:grayscale(1) contrast(1.06) drop-shadow(2px 0 0 #f4efe4) drop-shadow(-2px 0 0 #f4efe4) drop-shadow(0 -2px 0 #f4efe4) drop-shadow(0 16px 26px rgba(0,0,0,.5))}
+.sp-hero .sp-cut.c-vishnevy,.sp-hero .sp-cut.c-magiya{height:clamp(220px,24vw,340px)}
+.sp-hero .sp-cut.c-volsh{height:clamp(200px,22vw,300px);left:-6%}
+.sp-hero .edge{z-index:2}
+@media (max-width:1000px){.sp-hero .sp-cut{left:-2%;height:clamp(200px,52vw,320px)}}
+
+/* даты — плитки с обрывком бумаги */
+.sp-tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,330px),1fr));gap:12px}
+.sp-tiles .tile{display:grid;grid-template-columns:84px minmax(0,1fr) auto;align-items:center;gap:16px;padding:12px 16px 12px 12px;background:var(--panel);border:1px solid var(--line);transition:border-color .2s,background .2s}
+.sp-tiles .tile:hover{border-color:var(--line-2);background:var(--panel-2)}
+.sp-tiles .tile:hover .afs-d{transform:rotate(0) scale(1.04)}
+.sp-tiles .tile.sold{opacity:.6}
+.sp-tiles .i b{display:block;font-family:var(--fh);font-weight:700;font-size:24px;line-height:1}
+.sp-tiles .i small{display:block;margin-top:4px;font-size:13px;color:var(--ink-mute)}
+.sp-tiles .i em{font-style:normal;color:#e5a3ad}
+.sp-tiles .no{font-family:var(--fh);font-weight:600;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-mute)}
+
+/* о спектакле — первый абзац как вступление */
+#about .h-m{margin-bottom:20px}
+.sp-about{columns:2 380px;column-gap:56px}
+.sp-about p{break-inside:avoid}
+.sp-about .lead1{column-span:all;font-family:var(--fs);font-style:italic;font-size:clamp(22px,2vw,28px);line-height:1.35;color:var(--ink);max-width:46ch;margin-bottom:22px}
+
+/* программка — лист бумаги с рваными краями */
+.sp-prog-sec{border-top:0}
+.prog{position:relative;max-width:1100px;margin:0 auto;filter:drop-shadow(0 26px 40px rgba(0,0,0,.45))}
+.prog .tear{position:relative;height:30px;margin:0 -1%}
+.prog .tear svg{display:block;width:100%;height:100%}
+.prog .tear.t{margin-bottom:-2px}.prog .tear.b{margin-top:-2px;transform:scaleY(-1)}
+.prog .tear .pap{fill:#ece5d4}.prog .tear .fib{fill:#ece5d4}
+.prog .sheet{background-color:#ece5d4;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .3 0 0 0 0 .22 0 0 0 .16 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");color:#1d1914;padding:clamp(28px,4vw,56px) clamp(22px,5vw,72px) clamp(32px,4vw,56px)}
+.pg-top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-family:var(--fh);font-weight:600;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#7a6c58;padding-bottom:14px;border-bottom:1px solid rgba(29,25,20,.25)}
+.pg-t{margin:22px 0 4px;text-align:center;font-family:var(--fh);font-weight:800;text-transform:uppercase;font-size:clamp(36px,4.4vw,64px);line-height:.95;color:#1d1914}
+.pg-src{text-align:center;font-family:var(--fs);font-style:italic;font-size:20px;color:#5b4e3d}
+.pg-cols{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:clamp(28px,4vw,64px);margin-top:clamp(26px,3vw,40px);padding-top:clamp(22px,2.6vw,34px);border-top:1px solid rgba(29,25,20,.25)}
+.pg-cols.one{grid-template-columns:minmax(0,1fr);max-width:640px;margin-left:auto;margin-right:auto}
+.pg-cols h3{font-family:var(--fh);font-weight:700;font-size:14px;letter-spacing:.18em;text-transform:uppercase;color:#7d2433;margin-bottom:14px}
+.pg-list{list-style:none}
+.pg-list li{display:flex;align-items:baseline;gap:8px;padding:5px 0}
+.pg-list i{font-family:var(--fs);font-style:italic;font-size:19px;line-height:1.2;color:#3d342a;flex:0 1 auto}
+.pg-list .dots{flex:1 1 24px;min-width:24px;border-bottom:1.5px dotted rgba(29,25,20,.4);transform:translateY(-4px)}
+.pg-list b{font-family:var(--fh);font-weight:700;font-size:16px;letter-spacing:.04em;text-transform:uppercase;text-align:right;flex:0 1 auto;max-width:60%}
+.pg-list b a{color:#1d1914;text-decoration:none;background-image:linear-gradient(#7d2433,#7d2433);background-size:0 1.5px;background-position:0 100%;background-repeat:no-repeat;transition:background-size .25s,color .2s}
+.pg-list b a:hover{color:#7d2433;background-size:100% 1.5px}
+.pg-list.crew i{font-family:var(--ft);font-style:normal;font-size:14px;color:#6b5e4c}
+.pg-list.crew b{font-size:15px}
+.pg-list li.w{display:block;font-size:14px;color:#6b5e4c;padding-top:8px}
+.pg-foot{margin-top:clamp(24px,3vw,36px);padding-top:16px;border-top:1px solid rgba(29,25,20,.25);text-align:center;font-size:14px;color:#5b4e3d}
+@media (max-width:760px){.pg-cols{grid-template-columns:1fr}.pg-list i{font-size:17px}.pg-list b{font-size:14px}}
+
+/* липкая плашка покупки */
+.sp-bar{position:fixed;left:0;right:0;bottom:0;z-index:60;background:rgba(12,19,15,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--line);transform:translateY(110%);transition:transform .3s ease}
+.pal-sage .sp-bar{background:rgba(22,33,27,.94)}
+.sp-bar.on{transform:none}
+.sp-bar .wrap{display:flex;align-items:center;gap:20px;min-height:68px}
+.sp-bar .t{font-family:var(--fh);font-weight:700;font-size:20px;text-transform:uppercase}
+.sp-bar .w{color:var(--ink-soft);font-size:15px}
+.sp-bar .btn{margin-left:auto}
+@media (max-width:620px){.sp-bar .t{display:none}.sp-bar .w{font-size:14px}}

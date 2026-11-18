@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="assets/style.css?v=6">
 <link rel="stylesheet" href="assets/collage.css?v=2">
 <link rel="stylesheet" href="assets/main.css?v=25">
-<link rel="stylesheet" href="assets/pages.css?v=3">
+<link rel="stylesheet" href="assets/pages.css?v=6">
 </head>
 <body data-page="show">
 <div id="site-header"></div>
@@ -27,7 +27,7 @@
         <dl class="facts" id="sp-facts"></dl>
         <div class="acts"><button class="btn btn-buy" type="button" id="sp-buy">Купить билет</button><a class="link-arrow" href="#dates">Все даты</a></div>
       </div>
-      <div class="pic"><div class="ph"><img id="sp-img" alt=""></div><div class="edge" data-strip="73" data-h="34"></div></div>
+      <div class="pic"><div class="ph"><img id="sp-img" alt=""></div><img class="sp-cut" id="sp-cut" alt="" hidden><div class="edge" data-strip="73" data-h="34"></div></div>
     </div>
   </section>
 
@@ -39,16 +39,28 @@
   </section>
 
   <section class="sp-sec" id="about">
-    <div class="wrap sp-two">
-      <div><h2 class="h-m">О спектакле</h2><div class="sp-about" id="sp-about"></div></div>
-      <div id="sp-crew-w"><h2 class="h-m">Создатели</h2><dl class="sp-crew" id="sp-crew"></dl></div>
+    <div class="wrap">
+      <h2 class="h-m">О спектакле</h2>
+      <div class="sp-about" id="sp-about"></div>
     </div>
   </section>
 
-  <section class="sp-sec" id="cast-w">
+  <section class="sp-sec sp-prog-sec" id="prog-w">
     <div class="wrap">
-      <div class="sp-h"><h2 class="h-m">В ролях</h2><p class="soft">Нажмите на артиста — откроется его страница</p></div>
-      <ul class="sp-cast" id="sp-cast"></ul>
+      <div class="prog">
+        <div class="tear t" data-strip="81" data-h="30" aria-hidden="true"></div>
+        <div class="sheet">
+          <div class="pg-top"><span>Театральный ковчег в Дубраве</span><span>Программа спектакля</span></div>
+          <h2 class="pg-t" id="pg-t"></h2>
+          <p class="pg-src" id="pg-src"></p>
+          <div class="pg-cols">
+            <div id="pg-cast-w"><h3>Действующие лица и&nbsp;исполнители</h3><ul class="pg-list" id="pg-cast"></ul></div>
+            <div id="pg-crew-w"><h3>Над спектаклем работали</h3><ul class="pg-list crew" id="pg-crew"></ul></div>
+          </div>
+          <p class="pg-foot" id="pg-foot"></p>
+        </div>
+        <div class="tear b" data-strip="83" data-h="30" aria-hidden="true"></div>
+      </div>
     </div>
   </section>
 
@@ -66,6 +78,7 @@
     </div>
   </section>
 </main>
+<div class="sp-bar" id="sp-bar" aria-hidden="true"><div class="wrap"><span class="t" id="bar-t"></span><span class="w" id="bar-w"></span><button class="btn btn-buy" type="button" id="bar-buy" tabindex="-1">Купить билет</button></div></div>
 <dialog class="lb" id="lb" aria-label="Фото со сцены"><button class="x" type="button" aria-label="Закрыть">×</button><button class="nv p" type="button" aria-label="Предыдущее фото">←</button><img id="lb-img" alt=""><button class="nv n" type="button" aria-label="Следующее фото">→</button></dialog>
 <div id="site-footer"></div>
 <script src="assets/data.js"></script>
@@ -96,19 +109,37 @@
   var next = ev.filter(function (e) { return e.status === 'sale' || e.status === 'few'; })[0];
   if (next) $('sp-buy').setAttribute('data-buy', next.id); else $('sp-buy').style.display = 'none';
 
-  /* даты */
-  $('sp-dsum').textContent = ev.length ? ev.length + ' ' + (ev.length % 10 === 1 && ev.length % 100 !== 11 ? 'показ' : ev.length % 10 >= 2 && ev.length % 10 <= 4 && (ev.length % 100 < 10 || ev.length % 100 >= 20) ? 'показа' : 'показов') + ' · нажмите на дату, чтобы купить билет' : '';
+  /* даты — обрывки бумаги, как в афише */
+  function rnd(seed) { var x = 0, i = 0; for (; i < seed.length; i++) x = (x * 31 + seed.charCodeAt(i)) % 2147483647; return function () { x = (x * 16807) % 2147483647; return x / 2147483647; }; }
+  function torn(k) {
+    var r = rnd('t' + k), top = [], bot = [], x;
+    for (x = 0; x < 100; x += 7 + r() * 6) top.push(x.toFixed(1) + '% ' + (r() * 7).toFixed(1) + '%');
+    top.push('100% ' + (r() * 6).toFixed(1) + '%');
+    for (x = 100; x > 0; x -= 7 + r() * 6) bot.push(x.toFixed(1) + '% ' + (93 + r() * 7).toFixed(1) + '%');
+    bot.push('0% ' + (94 + r() * 6).toFixed(1) + '%');
+    return 'polygon(' + top.concat(bot).join(',') + ')';
+  }
+  function plural(n, a, b, c) { var x = n % 10, y = n % 100; return x === 1 && y !== 11 ? a : x >= 2 && x <= 4 && (y < 10 || y >= 20) ? b : c; }
+  $('sp-dsum').textContent = ev.length ? ev.length + ' ' + plural(ev.length, 'показ', 'показа', 'показов') : '';
+  $('sp-dates').className = 'sp-tiles';
   $('sp-dates').innerHTML = ev.length ? ev.map(function (e) {
-    var d = H.pd(e.date), l = '<b>' + d.getDate() + ' ' + H.MG[d.getMonth()].slice(0, 3) + '</b><span>' + H.WS[d.getDay()] + ', ' + e.time + ' · ' + SC[e.scene] + '</span>';
-    return e.status === 'sold' ? '<span class="afs-dt sold" title="Аншлаг">' + l + '</span>' : '<button type="button" class="afs-dt' + (e.status === 'few' ? ' few' : '') + '" data-buy="' + e.id + '">' + l + '</button>';
+    var d = H.pd(e.date), we = d.getDay() === 0 || d.getDay() === 6, tilt = ((rnd('r' + e.id)() - .5) * 5).toFixed(1);
+    var act = e.status === 'sold' ? '<span class="no">Аншлаг</span>' : e.status === 'group' ? '<button class="afs-btn ghost" type="button" data-buy="' + e.id + '">Заявка</button>' : '<button class="afs-btn" type="button" data-buy="' + e.id + '">Купить</button>';
+    return '<div class="tile' + (e.status === 'sold' ? ' sold' : '') + '"><span class="afs-d' + (we ? ' we' : '') + '" style="--r:' + tilt + 'deg"><span class="pp" style="clip-path:' + torn(e.id) + '"><b>' + d.getDate() + '</b> ' + H.MG[d.getMonth()].slice(0, 3) + '<small>' + H.WD[d.getDay()] + '</small></span></span>' +
+      '<span class="i"><b>' + e.time + '</b><small>' + SC[e.scene] + (e.status === 'few' ? ' · <em>мало мест</em>' : '') + '</small></span>' + act + '</div>';
   }).join('') : '<p class="soft">Новых показов пока нет — следите за афишей.</p>';
 
-  /* о спектакле и создатели */
-  var about = (inf.about && inf.about.length ? inf.about : [s.desc]).filter(Boolean);
-  $('sp-about').innerHTML = about.map(function (p) { return '<p>' + H.esc(p) + '</p>'; }).join('');
-  if (inf.crew && inf.crew.length) $('sp-crew').innerHTML = inf.crew.map(function (c) { return c[0] ? '<div><dt>' + H.esc(c[0]) + '</dt><dd>' + link(c[1]) + '</dd></div>' : '<div class="w"><dd>' + H.esc(c[1]) + '</dd></div>'; }).join('');
-  else if (s.dir) $('sp-crew').innerHTML = '<div><dt>Режиссёр</dt><dd>' + link(s.dir) + '</dd></div>';
-  else $('sp-crew-w').style.display = 'none';
+  /* вырезанный герой выходит из афиши — там, где есть вырезка */
+  var CUT = { zoykina: 'zoykina-man.png', vishnevy: 'vishnevy-couple.png', volsh: 'volshebnik-heroes.png', magiya: 'magiya-trio.png' };
+  if (CUT[id]) { $('sp-cut').src = 'photos/stage/' + CUT[id]; $('sp-cut').hidden = false; $('sp-cut').className = 'sp-cut c-' + id; }
+
+  /* о спектакле: первый абзац крупнее */
+  var about = (inf.about && inf.about.length ? inf.about : [s.desc]).filter(Boolean).slice();
+  var tag = $('sp-tag').textContent.trim();
+  if (tag && about[0] && about[0].indexOf(tag) === 0) about[0] = about[0].slice(tag.length).trim();
+  about = about.filter(Boolean);
+  $('sp-about').innerHTML = about.map(function (p, j) { return '<p' + (j === 0 && p.length < 240 ? ' class="lead1"' : '') + '>' + H.esc(p) + '</p>'; }).join('');
+  if (!about.length) $('about').style.display = 'none';
 
   /* имена артистов — ссылки на их страницы, если человек есть в труппе */
   function person(name) { return P.filter(function (p) { return name.indexOf(p[1]) >= 0; })[0]; }
@@ -116,15 +147,29 @@
     return names.split(/,\s*/).map(function (n) { var p = person(n); return p ? '<a href="' + H.artistUrl(p[0]) + '">' + H.esc(n) + '</a>' : H.esc(n); }).join(', ');
   }
 
-  /* состав */
-  if (inf.cast) inf.cast = inf.cast.filter(function (c) { return !/^N\.?N\.?$/.test(c[1].trim()); });
-  if (inf.cast && inf.cast.length) {
-    $('sp-cast').innerHTML = inf.cast.map(function (c) {
-      var p = person(c[1]);
-      return '<li>' + (p ? '<a class="pp" href="' + H.artistUrl(p[0]) + '"><span class="av"><img src="photos/artists/' + p[0] + '.png" alt="" loading="lazy"></span><span><b>' + H.esc(c[1]) + '</b><small>' + H.esc(c[0]) + '</small></span></a>'
-        : '<span class="pp"><span class="av none"></span><span><b>' + H.esc(c[1]) + '</b><small>' + H.esc(c[0]) + '</small></span></span>') + '</li>';
-    }).join('');
-  } else $('cast-w').style.display = 'none';
+  /* программка: действующие лица и исполнители, создатели */
+  $('pg-t').textContent = s.title;
+  $('pg-src').textContent = [inf.src || s.author, s.genre].filter(Boolean).join(' · ');
+  var cast = (inf.cast || []).filter(function (c) { return !/^N\.?N\.?$/.test(c[1].trim()); });
+  var crew = (inf.crew || []).length ? inf.crew : (s.dir ? [['Режиссёр', s.dir]] : []);
+  if (cast.length) $('pg-cast').innerHTML = cast.map(function (c) { return '<li><i>' + H.esc(c[0] || '') + '</i><span class="dots"></span><b>' + link(c[1]) + '</b></li>'; }).join('');
+  else $('pg-cast-w').style.display = 'none';
+  if (crew.length) $('pg-crew').innerHTML = crew.map(function (c) { return c[0] ? '<li><i>' + H.esc(c[0]) + '</i><span class="dots"></span><b>' + link(c[1]) + '</b></li>' : '<li class="w">' + H.esc(c[1]) + '</li>'; }).join('');
+  else $('pg-crew-w').style.display = 'none';
+  if (!cast.length && !crew.length) $('prog-w').style.display = 'none';
+  if (!cast.length) document.querySelector('.pg-cols').classList.add('one');
+  $('pg-foot').textContent = [inf.dur ? 'Продолжительность ' + inf.dur : '', s.age ? 'Возраст ' + s.age : '', inf.prem ? 'Премьера — ' + inf.prem : ''].filter(Boolean).join(' · ');
+
+  /* липкая плашка покупки — когда первый экран ушёл вверх */
+  if (next) {
+    var nd = H.pd(next.date);
+    $('bar-t').textContent = s.title; $('bar-w').textContent = 'Ближайший — ' + nd.getDate() + ' ' + H.MG[nd.getMonth()] + ', ' + H.WS[nd.getDay()] + ', ' + next.time;
+    $('bar-buy').setAttribute('data-buy', next.id);
+    var bar = $('sp-bar'), hero = document.querySelector('.sp-hero');
+    var was = null;
+    function upd() { var on = hero.getBoundingClientRect().bottom < 0; if (on === was) return; was = on; bar.classList.toggle('on', on); bar.setAttribute('aria-hidden', !on); $('bar-buy').tabIndex = on ? 0 : -1; }
+    addEventListener('scroll', upd, { passive: true }); upd();
+  }
 
   /* галерея + просмотр */
   var n = inf.gal || 0, pics = [];
