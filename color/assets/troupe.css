@@ -1,0 +1,58 @@
+/* Страница труппы: у каждого варианта свой вид — как первый экран его главной */
+body:not(.pal-sage) .tv2,.pal-sage .tv1{display:none}
+.tr-tabs{display:flex;flex-wrap:wrap;gap:8px}
+.tr-tabs.center{justify-content:center;margin-top:24px}
+
+/* ---------- вариант 1: премьера + сетка портретов ---------- */
+.tv1 .h-xl{font-size:clamp(52px,7vw,116px)}
+.tv1 .pic .ph img{width:100%;height:100%;object-fit:cover;filter:var(--photo-filter)}
+.tr-ctl{display:flex;flex-direction:column;gap:14px;align-items:flex-start}
+.tr-find{position:relative;width:min(100%,360px)}
+.tr-find .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.tr-find input{width:100%;padding:11px 16px;border:1px solid var(--line-2);border-radius:40px;background:transparent;color:var(--ink);font:inherit;font-size:15px}
+.tr-find input::placeholder{color:var(--ink-mute)}
+.tr-find input:focus{outline:none;border-color:var(--bronze)}
+.tr-grid-sec{padding:clamp(16px,2vw,28px) 0 clamp(56px,6vw,96px)}
+.tr-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:clamp(14px,1.6vw,24px)}
+.pc{display:block}
+.pc .ph{position:relative;display:flex;align-items:flex-end;justify-content:center;aspect-ratio:4/5;overflow:hidden;background:radial-gradient(70% 60% at 50% 75%,var(--panel-2),var(--panel) 75%);border:1px solid var(--line);margin-bottom:12px;transition:border-color .25s}
+.pc .ph img{height:94%;width:auto;filter:grayscale(1) contrast(1.05);transition:filter .4s,transform .5s;transform-origin:bottom center}
+.pc:hover .ph{border-color:var(--bronze)}
+.pc:hover .ph img{filter:none;transform:scale(1.04)}
+.pc b{display:block;font-family:var(--fh);font-weight:700;font-size:20px;text-transform:uppercase;line-height:1.05}
+.pc:hover b{color:var(--bronze-2)}
+.pc small{display:block;margin-top:4px;font-size:14px;color:var(--ink-soft);line-height:1.3}
+.pc em{display:block;margin-top:6px;font-style:normal;font-size:13px;color:var(--ink-mute)}
+.tr-none{padding:24px 0}
+@media (max-width:560px){.tr-grid{grid-template-columns:1fr 1fr}.pc b{font-size:17px}}
+
+/* ---------- вариант 2: «Плёнка» — труппа на поклоне ---------- */
+.tv2 h1 .serif{margin-top:6px}
+.tv2 .lead{font-family:var(--fh);font-weight:600;font-size:clamp(18px,1.6vw,24px);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+.tr-bow{position:relative;margin-top:clamp(36px,4vw,60px)}
+.tr-bow .tear{position:absolute;left:-2%;width:104%;height:34px;z-index:3;pointer-events:none;filter:drop-shadow(0 4px 6px rgba(0,0,0,.35))}
+.tr-bow .tear svg{display:block;width:100%;height:100%}
+.tr-bow .tear .pap{fill:#e9e1cf}.tr-bow .tear .fib{fill:#f8f4ea}
+.tr-bow .tear.t{top:-14px;transform:rotate(-.5deg)}
+.tr-bow .tear.b{bottom:-14px;transform:rotate(.4deg) scaleY(-1)}
+.tr-bow .row{display:flex;align-items:flex-end;gap:0;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;padding:40px clamp(16px,4vw,48px) 6px;background:rgba(10,14,12,.55);scrollbar-width:none}
+.tr-bow .row::-webkit-scrollbar{display:none}
+.tr-bow .fig{position:relative;flex:none;display:block;height:clamp(260px,26vw,360px);margin-right:-26px;scroll-snap-align:start;transform:translateY(var(--d,0));transition:transform .3s}
+.tr-bow .fig img{height:100%;width:auto;display:block;filter:grayscale(1) contrast(1.06) drop-shadow(2px 0 0 #f4efe4) drop-shadow(-2px 0 0 #f4efe4) drop-shadow(0 -2px 0 #f4efe4) drop-shadow(0 12px 18px rgba(0,0,0,.45));transition:filter .4s}
+.tr-bow .fig:hover,.tr-bow .fig:focus-visible{z-index:2;transform:translateY(calc(var(--d,0) - 10px))}
+.tr-bow .fig:hover img,.tr-bow .fig:focus-visible img{filter:grayscale(0) drop-shadow(2px 0 0 #f4efe4) drop-shadow(-2px 0 0 #f4efe4) drop-shadow(0 -2px 0 #f4efe4) drop-shadow(0 12px 18px rgba(0,0,0,.45))}
+.tr-bow .fig span{position:absolute;left:50%;bottom:30px;transform:translate(-50%,6px) rotate(-2deg);white-space:nowrap;background:#e9e1cf;color:#1c1712;font-family:var(--ft);font-size:12px;line-height:1.25;padding:6px 10px;box-shadow:0 6px 14px rgba(0,0,0,.35);opacity:0;transition:.25s;pointer-events:none;text-align:center}
+.tr-bow .fig span b{display:block;font-family:var(--fh);font-weight:700;font-size:15px;letter-spacing:.06em;text-transform:uppercase}
+.tr-bow .fig:hover span,.tr-bow .fig:focus-visible span{opacity:1;transform:translate(-50%,0) rotate(-2deg)}
+.tr-arr{position:absolute;top:50%;z-index:4;width:48px;height:48px;margin-top:-24px;border-radius:50%;background:rgba(22,33,27,.85);border:1px solid var(--line-2);color:var(--ink);font-size:20px}
+.tr-arr:hover{border-color:var(--bronze);color:var(--bronze-2)}
+.tr-arr.p{left:clamp(8px,2vw,24px)}.tr-arr.n{right:clamp(8px,2vw,24px)}
+.tr-list-sec{padding:clamp(56px,6vw,96px) 0}
+.tr-list{list-style:none;columns:2 420px;column-gap:clamp(32px,5vw,80px)}
+.tr-list li{break-inside:avoid}
+.tr-list a{display:flex;align-items:baseline;gap:10px;padding:9px 0;border-bottom:1px solid var(--line)}
+.tr-list b{font-family:var(--fh);font-weight:700;font-size:20px;text-transform:uppercase;flex:none}
+.tr-list .dots{flex:1 1 20px;border-bottom:1.5px dotted var(--line-2);transform:translateY(-5px)}
+.tr-list i{font-family:var(--fs);font-style:italic;font-size:18px;color:var(--ink-soft);text-align:right;max-width:55%}
+.tr-list a:hover b{color:var(--bronze-2)}
+@media (max-width:620px){.tr-bow .fig{height:240px;margin-right:-20px}.tr-arr{display:none}.tr-list b{font-size:17px}.tr-list i{font-size:15px}}

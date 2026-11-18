@@ -1,0 +1,5 @@
+/* Цветная версия: все фото и вырезки сразу в цвете. Подключается только в копиях из папки color/ (их собирает make-color.sh) */
+body{--photo-filter:none}
+.hero-cut img,.sp-hcut,.sp-hero .sp-cut,.cut img,.lc-fig img,.tr-bow .fig img{filter:drop-shadow(2px 0 0 #f4efe4) drop-shadow(-2px 0 0 #f4efe4) drop-shadow(0 -2px 0 #f4efe4) drop-shadow(0 14px 22px rgba(0,0,0,.45))!important}
+.ar-hero .pic img{filter:drop-shadow(0 20px 30px rgba(0,0,0,.45))!important}
+.sp-cast .av img,.lc-ph img,.pc .ph img{filter:none!important}
