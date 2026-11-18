@@ -11,23 +11,47 @@
 <link rel="stylesheet" href="assets/style.css?v=6">
 <link rel="stylesheet" href="assets/collage.css?v=2">
 <link rel="stylesheet" href="assets/main.css?v=25">
-<link rel="stylesheet" href="assets/pages.css?v=6">
+<link rel="stylesheet" href="assets/pages.css?v=8">
 </head>
 <body data-page="show">
 <div id="site-header"></div>
 <main id="main">
-  <section class="sp-hero">
+  <!-- Первый экран, вариант 1: как премьера на главной варианта 1 — текст слева, афиша с рваным краем справа -->
+  <section class="m1 hv1" aria-label="Спектакль">
     <div class="wrap">
       <div class="tx">
-        <a class="back" id="sp-back" href="main-1.html#afisha">← Афиша</a>
-        <span class="eyebrow" id="sp-k"></span>
-        <h1 class="h-xl" id="sp-t"></h1>
-        <p class="src" id="sp-src"></p>
-        <p class="tagline" id="sp-tag"></p>
-        <dl class="facts" id="sp-facts"></dl>
-        <div class="acts"><button class="btn btn-buy" type="button" id="sp-buy">Купить билет</button><a class="link-arrow" href="#dates">Все даты</a></div>
+        <a class="back js-back" href="main-1.html#afisha">← Афиша</a>
+        <span class="eyebrow js-k"></span>
+        <h1 class="h-xl js-t"></h1>
+        <p class="when js-when"></p>
+        <div class="acts"><button class="btn btn-buy js-buy" type="button">Купить билет</button><a class="link-arrow" href="#dates">Все даты</a></div>
       </div>
-      <div class="pic"><div class="ph"><img id="sp-img" alt=""></div><img class="sp-cut" id="sp-cut" alt="" hidden><div class="edge" data-strip="73" data-h="34"></div></div>
+      <div class="pic"><div class="ph"><img class="js-img" alt=""></div><div class="edge" data-strip="31" data-h="38"></div></div>
+    </div>
+  </section>
+
+  <!-- Первый экран, вариант 2: как «Плёнка» на главной варианта 2 — название по центру, лента кадров спектакля, герой стоит на ленте -->
+  <section class="hf hv2" aria-label="Спектакль">
+    <div class="wrap">
+      <a class="back js-back" href="main-2.html#afisha">← Афиша</a>
+      <span class="eyebrow js-k"></span>
+      <h1 class="h-xl"><span class="js-t"></span><span class="serif js-tag"></span></h1>
+      <p class="lead js-when"></p>
+      <div class="acts"><button class="btn btn-buy js-buy" type="button">Купить билет</button><a class="link-arrow" href="#dates">Все даты</a></div>
+    </div>
+    <div class="film">
+      <img class="hero-cut l sp-hcut" id="hv2-cut" alt="" hidden>
+      <div class="tear t" data-strip="61" data-h="34" aria-hidden="true"></div>
+      <div class="track" id="hv2-track" aria-hidden="true"></div>
+      <div class="tear b" data-strip="67" data-h="34" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <!-- то, что вынесено с первого экрана: автор, подзаголовок, продолжительность, сцена, режиссёр, премьера -->
+  <section class="sp-facts-sec">
+    <div class="wrap">
+      <div class="sp-fx"><p class="src" id="sp-src"></p><p class="tagline" id="sp-tag"></p></div>
+      <dl class="facts" id="sp-facts"></dl>
     </div>
   </section>
 
@@ -93,21 +117,46 @@
   var s = S[id], inf = I[id] || {}, home = H.V2 ? 'main-2.html' : 'main-1.html';
   var $ = function (x) { return document.getElementById(x); };
   document.title = s.title + ' — Театральный ковчег в Дубраве';
-  $('sp-back').href = $('sp-all').href = home + '#afisha';
+  $('sp-all').href = home + '#afisha';
 
-  /* первый экран */
-  $('sp-k').textContent = s.genre + (s.age ? ' · ' + s.age : '') + (s.pk ? ' · Пушкинская карта' : '');
-  $('sp-t').textContent = s.title;
+  /* первый экран — один и тот же контент, а вид свой у каждого варианта */
+  var each = function (cls, f) { document.querySelectorAll('.' + cls).forEach(f); };
+  var ev = H.upcoming.filter(function (e) { return e.show === id; });
+  var next = ev.filter(function (e) { return e.status === 'sale' || e.status === 'few'; })[0];
+  var prem = ev.some(function (e) { return e.prem; });
+  function range() {
+    if (!ev.length) return '';
+    var a = H.pd(ev[0].date), b = H.pd(ev[ev.length - 1].date);
+    if (ev.length === 1 || ev[0].date === ev[ev.length - 1].date) return a.getDate() + ' ' + H.MG[a.getMonth()];
+    if (a.getMonth() === b.getMonth()) return a.getDate() + '–' + b.getDate() + ' ' + H.MG[a.getMonth()];
+    return a.getDate() + ' ' + H.MG[a.getMonth()] + ' — ' + b.getDate() + ' ' + H.MG[b.getMonth()];
+  }
+  each('js-back', function (x) { x.href = home + '#afisha'; });
+  each('js-k', function (x) { x.textContent = (prem ? 'Премьера · ' : '') + s.genre; });
+  each('js-t', function (x) { x.textContent = s.title; });
+  each('js-tag', function (x) { x.textContent = inf.tag && inf.tag.length < 40 ? inf.tag : (s.author || ''); });
+  each('js-when', function (x) { x.textContent = [range(), s.age].filter(Boolean).join(' · '); });
+  each('js-img', function (x) { if (s.photo) { x.src = 'photos/' + s.photo; x.alt = 'Афиша спектакля «' + s.title + '»'; } });
+  each('js-buy', function (x) { if (next) x.setAttribute('data-buy', next.id); else x.style.display = 'none'; });
+
+  /* лента кадров варианта 2: кадры этого спектакля, мало кадров — повторяем */
+  var frames = [];
+  for (var g = 1; (inf.gal || 0) > 1 && g <= inf.gal; g++) frames.push('photos/shows/' + id + '/' + (g < 10 ? '0' : '') + g + '.jpg');
+  if (s.photo) frames.unshift('photos/' + s.photo);
+  if (frames.length < 3) ['iudushka-2', 'zoykina', 'vishnevyy-sad', 'magiya', 'dyadya-vanya', 'revizor', 'olesya', 'garnir'].forEach(function (k) { var u = 'photos/' + k + '.jpg'; if (frames.indexOf(u) < 0) frames.push(u); });
+  while (frames.length && frames.length < 8) frames = frames.concat(frames);
+  var one = frames.map(function (u) { return '<img src="' + u + '" alt="" loading="lazy">'; }).join('');
+  $('hv2-track').innerHTML = one + one;
+
+  /* вынесенное ниже: автор, подзаголовок, факты */
   $('sp-src').textContent = inf.src || s.author || '';
   $('sp-tag').textContent = inf.tag || s.desc || '';
-  if (s.photo) { $('sp-img').src = 'photos/' + s.photo; $('sp-img').alt = 'Афиша спектакля «' + s.title + '»'; }
-  var ev = H.upcoming.filter(function (e) { return e.show === id; });
+  /* во 2 варианте подзаголовок (или автор) уже стоит в названии курсивом — ниже не повторяем */
+  if (H.V2) { if (inf.tag && inf.tag.length < 40) $('sp-tag').style.display = 'none'; else $('sp-src').style.display = 'none'; }
   var scenes = []; ev.forEach(function (e) { if (scenes.indexOf(SC[e.scene]) < 0) scenes.push(SC[e.scene]); });
   var dir = (inf.crew || []).filter(function (c) { return /режисс/i.test(c[0]); })[0];
-  var facts = [['Продолжительность', inf.dur], ['Сцена', scenes.join(', ')], ['Режиссёр', dir ? dir[1] : s.dir], ['Премьера', inf.prem]];
+  var facts = [['Продолжительность', inf.dur], ['Сцена', scenes.join(', ')], ['Режиссёр', dir ? dir[1] : s.dir], ['Премьера', inf.prem], ['Пушкинская карта', s.pk ? 'можно оплатить' : '']];
   $('sp-facts').innerHTML = facts.filter(function (f) { return f[1]; }).map(function (f) { return '<div><dt>' + f[0] + '</dt><dd>' + H.esc(f[1]) + '</dd></div>'; }).join('');
-  var next = ev.filter(function (e) { return e.status === 'sale' || e.status === 'few'; })[0];
-  if (next) $('sp-buy').setAttribute('data-buy', next.id); else $('sp-buy').style.display = 'none';
 
   /* даты — обрывки бумаги, как в афише */
   function rnd(seed) { var x = 0, i = 0; for (; i < seed.length; i++) x = (x * 31 + seed.charCodeAt(i)) % 2147483647; return function () { x = (x * 16807) % 2147483647; return x / 2147483647; }; }
@@ -131,11 +180,11 @@
 
   /* вырезанный герой выходит из афиши — там, где есть вырезка */
   var CUT = { zoykina: 'zoykina-man.png', vishnevy: 'vishnevy-couple.png', volsh: 'volshebnik-heroes.png', magiya: 'magiya-trio.png' };
-  if (CUT[id]) { $('sp-cut').src = 'photos/stage/' + CUT[id]; $('sp-cut').hidden = false; $('sp-cut').className = 'sp-cut c-' + id; }
+  if (CUT[id]) { $('hv2-cut').src = 'photos/stage/' + CUT[id]; $('hv2-cut').hidden = false; $('hv2-cut').classList.add('c-' + id); }
 
   /* о спектакле: первый абзац крупнее */
   var about = (inf.about && inf.about.length ? inf.about : [s.desc]).filter(Boolean).slice();
-  var tag = $('sp-tag').textContent.trim();
+  var tag = (inf.tag || '').trim();
   if (tag && about[0] && about[0].indexOf(tag) === 0) about[0] = about[0].slice(tag.length).trim();
   about = about.filter(Boolean);
   $('sp-about').innerHTML = about.map(function (p, j) { return '<p' + (j === 0 && p.length < 240 ? ' class="lead1"' : '') + '>' + H.esc(p) + '</p>'; }).join('');
@@ -165,7 +214,7 @@
     var nd = H.pd(next.date);
     $('bar-t').textContent = s.title; $('bar-w').textContent = 'Ближайший — ' + nd.getDate() + ' ' + H.MG[nd.getMonth()] + ', ' + H.WS[nd.getDay()] + ', ' + next.time;
     $('bar-buy').setAttribute('data-buy', next.id);
-    var bar = $('sp-bar'), hero = document.querySelector('.sp-hero');
+    var bar = $('sp-bar'), hero = document.querySelector(H.V2 ? '.hv2' : '.hv1');
     var was = null;
     function upd() { var on = hero.getBoundingClientRect().bottom < 0; if (on === was) return; was = on; bar.classList.toggle('on', on); bar.setAttribute('aria-hidden', !on); $('bar-buy').tabIndex = on ? 0 : -1; }
     addEventListener('scroll', upd, { passive: true }); upd();
