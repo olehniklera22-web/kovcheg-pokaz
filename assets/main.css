@@ -169,3 +169,7 @@ body.pal-sage{--bg:#16211b;--bg-2:transparent;--panel:rgba(36,54,43,.62);--panel
 .pal-sage .sec.fest{background:rgba(10,22,15,.45)}
 .pal-sage .gold .cap{position:relative;left:0;right:0;bottom:0;background:none;padding:18px 0 0}
 .pal-sage .ftr{background:rgba(16,8,12,.3);border-top-color:rgba(236,226,206,.1)}
+
+/* плашка показа поднимается над липкой плашкой покупки на странице спектакля */
+.sp-bar.on ~ .mbar{bottom:86px}
+.mbar{transition:bottom .3s ease}
