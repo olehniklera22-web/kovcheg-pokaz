@@ -41,7 +41,7 @@ body:not(.pal-sage) .tv2,.pal-sage .tv1{display:none}
 .tr-bow .fig img{height:100%;width:auto;display:block;filter:grayscale(1) contrast(1.06) drop-shadow(2px 0 0 #f4efe4) drop-shadow(-2px 0 0 #f4efe4) drop-shadow(0 -2px 0 #f4efe4) drop-shadow(0 12px 18px rgba(0,0,0,.45));transition:filter .4s}
 .tr-bow .fig:hover,.tr-bow .fig:focus-visible{z-index:2;transform:translateY(calc(var(--d,0) - 10px))}
 .tr-bow .fig:hover img,.tr-bow .fig:focus-visible img{filter:grayscale(0) drop-shadow(2px 0 0 #f4efe4) drop-shadow(-2px 0 0 #f4efe4) drop-shadow(0 -2px 0 #f4efe4) drop-shadow(0 12px 18px rgba(0,0,0,.45))}
-.tr-bow .fig span{position:absolute;left:50%;top:10px;transform:translate(-50%,6px) rotate(-2deg);white-space:nowrap;background:#e9e1cf;color:#1c1712;font-family:var(--ft);font-size:12px;line-height:1.25;padding:6px 10px;box-shadow:0 6px 14px rgba(0,0,0,.35);opacity:0;transition:.25s;pointer-events:none;text-align:center}
+.tr-bow .fig span{position:absolute;left:50%;bottom:30px;transform:translate(-50%,6px) rotate(-2deg);white-space:nowrap;background:#e9e1cf;color:#1c1712;font-family:var(--ft);font-size:12px;line-height:1.25;padding:6px 10px;box-shadow:0 6px 14px rgba(0,0,0,.35);opacity:0;transition:.25s;pointer-events:none;text-align:center}
 .tr-bow .fig span b{display:block;font-family:var(--fh);font-weight:700;font-size:15px;letter-spacing:.06em;text-transform:uppercase}
 .tr-bow .fig:hover span,.tr-bow .fig:focus-visible span{opacity:1;transform:translate(-50%,0) rotate(-2deg)}
 .tr-arr{position:absolute;top:50%;z-index:4;width:48px;height:48px;margin-top:-24px;border-radius:50%;background:rgba(22,33,27,.85);border:1px solid var(--line-2);color:var(--ink);font-size:20px}
